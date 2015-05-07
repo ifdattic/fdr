@@ -22,7 +22,11 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "simple-bus/symfony-bridge": "^4.0",
-        "beberlei/assert": "^2.3"
+        "beberlei/assert": "^2.3",
+        "friendsofsymfony/rest-bundle": "^1.5",
+        "jms/serializer-bundle": "^0.13.0",
+        "simple-bus/doctrine-orm-bridge": "^4.0",
+        "ramsey/uuid": "3.0.x@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
