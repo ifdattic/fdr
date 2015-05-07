@@ -1,0 +1,12 @@
+Domain\User\Entity\User:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            inline: true
+        email:
+            expose: true
+            inline: true
+        fullName:
+            expose: true
+            inline: true
