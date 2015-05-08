@@ -7,6 +7,13 @@ use Domain\User\ValueObject\UserId;
 
 interface UserRepository
 {
+    /**
+     * Find user by id.
+     *
+     * @param  UserId $userId
+     * @return User
+     * @throws Domain\User\Exception\UserNotFoundException if user is not found
+     */
     public function find(UserId $userId);
 
     public function findAll();

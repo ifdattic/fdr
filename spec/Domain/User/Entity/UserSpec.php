@@ -43,4 +43,9 @@ class UserSpec extends ObjectBehavior
     {
         $this->getFullName()->shouldHaveType(FullName::CLASS);
     }
+
+    function it_returns_its_created_at()
+    {
+        $this->getCreatedAt()->shouldHaveType(\DateTime::CLASS);
+    }
 }

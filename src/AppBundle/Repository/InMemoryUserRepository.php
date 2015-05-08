@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use Domain\Core\Identity\Uuid;
 use Domain\User\Entity\User;
+use Domain\User\Exception\UserNotFoundException;
 use Domain\User\Repository\UserRepository;
 use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\FullName;
@@ -28,9 +29,16 @@ class InMemoryUserRepository implements UserRepository
         );
     }
 
+    /** {@inheritDocs} */
     public function find(UserId $userId)
     {
+        foreach ($this->users as $user) {
+            if ($userId == $user->getId()) {
+                return $user;
+            }
+        }
 
+        throw new UserNotFoundException();
     }
 
     public function findAll()
@@ -40,7 +48,7 @@ class InMemoryUserRepository implements UserRepository
 
     public function add(User $user)
     {
-
+        $this->users[] = $user;
     }
 
     public function remove(User $user)
