@@ -8,6 +8,13 @@ use Domain\User\ValueObject\UserId;
 interface UserRepository
 {
     /**
+     * Clear all users.
+     *
+     * @return void
+     */
+    public function clear();
+
+    /**
      * Find user by id.
      *
      * @param  UserId $userId

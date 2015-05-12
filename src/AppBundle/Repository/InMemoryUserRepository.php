@@ -30,6 +30,12 @@ class InMemoryUserRepository implements UserRepository
     }
 
     /** {@inheritDocs} */
+    public function clear()
+    {
+        $this->users = [];
+    }
+
+    /** {@inheritDocs} */
     public function find(UserId $userId)
     {
         foreach ($this->users as $user) {

@@ -1,0 +1,16 @@
+default:
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://localhost:8000
+            sessions:
+                default:
+                    goutte: ~
+        Behat\Symfony2Extension: ~
+
+    suites:
+        api:
+            paths: [%paths.base%/features]
+            contexts:
+                - CommonContext
+                - ApiContext:
+                    userRepository: '@userRepository'
