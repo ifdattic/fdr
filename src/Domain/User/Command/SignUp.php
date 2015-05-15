@@ -2,11 +2,14 @@
 
 namespace Domain\User\Command;
 
+use Domain\Core\Validation\HasErrorsTrait;
 use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\FullName;
 
 class SignUp
 {
+    use HasErrorsTrait;
+
     /** @var string */
     private $email;
 
@@ -19,19 +22,19 @@ class SignUp
      */
     public function __construct($email, $fullName)
     {
-        $this->email = new Email($email);
-        $this->fullName = new FullName($fullName);
+        $this->email = $email;
+        $this->fullName = $fullName;
     }
 
     /** @return Email */
     public function getEmail()
     {
-        return $this->email;
+        return new Email($this->email);
     }
 
     /** @return FullName */
     public function getFullName()
     {
-        return $this->fullName;
+        return new FullName($this->fullName);
     }
 }
