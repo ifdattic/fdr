@@ -7,9 +7,16 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    form.error_extractor:
+        class: AppBundle\Form\FlattenedFormErrorExtractor
+
     user_repository:
         alias: user_repository.in_memory
 
     user_repository.in_memory:
         class: AppBundle\Repository\InMemoryUserRepository
         public: false
+
+    command_validator:
+        class: AppBundle\Validation\Validator
+        arguments: [@validator]
