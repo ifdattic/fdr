@@ -48,20 +48,20 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
     {
         $userId = new UserId(new Uuid(self::UUID));
 
-        $this->shouldThrow(UserNotFoundException::CLASS)->during('find', [$userId]);
+        $this->shouldThrow(UserNotFoundException::CLASS)->during('findByUserId', [$userId]);
     }
 
     function it_finds_a_user_by_id()
     {
         $userId = new UserId(new Uuid(self::EXISTING_UUID));
 
-        $this->find($userId)->shouldBeLike($this->existingUser);
+        $this->findByUserId($userId)->shouldBeLike($this->existingUser);
     }
 
     function it_adds_a_user()
     {
         $this->add($this->user);
 
-        $this->find($this->user->getId())->shouldReturn($this->user);
+        $this->findByUserId($this->user->getId())->shouldReturn($this->user);
     }
 }

@@ -36,7 +36,7 @@ class InMemoryUserRepository implements UserRepository
     }
 
     /** {@inheritDocs} */
-    public function find(UserId $userId)
+    public function findByUserId(UserId $userId)
     {
         foreach ($this->users as $user) {
             if ($userId == $user->getId()) {
