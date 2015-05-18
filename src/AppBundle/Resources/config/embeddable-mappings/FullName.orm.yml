@@ -1,0 +1,7 @@
+Domain\User\ValueObject\FullName:
+    type: embeddable
+    fields:
+        value:
+            type: string
+            length: 255
+            column: full_name

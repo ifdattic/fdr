@@ -21,10 +21,15 @@ interface UserRepository
      * @return User
      * @throws Domain\User\Exception\UserNotFoundException if user is not found
      */
-    public function find(UserId $userId);
+    public function findByUserId(UserId $userId);
 
     public function findAll();
 
+    /**
+     * Add a user.
+     *
+     * @param User $user
+     */
     public function add(User $user);
 
     public function remove(User $user);

@@ -1,0 +1,13 @@
+services:
+    user_repository:
+        alias: user_repository.doctrine
+
+    user_repository.doctrine:
+        class: AppBundle\Repository\DoctrineUserRepository
+        factory: ["@doctrine", getRepository]
+        arguments: ['Domain\User\Entity\User']
+        public: false
+
+    user_repository.in_memory:
+        class: AppBundle\Repository\InMemoryUserRepository
+        public: false

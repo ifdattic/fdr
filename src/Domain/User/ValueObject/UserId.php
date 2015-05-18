@@ -19,4 +19,10 @@ class UserId
     {
         return $this->uuid->getValue();
     }
+
+    /** @return string */
+    public function __toString()
+    {
+        return $this->getValue();
+    }
 }

@@ -10,13 +10,6 @@ services:
     form.error_extractor:
         class: AppBundle\Form\FlattenedFormErrorExtractor
 
-    user_repository:
-        alias: user_repository.in_memory
-
-    user_repository.in_memory:
-        class: AppBundle\Repository\InMemoryUserRepository
-        public: false
-
     command_validator:
         class: AppBundle\Validation\Validator
         arguments: [@validator]

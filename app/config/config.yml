@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: handlers.yml }
+    - { resource: repositories.yml }
 
 framework:
     #esi:             ~
@@ -64,7 +65,23 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    user_models:
+                        alias: User
+                        mapping:   true
+                        type:      yml
+                        dir:       "%kernel.root_dir%/../src/AppBundle/Resources/config/entity-mappings"
+                        prefix:    Domain\User\Entity
+                        is_bundle: false
+                    user_embeddables:
+                        mapping:   true
+                        type:      yml
+                        dir:       "%kernel.root_dir%/../src/AppBundle/Resources/config/embeddable-mappings"
+                        prefix:    Domain\User\ValueObject
+                        is_bundle: false
 
 # Swiftmailer Configuration
 swiftmailer:

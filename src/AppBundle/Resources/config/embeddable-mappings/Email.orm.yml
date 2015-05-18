@@ -1,0 +1,8 @@
+Domain\User\ValueObject\Email:
+    type: embeddable
+    fields:
+        value:
+            type: string
+            length: 255
+            unique: true
+            column: email

@@ -1,0 +1,20 @@
+Domain\User\Entity\User:
+    type: entity
+    table: user
+    repositoryClass: AppBundle\Repository\DoctrineUserRepository
+    id:
+        id:
+            type: guid
+            generator:
+                strategy: NONE
+    embedded:
+        email:
+            class: Domain\User\ValueObject\Email
+            columnPrefix: false
+        fullName:
+            class: Domain\User\ValueObject\FullName
+            columnPrefix: false
+    fields:
+        createdAt:
+            type: datetime
+            column: created_at
