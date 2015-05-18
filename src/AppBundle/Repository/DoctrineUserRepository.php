@@ -11,6 +11,16 @@ use Domain\User\ValueObject\UserId;
 class DoctrineUserRepository extends EntityRepository implements UserRepository
 {
     /** {@inheritdoc} */
+    public function clear()
+    {
+        return $this->createQueryBuilder('u')
+            ->delete()
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
+    /** {@inheritdoc} */
     public function find($id)
     {
         $this->findByUserId(new UserId($id));
