@@ -2,6 +2,7 @@
 
 namespace AppBundle\Validation;
 
+use Doctrine\Common\Inflector\Inflector;
 use Domain\Core\Validation\Error;
 use Domain\Core\Validation\ValidatorInterface as BaseValidatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -27,7 +28,7 @@ class Validator implements BaseValidatorInterface
         foreach ($violations as $violation) {
             $errors[] = new Error(
                 $violation->getMessage(),
-                $violation->getPropertyPath(),
+                Inflector::tableize($violation->getPropertyPath()),
                 $violation->getCode()
             );
         }
