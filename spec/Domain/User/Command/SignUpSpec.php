@@ -18,11 +18,13 @@ class SignUpSpec extends ObjectBehavior
         $this->beConstructedWith(self::EMAIL, self::FULLNAME);
     }
 
-    function it_throws_an_exception_if_invalid_value_is_given()
+    function it_throws_an_exception_on_invalid_email()
     {
+        $this->beConstructedWith('invalid', self::FULLNAME);
+
         $this
             ->shouldThrow(AssertionFailedException::CLASS)
-            ->during('__construct', ['invalid', self::FULLNAME])
+            ->during('getEmail')
         ;
     }
 
