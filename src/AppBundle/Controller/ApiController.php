@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Domain\Core\Exception\DomainException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
 use Symfony\Component\EventDispatcher\Event;
@@ -113,6 +114,10 @@ class ApiController extends FOSRestController
     protected function respondWithForm(FormInterface $form)
     {
         $errors = $this->get('form.error_extractor')->extract($form);
+
+        if (empty($errors)) {
+            throw new DomainException('Request is invalid!');
+        }
 
         return $this
             ->setStatusCode(Codes::HTTP_BAD_REQUEST)
