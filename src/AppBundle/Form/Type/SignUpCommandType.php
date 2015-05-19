@@ -18,6 +18,7 @@ class SignUpCommandType extends AbstractType
         $builder
             ->add('email', null, $notMapped)
             ->add('full_name', null, $notMapped)
+            ->add('password', null, $notMapped)
         ;
     }
 
@@ -29,7 +30,8 @@ class SignUpCommandType extends AbstractType
             'empty_data' => function (FormInterface $form) {
                 return new SignUp(
                     $form->get('email')->getData(),
-                    $form->get('full_name')->getData()
+                    $form->get('full_name')->getData(),
+                    $form->get('password')->getData()
                 );
             }
         ]);

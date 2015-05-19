@@ -8,3 +8,11 @@ Domain\User\Command\SignUp:
         fullName:
             - NotBlank:
                 message: The full name is required
+        password:
+            - NotBlank:
+                message: The password is required
+            - Length:
+                min: 8
+                max: 72
+                minMessage: Password must be at least {{ limit }} characters
+                maxMessage: Password must be less than {{ limit }} characters

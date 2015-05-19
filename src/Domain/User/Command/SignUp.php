@@ -5,6 +5,7 @@ namespace Domain\User\Command;
 use Domain\Core\Validation\HasErrorsTrait;
 use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\FullName;
+use Domain\User\ValueObject\Password;
 
 class SignUp
 {
@@ -16,14 +17,19 @@ class SignUp
     /** @var string */
     private $fullName;
 
+    /** @var string */
+    private $password;
+
     /**
      * @param string $email
      * @param string $fullName
+     * @param string $password
      */
-    public function __construct($email, $fullName)
+    public function __construct($email, $fullName, $password)
     {
         $this->email = $email;
         $this->fullName = $fullName;
+        $this->password = $password;
     }
 
     /** @return Email */
@@ -36,5 +42,11 @@ class SignUp
     public function getFullName()
     {
         return new FullName($this->fullName);
+    }
+
+    /** @return Password */
+    public function getPassword()
+    {
+        return new Password($this->password);
     }
 }

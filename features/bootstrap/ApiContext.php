@@ -40,14 +40,16 @@ class ApiContext implements Context, SnippetAcceptingContext
     public function iSignUpWithEmailFullNameAndPassword($email, $fullName, $password)
     {
         $body = [
-            'email' => $email,
-            'fullName' => $fullName,
-            'password' => $password,
+            'sign_up' => [
+                'email'     => $email,
+                'full_name' => $fullName,
+                'password'  => $password,
+            ],
         ];
         $session = $this->minkContext->getSession();
         $client = $session->getDriver()->getClient();
 
-        $response = $client->request('POST', $this->minkContext->locatePath('/users'), [], [], [], json_encode($body));
+        $client->request('POST', $this->minkContext->locatePath('/users'), [], [], [], json_encode($body));
 
         Assert::assertSame(201, $session->getStatusCode());
     }

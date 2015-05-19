@@ -7,6 +7,7 @@ use Domain\User\Entity\User;
 use Domain\User\Exception\UserNotFoundException;
 use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\FullName;
+use Domain\User\ValueObject\PasswordHash;
 use Domain\User\ValueObject\UserId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -29,13 +30,15 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
         $this->existingUser = new User(
             new UserId(new Uuid(self::EXISTING_UUID)),
             new Email('john@doe.com'),
-            new FullName('John Doe')
+            new FullName('John Doe'),
+            new PasswordHash('$2y$04$ZpNmuQAE0roOG.UnpEFErOuZ0fFMXmMDoojuzmbvOwhYOKT9SJgB2')
         );
 
         $this->user = new User(
             new UserId(new Uuid(self::UUID)),
             new Email(self::EMAIL),
-            new FullName(self::FULLNAME)
+            new FullName(self::FULLNAME),
+            new PasswordHash('$2y$04$dWGqp58K1Xjr5tJUX/5TjOgWUBqC9EnPS8/sLog35cC46FJZh20QW')
         );
     }
 
