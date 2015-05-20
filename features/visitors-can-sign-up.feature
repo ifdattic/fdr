@@ -4,7 +4,11 @@ Feature: A visitor can sign up
     I need to sign up for an account
 
     Scenario: Sign up for an account
-        When I sign up with email "virgil@mundell.com", full name "Virgil Mundell" and password "topsecret"
-        Then I should be able to log in with email "virgil@mundell.com" and password "topsecret"
+        When I sign up with available email
+        Then I should receive created response
+        And I should be able to log in as newly created user
 
     Scenario: Email address is already taken
+        Given data is seeded
+        When I sign up with email which is taken
+        Then I should receive bad request response

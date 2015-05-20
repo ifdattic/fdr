@@ -14,10 +14,11 @@ use Prophecy\Argument;
 
 class InMemoryUserRepositorySpec extends ObjectBehavior
 {
-    const UUID          = '5399dbab-ccd0-493c-be1a-67300de1671f';
-    const EXISTING_UUID = '8ce05088-ed1f-43e9-a415-3b3792655a9b';
-    const EMAIL         = 'virgil@mundell.com';
-    const FULLNAME      = 'Virgil Mundell';
+    const EMAIL          = 'virgil@mundell.com';
+    const EXISTING_EMAIL = 'john@doe.com';
+    const EXISTING_UUID  = '8ce05088-ed1f-43e9-a415-3b3792655a9b';
+    const FULLNAME       = 'Virgil Mundell';
+    const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
 
     /** @var User */
     private $existingUser;
@@ -29,7 +30,7 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
     {
         $this->existingUser = new User(
             new UserId(new Uuid(self::EXISTING_UUID)),
-            new Email('john@doe.com'),
+            new Email(self::EXISTING_EMAIL),
             new FullName('John Doe'),
             new PasswordHash('$2y$04$ZpNmuQAE0roOG.UnpEFErOuZ0fFMXmMDoojuzmbvOwhYOKT9SJgB2')
         );
@@ -66,5 +67,19 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
         $this->add($this->user);
 
         $this->findByUserId($this->user->getId())->shouldReturn($this->user);
+    }
+
+    function it_returns_false_when_checking_for_unique_email_when_email_is_taken()
+    {
+        $email = new Email(self::EXISTING_EMAIL);
+
+        $this->isEmailUnique($email)->shouldReturn(false);
+    }
+
+    function it_returns_true_when_checking_for_unique_email_when_email_is_not_taken()
+    {
+        $email = new Email(self::EMAIL);
+
+        $this->isEmailUnique($email)->shouldReturn(true);
     }
 }

@@ -3,6 +3,7 @@
 namespace Domain\User\Repository;
 
 use Domain\User\Entity\User;
+use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\UserId;
 
 interface UserRepository
@@ -33,4 +34,12 @@ interface UserRepository
     public function add(User $user);
 
     public function remove(User $user);
+
+    /**
+     * Check if email is unique (no user with this email).
+     *
+     * @param  Email   $email
+     * @return boolean        true if email is unique, false otherwise
+     */
+    public function isEmailUnique(Email $email);
 }

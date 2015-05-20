@@ -64,4 +64,16 @@ class InMemoryUserRepository implements UserRepository
     {
 
     }
+
+    /** {@inheritdocs} */
+    public function isEmailUnique(Email $email)
+    {
+        foreach ($this->users as $user) {
+            if ($email == $user->getEmail()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
