@@ -13,5 +13,5 @@ default:
             contexts:
                 - CommonContext
                 - ApiContext:
-                    userRepository: '@userRepository'
+                    userRepository: @user_repository
                 - Behat\MinkExtension\Context\MinkContext

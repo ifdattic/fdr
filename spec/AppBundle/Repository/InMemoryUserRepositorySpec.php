@@ -59,6 +59,8 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
     {
         $userId = new UserId(new Uuid(self::EXISTING_UUID));
 
+        $this->add($this->existingUser);
+
         $this->findByUserId($userId)->shouldBeLike($this->existingUser);
     }
 
@@ -73,12 +75,16 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
     {
         $email = new Email(self::EXISTING_EMAIL);
 
+        $this->add($this->existingUser);
+
         $this->isEmailUnique($email)->shouldReturn(false);
     }
 
     function it_returns_true_when_checking_for_unique_email_when_email_is_not_taken()
     {
         $email = new Email(self::EMAIL);
+
+        $this->add($this->existingUser);
 
         $this->isEmailUnique($email)->shouldReturn(true);
     }

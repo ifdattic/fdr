@@ -133,4 +133,12 @@ class ApiContext implements Context, SnippetAcceptingContext
     {
         throw new PendingException();
     }
+
+    /**
+     * @When I get response content
+     */
+    public function iGetResponseContent()
+    {
+        echo $this->session->getPage()->getContent();
+    }
 }
