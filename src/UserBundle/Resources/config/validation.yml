@@ -1,4 +1,7 @@
 Domain\User\Command\SignUp:
+    group_sequence:
+        - SignUp
+        - Unique
     properties:
         email:
             - NotBlank:
@@ -10,6 +13,7 @@ Domain\User\Command\SignUp:
                 repositoryMethod: isEmailUnique
                 service: validator.unique.user_email
                 valueObjectClass: Domain\User\ValueObject\Email
+                groups: [Unique]
         fullName:
             - NotBlank:
                 message: The full name is required
