@@ -23,7 +23,7 @@ trait HasErrorsTrait
         $this->errors[] = $error;
     }
 
-    /** @return bool */
+    /** @return boolean */
     public function hasErrors()
     {
         return count($this->errors) > 0;

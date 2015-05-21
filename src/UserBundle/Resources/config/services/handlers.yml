@@ -1,0 +1,6 @@
+services:
+    signup_command_handler:
+        class: Domain\User\Handler\SignUpCommandHandler
+        arguments: [@user_repository, @password_encoder]
+        tags:
+            - { name: command_handler, handles: Domain\User\Command\SignUp }

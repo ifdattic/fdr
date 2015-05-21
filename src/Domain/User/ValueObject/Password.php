@@ -4,7 +4,7 @@ namespace Domain\User\ValueObject;
 
 use Domain\Core\Validation\Assert;
 
-class Password
+final class Password
 {
     const LENGTH_MAX = 72;
     const LENGTH_MIN = 8;

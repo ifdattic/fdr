@@ -2,8 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: handlers.yml }
-    - { resource: repositories.yml }
+    - { resource: middleware.yml }
 
 framework:
     #esi:             ~
@@ -73,13 +72,13 @@ doctrine:
                         alias: User
                         mapping:   true
                         type:      yml
-                        dir:       "%kernel.root_dir%/../src/AppBundle/Resources/config/entity-mappings"
+                        dir:       "%kernel.root_dir%/../src/UserBundle/Resources/config/entity-mappings"
                         prefix:    Domain\User\Entity
                         is_bundle: false
                     user_embeddables:
                         mapping:   true
                         type:      yml
-                        dir:       "%kernel.root_dir%/../src/AppBundle/Resources/config/embeddable-mappings"
+                        dir:       "%kernel.root_dir%/../src/UserBundle/Resources/config/embeddable-mappings"
                         prefix:    Domain\User\ValueObject
                         is_bundle: false
 
@@ -126,6 +125,6 @@ sensio_framework_extra:
 jms_serializer:
     metadata:
         directories:
-            Domain:
+            User:
                 namespace_prefix: Domain
-                path: "@AppBundle/Resources/config/serializer/"
+                path: "@UserBundle/Resources/config/serializer/"

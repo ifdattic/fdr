@@ -9,9 +9,10 @@ default:
 
     suites:
         api:
-            paths: [%paths.base%/features]
+            paths:
+                - %paths.base%/src/UserBundle/Features
             contexts:
-                - CommonContext
-                - ApiContext:
+                - AppBundle\Features\Context\ApiContext
+                - UserBundle\Features\Context\UserApiContext:
                     userRepository: @user_repository
                 - Behat\MinkExtension\Context\MinkContext

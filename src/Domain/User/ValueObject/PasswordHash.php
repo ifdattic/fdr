@@ -4,7 +4,7 @@ namespace Domain\User\ValueObject;
 
 use Domain\Core\Validation\Assert;
 
-class PasswordHash
+final class PasswordHash
 {
     const LENGTH = 60;
 

@@ -4,7 +4,7 @@ namespace Domain\User\ValueObject;
 
 use Domain\Core\Identity\Uuid;
 
-class UserId
+final class UserId
 {
     /** @var Uuid */
     private $uuid;

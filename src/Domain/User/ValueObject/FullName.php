@@ -4,7 +4,7 @@ namespace Domain\User\ValueObject;
 
 use Domain\Core\Validation\Assert;
 
-class FullName
+final class FullName
 {
     /** @var string */
     private $value;

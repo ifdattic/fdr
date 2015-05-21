@@ -1,0 +1,13 @@
+parameters:
+    password_encoder_cost: 14
+
+services:
+    password_encoder:
+        class: Domain\User\Security\PasswordEncoder
+        arguments: ["%password_encoder_cost%"]
+
+    validator.unique.user_email:
+        class: AppBundle\Validation\Constraints\UniqueFieldValidator
+        arguments: [@user_repository]
+        tags:
+            - { name: validator.constraint_validator, alias: validator.unique.user_email }

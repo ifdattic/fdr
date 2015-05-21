@@ -1,0 +1,18 @@
+suites:
+    core_suite:
+        namespace: Domain\Core
+        psr4_prefix: Domain\Core
+        spec_path: src/Domain/Core
+        spec_prefix: Spec
+
+    user_infrastructure_suite:
+        namespace: UserBundle
+        psr4_prefix: UserBundle
+        spec_path: src/UserBundle
+        spec_prefix: Spec
+
+    user_suite:
+        namespace: Domain\User
+        psr4_prefix: Domain\User
+        spec_path: src/Domain/User
+        spec_prefix: Spec

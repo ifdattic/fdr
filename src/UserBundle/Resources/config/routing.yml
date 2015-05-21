@@ -1,0 +1,9 @@
+api.user_all:
+    path: /users
+    defaults: { _controller: UserBundle:User:all }
+    methods: [GET]
+
+api.sign_up:
+    path: /users
+    defaults: { _controller: UserBundle:User:signUp }
+    methods: POST

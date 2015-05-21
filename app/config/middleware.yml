@@ -1,0 +1,7 @@
+services:
+    command_validator_middleware:
+        class: Domain\Core\Middleware\CommandValidatorMiddleware
+        arguments: [@command_validator]
+        public: false
+        tags:
+            - { name: command_bus_middleware }

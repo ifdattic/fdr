@@ -19,9 +19,10 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle(),
-            // new SimpleBus\SymfonyBridge\DoctrineOrmBridgeBundle(),
+            new SimpleBus\SymfonyBridge\DoctrineOrmBridgeBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new UserBundle\UserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
