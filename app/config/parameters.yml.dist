@@ -18,3 +18,10 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    jwt_private_key_path: %env.jwt_private_key_path%
+    jwt_public_key_path: %env.jwt_public_key_path%
+    jwt_key_pass_phrase: %env.jwt_key_pass_phrase%
+    jwt_token_ttl: %env.jwt_token_ttl% # in seconds
+
+    security_encoder_cost: 14

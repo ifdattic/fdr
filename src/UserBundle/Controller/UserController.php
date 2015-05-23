@@ -3,6 +3,7 @@
 namespace UserBundle\Controller;
 
 use AppBundle\Controller\ApiController;
+use Domain\User\Command\GetUser;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,6 +11,29 @@ use UserBundle\Form\Type\SignUpCommandType;
 
 class UserController extends ApiController
 {
+    public function getTokenAction()
+    {
+        return new Response('', 401);
+    }
+
+    public function getLoggedInUserDataAction()
+    {
+        $userProvider = $this->get('user_provider');
+        $userId = $userProvider->getUser()->getId();
+
+        $command = new GetUser($userId);
+
+        $this->getCommandBus()->handle($command);
+
+        $user = $command->getUser();
+
+        return $this
+            ->setStatusCode(Response::HTTP_OK)
+            ->setData(['user' => $user])
+            ->respond()
+        ;
+    }
+
     /**
      * @Rest\View
      */

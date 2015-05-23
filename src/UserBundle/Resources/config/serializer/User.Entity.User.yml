@@ -3,7 +3,6 @@ Domain\User\Entity\User:
     properties:
         id:
             expose: true
-            inline: true
         email:
             expose: true
             inline: true

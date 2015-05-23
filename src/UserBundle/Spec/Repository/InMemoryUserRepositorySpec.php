@@ -88,4 +88,23 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
 
         $this->isEmailUnique($email)->shouldReturn(true);
     }
+
+    function it_throws_an_exception_if_user_with_provided_email_not_found()
+    {
+        $email = new Email(self::EMAIL);
+
+        $this->add($this->existingUser);
+
+        $this->shouldThrow(UserNotFoundException::CLASS)->during('findByEmail', [$email]);
+    }
+
+    function it_returns_a_user_found_by_email()
+    {
+        $email = new Email(self::EMAIL);
+
+        $this->add($this->existingUser);
+        $this->add($this->user);
+
+        $this->findByEmail($email)->shouldReturn($this->user);
+    }
 }

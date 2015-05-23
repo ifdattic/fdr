@@ -37,6 +37,18 @@ class InMemoryUserRepository implements UserRepository
     }
 
     /** {@inheritdoc} */
+    public function findByEmail(Email $email)
+    {
+        foreach ($this->users as $user) {
+            if ($email == $user->getEmail()) {
+                return $user;
+            }
+        }
+
+        throw new UserNotFoundException();
+    }
+
+    /** {@inheritdoc} */
     public function findAll()
     {
         return $this->users;

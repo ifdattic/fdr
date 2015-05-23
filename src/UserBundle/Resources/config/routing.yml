@@ -1,9 +1,19 @@
+api.get_token:
+    path: /users/get-token
+    defaults: { _controller: UserBundle:User:getToken }
+    methods: POST
+
+api.get_logged_in_user_data:
+    path: /users/me
+    defaults: { _controller: UserBundle:User:getLoggedInUserData }
+    methods: GET
+
 api.user_all:
     path: /users
     defaults: { _controller: UserBundle:User:all }
     methods: [GET]
 
 api.sign_up:
-    path: /users
+    path: /users/sign-up
     defaults: { _controller: UserBundle:User:signUp }
     methods: POST

@@ -14,6 +14,17 @@ final class UserId
         $this->uuid = $uuid;
     }
 
+    /**
+     * @param  string $uuid
+     * @return self
+     */
+    public static function createFromString($uuid)
+    {
+        $uuid = new Uuid($uuid);
+
+        return new self($uuid);
+    }
+
     /** @return string */
     public function getValue()
     {

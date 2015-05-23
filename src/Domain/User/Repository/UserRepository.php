@@ -24,6 +24,15 @@ interface UserRepository
      */
     public function findByUserId(UserId $userId);
 
+    /**
+     * Find user by email.
+     *
+     * @param  Email  $email
+     * @return User
+     * @throws Domain\User\Exception\UserNotFoundException if user is not found
+     */
+    public function findByEmail(Email $email);
+
     public function findAll();
 
     /**

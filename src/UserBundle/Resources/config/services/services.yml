@@ -1,10 +1,14 @@
 parameters:
-    password_encoder_cost: 14
+    password_encoder_cost: %security_encoder_cost%
 
 services:
     password_encoder:
         class: Domain\User\Security\PasswordEncoder
         arguments: ["%password_encoder_cost%"]
+
+    user_provider:
+        class: UserBundle\Security\SymfonyUserProvider
+        arguments: [@user_repository]
 
     validator.unique.user_email:
         class: AppBundle\Validation\Constraints\UniqueFieldValidator

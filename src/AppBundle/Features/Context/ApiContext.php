@@ -3,14 +3,13 @@
 namespace AppBundle\Features\Context;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use PHPUnit_Framework_Assert as Assert;
 
-class ApiContext implements Context, SnippetAcceptingContext
+class ApiContext implements Context
 {
     /** @var Behat\MinkExtension\Context\MinkContext */
     private $minkContext;
@@ -48,6 +47,14 @@ class ApiContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * @Then I should receive success response
+     */
+    public function iShouldReceiveSuccessResponse()
+    {
+        Assert::assertSame(200, $this->session->getStatusCode());
+    }
+
+    /**
      * @Then I should receive created response
      */
     public function iShouldReceiveCreatedResponse()
@@ -61,6 +68,14 @@ class ApiContext implements Context, SnippetAcceptingContext
     public function iShouldReceiveBadRequestResponse()
     {
         Assert::assertSame(400, $this->session->getStatusCode());
+    }
+
+    /**
+     * @Then I should receive unauthorized response
+     */
+    public function iShouldReceiveUnauthorizedResponse()
+    {
+        Assert::assertSame(401, $this->session->getStatusCode());
     }
 
     /**

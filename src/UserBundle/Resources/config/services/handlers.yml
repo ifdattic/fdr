@@ -1,4 +1,10 @@
 services:
+    getuser_command_handler:
+        class: Domain\User\Handler\GetUserCommandHandler
+        arguments: [@user_repository]
+        tags:
+            - { name: command_handler, handles: Domain\User\Command\GetUser }
+
     signup_command_handler:
         class: Domain\User\Handler\SignUpCommandHandler
         arguments: [@user_repository, @password_encoder]

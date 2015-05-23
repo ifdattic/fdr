@@ -30,6 +30,35 @@ class DoctrineUserRepository extends EntityRepository implements UserRepository
     /** {@inheritdoc} */
     public function findByUserId(UserId $userId)
     {
+        $user = $this->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameter('id', $userId->getValue())
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        if (null === $user) {
+            throw new UserNotFoundException();
+        }
+
+        return $user;
+    }
+
+    /** {@inheritdoc} */
+    public function findByEmail(Email $email)
+    {
+        $user = $this->createQueryBuilder('u')
+            ->where('u.email.value = :email')
+            ->setParameter('email', $email->getValue())
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        if (null === $user) {
+            throw new UserNotFoundException();
+        }
+
+        return $user;
     }
 
     /** {@inheritdoc} */

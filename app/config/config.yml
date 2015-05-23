@@ -107,16 +107,16 @@ fos_rest:
         serializer: jms_serializer.serializer
     exception:
         codes:
-            # Domain\Core\Exception\AccessDeniedException: 400
             Domain\Core\Exception\AssertionFailedException: 400
             Domain\Core\Exception\DomainException: 400
             Domain\Core\Exception\EntityNotFoundException: 404
+            Domain\User\Exception\AccessDeniedException: 403
             Symfony\Component\Security\Core\Exception\AccessDeniedException: 403
         messages:
-            # Domain\Core\Exception\AccessDeniedException: true
             Domain\Core\Exception\AssertionFailedException: true
             Domain\Core\Exception\DomainException: true
             Domain\Core\Exception\EntityNotFoundException: true
+            Domain\User\Exception\AccessDeniedException: true
             Symfony\Component\Security\Core\Exception\AccessDeniedException: true
 
 sensio_framework_extra:
@@ -128,3 +128,9 @@ jms_serializer:
             User:
                 namespace_prefix: Domain
                 path: "@UserBundle/Resources/config/serializer/"
+
+lexik_jwt_authentication:
+    private_key_path: %jwt_private_key_path%
+    public_key_path: %jwt_public_key_path%
+    pass_phrase: %jwt_key_pass_phrase%
+    token_ttl: %jwt_token_ttl%
