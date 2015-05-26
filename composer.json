@@ -37,7 +37,8 @@
         "phpspec/phpspec": "^2.2",
         "behat/mink-extension": "^2.0",
         "behat/mink-goutte-driver": "^1.1",
-        "behat/symfony2-extension": "^2.0"
+        "behat/symfony2-extension": "^2.0",
+        "nelmio/api-doc-bundle": "~2.9"
     },
     "scripts": {
         "post-root-package-install": [

@@ -116,7 +116,7 @@ class ApiController extends FOSRestController
         $errors = $this->get('form.error_extractor')->extract($form);
 
         if (empty($errors)) {
-            throw new DomainException('Request is invalid!');
+            throw new DomainException('Bad Request');
         }
 
         return $this
