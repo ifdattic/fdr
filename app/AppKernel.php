@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Gfreeau\Bundle\GetJWTBundle\GfreeauGetJWTBundle(),
+            new TaskBundle\TaskBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
