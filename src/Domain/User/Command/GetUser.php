@@ -3,7 +3,6 @@
 namespace Domain\User\Command;
 
 use Domain\User\Entity\User;
-use Domain\User\Exception\UserNotFoundException;
 use Domain\User\ValueObject\UserId;
 
 class GetUser
@@ -28,12 +27,12 @@ class GetUser
 
     /**
      * @return User
-     * @throws UserNotFoundException if user is not set
+     * @throws \RuntimeException if user is not set
      */
     public function getUser()
     {
         if (null === $this->user) {
-            throw new UserNotFoundException();
+            throw new \RuntimeException('User not set');
         }
 
         return $this->user;

@@ -3,7 +3,6 @@
 namespace Spec\Domain\User\Command;
 
 use Domain\User\Entity\User;
-use Domain\User\Exception\UserNotFoundException;
 use Domain\User\ValueObject\UserId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -30,7 +29,7 @@ class GetUserSpec extends ObjectBehavior
     function it_should_throw_an_exception_if_returning_user_without_setting_it()
     {
         $this
-            ->shouldThrow(UserNotFoundException::CLASS)
+            ->shouldThrow(\RuntimeException::CLASS)
             ->during('getUser')
         ;
     }
