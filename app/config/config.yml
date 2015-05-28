@@ -125,6 +125,9 @@ sensio_framework_extra:
 jms_serializer:
     metadata:
         directories:
+            Core:
+                namespace_prefix: Domain
+                path: "@AppBundle/Resources/config/serializer/"
             Task:
                 namespace_prefix: Domain
                 path: "@TaskBundle/Resources/config/serializer/"
