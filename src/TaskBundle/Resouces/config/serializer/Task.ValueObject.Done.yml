@@ -1,0 +1,10 @@
+Domain\Task\ValueObject\Done:
+    exclusion_policy: ALL
+    properties:
+        value:
+            expose: true
+            serialized_name: done
+            access_type: public_method
+            accessor:
+                getter: getValue
+            read_only: true
