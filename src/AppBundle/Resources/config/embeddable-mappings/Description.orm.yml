@@ -1,0 +1,7 @@
+Domain\Core\ValueObject\Description:
+    type: embeddable
+    fields:
+        value:
+            type: text
+            column: description
+            nullable: true

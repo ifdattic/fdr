@@ -68,6 +68,25 @@ doctrine:
             default:
                 connection: default
                 mappings:
+                    core_embeddables:
+                        mapping: true
+                        type: yml
+                        dir: "%kernel.root_dir%/../src/AppBundle/Resources/config/embeddable-mappings"
+                        prefix: Domain\Core\ValueObject
+                        is_bundle: false
+                    task_models:
+                        alias: Task
+                        mapping: true
+                        type: yml
+                        dir: "%kernel.root_dir%/../src/TaskBundle/Resources/config/entity-mappings"
+                        prefix: Domain\Task\Entity
+                        is_bundle: false
+                    task_embeddables:
+                        mapping: true
+                        type: yml
+                        dir: "%kernel.root_dir%/../src/TaskBundle/Resources/config/embeddable-mappings"
+                        prefix: Domain\Task\ValueObject
+                        is_bundle: false
                     user_models:
                         alias: User
                         mapping:   true

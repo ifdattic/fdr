@@ -1,0 +1,8 @@
+Domain\Task\ValueObject\Done:
+    type: embeddable
+    fields:
+        value:
+            type: boolean
+            column: done
+            options:
+                default: false

@@ -1,0 +1,7 @@
+Domain\Task\ValueObject\TaskName:
+    type: embeddable
+    fields:
+        value:
+            type: string
+            length: 1028
+            column: name

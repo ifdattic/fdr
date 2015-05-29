@@ -1,0 +1,36 @@
+Domain\Task\Entity\Task:
+    type: entity
+    table: task
+    repositoryClass: TaskBundle\Repository\DoctrineTaskRepository
+    id:
+        id:
+            type: guid
+            generator:
+                strategy: NONE
+    embedded:
+        name:
+            class: Domain\Task\ValueObject\TaskName
+            columnPrefix: false
+        description:
+            class: Domain\Core\ValueObject\Description
+            columnPrefix: false
+        estimated:
+            class: Domain\Task\ValueObject\Estimated
+            columnPrefix: false
+        done:
+            class: Domain\Task\ValueObject\Done
+            columnPrefix: false
+        timeSpent:
+            class: Domain\Task\ValueObject\TimeSpent
+            columnPrefix: false
+    fields:
+        date:
+            type: date
+            column: date
+    manyToOne:
+        user:
+            targetEntity: Domain\User\Entity\User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+                nullable: false

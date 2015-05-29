@@ -1,0 +1,9 @@
+Domain\Task\ValueObject\TimeSpent:
+    type: embeddable
+    fields:
+        value:
+            type: smallint
+            column: time_spent
+            options:
+                unsigned: true
+                default: 0
