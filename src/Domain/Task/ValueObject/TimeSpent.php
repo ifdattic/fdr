@@ -9,19 +9,23 @@ final class TimeSpent
     const DEFAULT_VALUE = 0;
     const MIN = 0;
 
-    /** @var string */
+    /** @var integer */
     private $value;
 
-    /** @param string $value */
-    public function __construct($value = self::DEFAULT_VALUE)
+    /** @param integer|null $value */
+    public function __construct($value = null)
     {
+        if (null === $value) {
+            $value = self::DEFAULT_VALUE;
+        }
+
         Assert::integer($value);
         Assert::min($value, self::MIN);
 
         $this->value = (int) $value;
     }
 
-    /** @return string */
+    /** @return integer */
     public function getValue()
     {
         return $this->value;

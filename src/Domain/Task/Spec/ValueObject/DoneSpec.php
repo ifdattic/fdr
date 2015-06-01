@@ -40,4 +40,11 @@ class DoneSpec extends ObjectBehavior
 
         $this->getValue()->shouldReturn(false);
     }
+
+    function it_should_return_default_value_when_constructed_with_null()
+    {
+        $this->beConstructedWith(null);
+
+        $this->getValue()->shouldReturn(false);
+    }
 }

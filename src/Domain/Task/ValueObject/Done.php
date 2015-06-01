@@ -8,18 +8,22 @@ final class Done
 {
     const DEFAULT_VALUE = false;
 
-    /** @var string */
+    /** @var boolean */
     private $value;
 
-    /** @param string $value */
-    public function __construct($value = self::DEFAULT_VALUE)
+    /** @param boolean|null $value */
+    public function __construct($value = null)
     {
+        if (null === $value) {
+            $value = self::DEFAULT_VALUE;
+        }
+
         Assert::boolean($value);
 
         $this->value = (bool) $value;
     }
 
-    /** @return string */
+    /** @return boolean */
     public function getValue()
     {
         return $this->value;

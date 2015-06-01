@@ -50,4 +50,11 @@ class TimeSpentSpec extends ObjectBehavior
 
         $this->getValue()->shouldReturn(0);
     }
+
+    function it_should_return_default_value_when_constructed_with_null()
+    {
+        $this->beConstructedWith(null);
+
+        $this->getValue()->shouldReturn(0);
+    }
 }

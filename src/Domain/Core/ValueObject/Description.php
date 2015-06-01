@@ -9,9 +9,13 @@ final class Description
     /** @var string */
     private $value;
 
-    /** @param string $value */
-    public function __construct($value = '')
+    /** @param string|null $value */
+    public function __construct($value = null)
     {
+        if (null === $value) {
+            $value = '';
+        }
+
         Assert::string($value);
 
         $this->value = $value;

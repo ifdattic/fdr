@@ -25,4 +25,11 @@ class DescriptionSpec extends ObjectBehavior
 
         $this->getValue()->shouldReturn('');
     }
+
+    function it_returns_empty_string_when_constructed_with_null()
+    {
+        $this->beConstructedWith(null);
+
+        $this->getValue()->shouldReturn('');
+    }
 }
