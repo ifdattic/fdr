@@ -46,8 +46,8 @@ class Task implements ContainsRecordedMessages
         $this->id = $id;
         $this->user = $user;
         $this->name = $name;
-        $this->description = new Description();
         $this->date = $date;
+        $this->description = new Description();
         $this->estimated = new Estimated();
         $this->done = new Done();
         $this->timeSpent = new TimeSpent();
