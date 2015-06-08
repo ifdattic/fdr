@@ -7,9 +7,13 @@ use Domain\Task\ValueObject\Done;
 use Domain\Task\ValueObject\Estimated;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
+use Domain\User\Entity\User;
 
 class CreateTask
 {
+    /** @var User */
+    private $user;
+
     /** @var string */
     private $name;
 
@@ -29,6 +33,7 @@ class CreateTask
     private $timeSpent;
 
     /**
+     * @param User $user
      * @param string $name
      * @param string $date
      * @param string|null $description
@@ -36,14 +41,21 @@ class CreateTask
      * @param boolean|null $done
      * @param integer|null $timeSpent
      */
-    public function __construct($name, $date, $description, $estimated, $done, $timeSpent)
+    public function __construct(User $user, $name, $date, $description, $estimated, $done, $timeSpent)
     {
+        $this->user = $user;
         $this->name = $name;
         $this->date = $date;
         $this->description = $description;
         $this->estimated = $estimated;
         $this->done = $done;
         $this->timeSpent = $timeSpent;
+    }
+
+    /** @return User */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /** @return TaskName */

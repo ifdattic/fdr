@@ -8,21 +8,23 @@ use Domain\Task\ValueObject\Done;
 use Domain\Task\ValueObject\Estimated;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
+use Domain\User\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class CreateTaskSpec extends ObjectBehavior
 {
-    const TASK_NAME   = 'Task Name';
     const DATE        = '2015-04-15';
-    const ESTIMATED   = 3;
-    const DONE        = true;
     const DESCRIPTION = 'This is the description.';
+    const DONE        = true;
+    const ESTIMATED   = 3;
+    const TASK_NAME   = 'Task Name';
     const TIME_SPENT  = 23;
 
-    function let()
+    function let(User $user)
     {
         $this->beConstructedWith(
+            $user,
             self::TASK_NAME,
             self::DATE,
             self::DESCRIPTION,
@@ -35,6 +37,11 @@ class CreateTaskSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(CreateTask::CLASS);
+    }
+
+    function it_should_returns_its_user(User $user)
+    {
+        $this->getUser()->shouldReturn($user);
     }
 
     function it_should_returns_its_name()

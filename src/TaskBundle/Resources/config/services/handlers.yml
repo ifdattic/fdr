@@ -1,0 +1,6 @@
+services:
+    create_task_command_handler:
+        class: Domain\Task\Handler\CreateTaskCommandHandler
+        arguments: [@task_repository]
+        tags:
+            - { name: command_handler, handles: Domain\Task\Command\CreateTask }
