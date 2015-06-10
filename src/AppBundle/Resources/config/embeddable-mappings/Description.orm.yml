@@ -5,3 +5,5 @@ Domain\Core\ValueObject\Description:
             type: text
             column: description
             nullable: true
+            options:
+                default: null

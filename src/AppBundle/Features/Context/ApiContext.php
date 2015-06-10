@@ -79,10 +79,20 @@ class ApiContext implements Context
     }
 
     /**
+     * Get the content of a response
+     *
+     * @return string
+     */
+    public function getResponseContent()
+    {
+        return $this->session->getPage()->getContent();
+    }
+
+    /**
      * @When I get response content
      */
     public function iGetResponseContent()
     {
-        echo $this->session->getPage()->getContent();
+        echo $this->getResponseContent();
     }
 }

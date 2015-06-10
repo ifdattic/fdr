@@ -4,6 +4,7 @@ namespace Spec\Domain\Task\Command;
 
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Command\CreateTask;
+use Domain\Task\Entity\Task;
 use Domain\Task\ValueObject\Done;
 use Domain\Task\ValueObject\Estimated;
 use Domain\Task\ValueObject\TaskName;
@@ -51,7 +52,7 @@ class CreateTaskSpec extends ObjectBehavior
 
     function it_should_returns_its_date()
     {
-        $this->getDate()->shouldBeLike(new \DateTimeImmutable(self::DATE));
+        $this->getDate()->shouldBeLike(new \DateTime(self::DATE));
     }
 
     function it_should_returns_its_description()
@@ -72,5 +73,20 @@ class CreateTaskSpec extends ObjectBehavior
     function it_should_return_its_time_spent()
     {
         $this->getTimeSpent()->shouldBeLike(new TimeSpent(self::TIME_SPENT));
+    }
+
+    function it_should_throw_an_exception_if_returning_task_without_setting_it()
+    {
+        $this
+            ->shouldThrow(\RuntimeException::CLASS)
+            ->during('getTask')
+        ;
+    }
+
+    function it_should_return_a_task_which_was_set(Task $task)
+    {
+        $this->setTask($task);
+
+        $this->getTask()->shouldReturn($task);
     }
 }

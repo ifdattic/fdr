@@ -1,0 +1,4 @@
+api.create_task:
+    path: /tasks
+    defaults: { _controller: TaskBundle:Task:create }
+    methods: POST

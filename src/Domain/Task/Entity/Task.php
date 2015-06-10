@@ -29,7 +29,7 @@ class Task implements ContainsRecordedMessages
     /** @var Description */
     private $description;
 
-    /** @var \DateTimeImmutable */
+    /** @var \DateTime */
     private $date;
 
     /** @var Estimated */
@@ -41,7 +41,7 @@ class Task implements ContainsRecordedMessages
     /** @var TimeSpent */
     private $timeSpent;
 
-    public function __construct(TaskId $id, User $user, TaskName $name, \DateTimeImmutable $date)
+    public function __construct(TaskId $id, User $user, TaskName $name, \DateTime $date)
     {
         $this->id = $id;
         $this->user = $user;
@@ -84,7 +84,7 @@ class Task implements ContainsRecordedMessages
         return $this->description;
     }
 
-    /** @return \DateTimeImmutable */
+    /** @return \DateTime */
     public function getDate()
     {
         return $this->date;

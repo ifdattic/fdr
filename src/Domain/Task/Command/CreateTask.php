@@ -2,7 +2,9 @@
 
 namespace Domain\Task\Command;
 
+use Domain\Core\Validation\HasErrorsTrait;
 use Domain\Core\ValueObject\Description;
+use Domain\Task\Entity\Task;
 use Domain\Task\ValueObject\Done;
 use Domain\Task\ValueObject\Estimated;
 use Domain\Task\ValueObject\TaskName;
@@ -11,6 +13,8 @@ use Domain\User\Entity\User;
 
 class CreateTask
 {
+    use HasErrorsTrait;
+
     /** @var User */
     private $user;
 
@@ -31,6 +35,9 @@ class CreateTask
 
     /** @var integer|null */
     private $timeSpent;
+
+    /** @var Task */
+    private $task;
 
     /**
      * @param User $user
@@ -64,10 +71,10 @@ class CreateTask
         return new TaskName($this->name);
     }
 
-    /** @return \DateTimeImmutable */
+    /** @return \DateTime */
     public function getDate()
     {
-        return new \DateTimeImmutable($this->date);
+        return new \DateTime($this->date);
     }
 
     /** @return Description */
@@ -92,5 +99,23 @@ class CreateTask
     public function getTimeSpent()
     {
         return new TimeSpent($this->timeSpent);
+    }
+
+    /**
+     * @return Task
+     * @throws \RuntimeException if task is not set
+     */
+    public function getTask()
+    {
+        if (null === $this->task) {
+            throw new \RuntimeException('Task not set');
+        }
+
+        return $this->task;
+    }
+
+    public function setTask(Task $task)
+    {
+        $this->task = $task;
     }
 }

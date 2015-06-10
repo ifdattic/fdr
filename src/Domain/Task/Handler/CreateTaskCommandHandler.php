@@ -33,5 +33,7 @@ class CreateTaskCommandHandler
         $task->setTimeSpent($command->getTimeSpent());
 
         $this->taskRepository->add($task);
+
+        $command->setTask($task);
     }
 }

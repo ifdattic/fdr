@@ -19,7 +19,7 @@ Domain\Task\Command\CreateTask:
             - Type:
                 type: bool
                 message: Done is not a valid {{ type }}
-        time_spent:
+        timeSpent:
             - Range:
                 min: 0
                 minMessage: Time spent must be a positive number

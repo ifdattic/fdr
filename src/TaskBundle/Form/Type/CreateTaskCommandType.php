@@ -28,9 +28,9 @@ class CreateTaskCommandType extends AbstractType
             ->add('name', null, $notMapped)
             ->add('date', null, $notMapped)
             ->add('description', null, $notMapped)
-            ->add('estimated', null, $notMapped)
-            ->add('done', null, $notMapped)
-            ->add('time_spent', null, $notMapped)
+            ->add('estimated', 'integer', $notMapped)
+            ->add('done', 'checkbox', $notMapped)
+            ->add('time_spent', 'integer', $notMapped)
         ;
     }
 

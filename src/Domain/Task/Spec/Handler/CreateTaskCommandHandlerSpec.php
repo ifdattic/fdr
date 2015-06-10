@@ -49,6 +49,7 @@ class CreateTaskCommandHandlerSpec extends ObjectBehavior
         $task = Argument::type(Task::CLASS);
 
         $taskRepository->add($task)->shouldBeCalled();
+        $command->setTask($task)->shouldBeCalled();
 
         $this->handle($command);
     }

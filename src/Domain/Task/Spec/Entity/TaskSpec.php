@@ -69,7 +69,7 @@ class TaskSpec extends ObjectBehavior
 
     function it_should_returns_its_date()
     {
-        $this->getDate()->shouldHaveType(\DateTimeImmutable::CLASS);
+        $this->getDate()->shouldHaveType(\DateTime::CLASS);
     }
 
     function it_should_return_its_estimated()
