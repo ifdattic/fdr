@@ -145,13 +145,13 @@ jms_serializer:
     metadata:
         directories:
             Core:
-                namespace_prefix: Domain
+                namespace_prefix: Domain\Core
                 path: "@AppBundle/Resources/config/serializer/"
             Task:
-                namespace_prefix: Domain
+                namespace_prefix: Domain\Task
                 path: "@TaskBundle/Resources/config/serializer/"
             User:
-                namespace_prefix: Domain
+                namespace_prefix: Domain\User
                 path: "@UserBundle/Resources/config/serializer/"
 
 lexik_jwt_authentication:

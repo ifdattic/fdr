@@ -1,0 +1,23 @@
+Domain\Task\Entity\Task:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            inline: true
+        name:
+            expose: true
+            inline: true
+        description:
+            expose: true
+            inline: true
+        date:
+            expose: true
+        estimated:
+            expose: true
+            inline: true
+        done:
+            expose: true
+            inline: true
+        timeSpent:
+            expose: true
+            inline: true
