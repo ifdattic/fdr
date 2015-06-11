@@ -29,7 +29,7 @@ class TaskSpec extends ObjectBehavior
             TaskId::createFromString(self::UUID),
             $user,
             new TaskName(self::TASK_NAME),
-            new \DateTimeImmutable(self::DATE)
+            new \DateTime(self::DATE)
         );
     }
 

@@ -41,7 +41,7 @@ class CreateTaskCommandHandlerSpec extends ObjectBehavior
     ) {
         $command->getUser()->willReturn($user);
         $command->getName()->willReturn(new TaskName(self::TASK_NAME));
-        $command->getDate()->willReturn(new \DateTimeImmutable(self::DATE));
+        $command->getDate()->willReturn(new \DateTime(self::DATE));
         $command->getDescription()->willReturn(new Description(self::DESCRIPTION));
         $command->getEstimated()->willReturn(new Estimated(self::ESTIMATED));
         $command->getDone()->willReturn(new Done(self::DONE));
