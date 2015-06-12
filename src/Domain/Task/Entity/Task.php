@@ -4,7 +4,6 @@ namespace Domain\Task\Entity;
 
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Event\TaskWasEntered;
-use Domain\Task\ValueObject\Done;
 use Domain\Task\ValueObject\Estimated;
 use Domain\Task\ValueObject\TaskId;
 use Domain\Task\ValueObject\TaskName;
@@ -35,8 +34,8 @@ class Task implements ContainsRecordedMessages
     /** @var Estimated */
     private $estimated;
 
-    /** @var Done */
-    private $done;
+    /** @var \DateTime|null */
+    private $completedAt;
 
     /** @var TimeSpent */
     private $timeSpent;
@@ -49,7 +48,7 @@ class Task implements ContainsRecordedMessages
         $this->date = $date;
         $this->description = new Description();
         $this->estimated = new Estimated();
-        $this->done = new Done();
+        $this->completedAt = null;
         $this->timeSpent = new TimeSpent();
 
         $this->record(new TaskWasEntered($id));
@@ -101,21 +100,21 @@ class Task implements ContainsRecordedMessages
         return $this->estimated;
     }
 
-    public function setDone(Done $done)
+    /** @return \DateTime|null */
+    public function getCompletedAt()
     {
-        $this->done = $done;
+        return $this->completedAt;
     }
 
-    /** @return Done */
-    public function getDone()
+    public function setCompletedAt(\DateTime $completedAt = null)
     {
-        return $this->done;
+        $this->completedAt = $completedAt;
     }
 
-    /** @return false */
-    public function isDone()
+    /** @return boolean */
+    public function isCompleted()
     {
-        return $this->done->getValue();
+        return null !== $this->completedAt;
     }
 
     public function setTimeSpent(TimeSpent $timeSpent)

@@ -29,7 +29,7 @@ class CreateTaskCommandType extends AbstractType
             ->add('date', null, $notMapped)
             ->add('description', null, $notMapped)
             ->add('estimated', 'integer', $notMapped)
-            ->add('done', 'checkbox', $notMapped)
+            ->add('completed_at', null, $notMapped)
             ->add('time_spent', 'integer', $notMapped)
         ;
     }
@@ -46,7 +46,7 @@ class CreateTaskCommandType extends AbstractType
                     $form->get('date')->getData(),
                     $form->get('description')->getData(),
                     $form->get('estimated')->getData(),
-                    $form->get('done')->getData(),
+                    $form->get('completed_at')->getData(),
                     $form->get('time_spent')->getData()
                 );
             }

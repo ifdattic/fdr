@@ -13,18 +13,21 @@ class TaskController extends ApiController
     /**
      * Create a new task.
      *
+     * If task is **not completed it has no `completed_at`** in the response!
+     *
      * #### Example of successful response
      *
      * ```
      * {
      *   "message": "Task created.",
      *   "task": {
-     *     "id": "174e0393-8e12-4ab1-91cf-0c3f2cfebff8",
+     *     "id": "b4b60f6f-9454-4e03-b9fe-80066e9ac441",
      *     "name": "Task name",
-     *     "description": "This is task description",
      *     "date": "2015-06-28T00:00:00+0000",
+     *     "description": "This is task description",
      *     "estimated": 3,
-     *     "done": false,
+     *     "is_completed": true,
+     *     "completed_at": "2015-05-05T05:05:05+0000",
      *     "time_spent": 23
      *   }
      * }

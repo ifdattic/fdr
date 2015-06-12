@@ -17,9 +17,6 @@ Domain\Task\Entity\Task:
         estimated:
             class: Domain\Task\ValueObject\Estimated
             columnPrefix: false
-        done:
-            class: Domain\Task\ValueObject\Done
-            columnPrefix: false
         timeSpent:
             class: Domain\Task\ValueObject\TimeSpent
             columnPrefix: false
@@ -27,6 +24,12 @@ Domain\Task\Entity\Task:
         date:
             type: date
             column: date
+        completedAt:
+            type: datetime
+            column: completed_at
+            nullable: true
+            options:
+                default: null
     manyToOne:
         user:
             targetEntity: Domain\User\Entity\User

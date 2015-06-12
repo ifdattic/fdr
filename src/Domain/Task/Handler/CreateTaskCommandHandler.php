@@ -29,7 +29,7 @@ class CreateTaskCommandHandler
 
         $task->setDescription($command->getDescription());
         $task->setEstimated($command->getEstimated());
-        $task->setDone($command->getDone());
+        $task->setCompletedAt($command->getCompletedAt());
         $task->setTimeSpent($command->getTimeSpent());
 
         $this->taskRepository->add($task);

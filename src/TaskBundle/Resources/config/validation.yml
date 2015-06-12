@@ -15,10 +15,9 @@ Domain\Task\Command\CreateTask:
             - Range:
                 min: 0
                 minMessage: Estimated must be a positive number
-        done:
-            - Type:
-                type: bool
-                message: Done is not a valid {{ type }}
+        completedAt:
+            - DateTime:
+                message: Completed at is not a valid date
         timeSpent:
             - Range:
                 min: 0

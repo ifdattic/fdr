@@ -13,13 +13,13 @@ use PHPUnit_Framework_Assert as Assert;
 
 class TaskApiContext implements Context, SnippetAcceptingContext
 {
-    const DATE        = '2015-04-15';
-    const DESCRIPTION = 'This is the description.';
-    const DONE        = true;
-    const ESTIMATED   = 3;
-    const TASK_NAME   = 'Task Name';
-    const TIME_SPENT  = 23;
-    const UUID        = '5399dbab-ccd0-493c-be1a-67300de1671f';
+    const DATE           = '2015-04-15';
+    const DESCRIPTION    = 'This is the description.';
+    const COMPLETED_DATE = '2015-04-15 13:14:15';
+    const ESTIMATED      = 3;
+    const TASK_NAME      = 'Task Name';
+    const TIME_SPENT     = 23;
+    const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
 
     /** @var ApiContext */
     private $apiContext;
@@ -86,7 +86,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
                 'date' => self::DATE,
                 'description' => self::DESCRIPTION,
                 'estimated' => self::ESTIMATED,
-                'done' => self::DONE,
+                'completed_at' => self::COMPLETED_DATE,
                 'time_spent' => self::TIME_SPENT,
             ],
         ];

@@ -5,7 +5,6 @@ namespace Spec\Domain\Task\Command;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Command\CreateTask;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\Done;
 use Domain\Task\ValueObject\Estimated;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
@@ -15,12 +14,12 @@ use Prophecy\Argument;
 
 class CreateTaskSpec extends ObjectBehavior
 {
-    const DATE        = '2015-04-15';
-    const DESCRIPTION = 'This is the description.';
-    const DONE        = true;
-    const ESTIMATED   = 3;
-    const TASK_NAME   = 'Task Name';
-    const TIME_SPENT  = 23;
+    const COMPLETED_DATE = '2015-04-15 13:14:15';
+    const DATE           = '2015-04-15';
+    const DESCRIPTION    = 'This is the description.';
+    const ESTIMATED      = 3;
+    const TASK_NAME      = 'Task Name';
+    const TIME_SPENT     = 23;
 
     function let(User $user)
     {
@@ -30,7 +29,7 @@ class CreateTaskSpec extends ObjectBehavior
             self::DATE,
             self::DESCRIPTION,
             self::ESTIMATED,
-            self::DONE,
+            self::COMPLETED_DATE,
             self::TIME_SPENT
         );
     }
@@ -65,9 +64,9 @@ class CreateTaskSpec extends ObjectBehavior
         $this->getEstimated()->shouldBeLike(new Estimated(self::ESTIMATED));
     }
 
-    function it_should_return_its_done()
+    function it_should_return_its_completed_at()
     {
-        $this->getDone()->shouldBeLike(new Done(self::DONE));
+        $this->getCompletedAt()->shouldBeLike(new \DateTime(self::COMPLETED_DATE));
     }
 
     function it_should_return_its_time_spent()

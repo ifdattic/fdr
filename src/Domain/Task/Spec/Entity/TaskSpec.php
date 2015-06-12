@@ -4,7 +4,6 @@ namespace Spec\Domain\Task\Entity;
 
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\Done;
 use Domain\Task\ValueObject\Estimated;
 use Domain\Task\ValueObject\TaskId;
 use Domain\Task\ValueObject\TaskName;
@@ -15,13 +14,13 @@ use Prophecy\Argument;
 
 class TaskSpec extends ObjectBehavior
 {
-    const DATE        = '2015-04-15';
-    const DESCRIPTION = 'This is the description.';
-    const DONE        = true;
-    const ESTIMATED   = 3;
-    const TASK_NAME   = 'Task Name';
-    const TIME_SPENT  = 23;
-    const UUID        = '5399dbab-ccd0-493c-be1a-67300de1671f';
+    const COMPLETED_DATE = '2015-04-15 13:14:15';
+    const DATE           = '2015-04-15';
+    const DESCRIPTION    = 'This is the description.';
+    const ESTIMATED      = 3;
+    const TASK_NAME      = 'Task Name';
+    const TIME_SPENT     = 23;
+    const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
 
     function let(User $user)
     {
@@ -86,24 +85,39 @@ class TaskSpec extends ObjectBehavior
         $this->getEstimated()->shouldReturn($estimated);
     }
 
-    function it_should_return_its_done()
+    function it_should_return_completed_at_when_its_not_completed()
     {
-        $this->getDone()->shouldHaveType(Done::CLASS);
+        $this->getCompletedAt()->shouldReturn(null);
     }
 
-    function it_should_return_its_done_as_boolean_value()
+    function it_should_return_completed_at_when_its_set_as_not_completed()
     {
-        $this->shouldNotBeDone();
+        $this->setCompletedAt(null);
+
+        $this->getCompletedAt()->shouldReturn(null);
     }
 
-    function it_should_return_done_which_was_set()
+    function it_should_return_completed_at_when_its_completed()
     {
-        $done = new Done(self::DONE);
+        $date = new \DateTime(self::COMPLETED_DATE);
 
-        $this->setDone($done);
+        $this->setCompletedAt($date);
 
-        $this->getDone()->shouldReturn($done);
-        $this->shouldBeDone();
+        $this->getCompletedAt()->shouldReturn($date);
+    }
+
+    function it_should_not_be_completed()
+    {
+        $this->shouldNotBeCompleted();
+    }
+
+    function it_should_be_completed()
+    {
+        $date = new \DateTime(self::COMPLETED_DATE);
+
+        $this->setCompletedAt($date);
+
+        $this->shouldBeCompleted();
     }
 
     function it_should_returns_its_time_spent()

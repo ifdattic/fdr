@@ -5,7 +5,6 @@ namespace Domain\Task\Command;
 use Domain\Core\Validation\HasErrorsTrait;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\Done;
 use Domain\Task\ValueObject\Estimated;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
@@ -30,8 +29,8 @@ class CreateTask
     /** @var integer|null */
     private $estimated;
 
-    /** @var boolean|null */
-    private $done;
+    /** @var \DateTime|null */
+    private $completedAt;
 
     /** @var integer|null */
     private $timeSpent;
@@ -46,16 +45,17 @@ class CreateTask
      * @param string|null $description
      * @param integer|null $estimated
      * @param boolean|null $done
+     * @param string|null $completedAt
      * @param integer|null $timeSpent
      */
-    public function __construct(User $user, $name, $date, $description, $estimated, $done, $timeSpent)
+    public function __construct(User $user, $name, $date, $description, $estimated, $completedAt, $timeSpent)
     {
         $this->user = $user;
         $this->name = $name;
         $this->date = $date;
         $this->description = $description;
         $this->estimated = $estimated;
-        $this->done = $done;
+        $this->completedAt = $completedAt;
         $this->timeSpent = $timeSpent;
     }
 
@@ -89,10 +89,16 @@ class CreateTask
         return new Estimated($this->estimated);
     }
 
-    /** @return Done */
-    public function getDone()
+    /** @return \DateTime|null */
+    public function getCompletedAt()
     {
-        return new Done($this->done);
+        $completedAt = $this->completedAt;
+
+        if (null !== $completedAt) {
+            $completedAt = new \DateTime($completedAt);
+        }
+
+        return $completedAt;
     }
 
     /** @return TimeSpent */

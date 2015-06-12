@@ -1,23 +1,41 @@
 Domain\Task\Entity\Task:
     exclusion_policy: ALL
+    accessor_order: custom
+    custom_accessor_order:
+        - id
+        - name
+        - date
+        - description
+        - estimated
+        - isCompleted
+        - completedAt
+        - timeSpent
     properties:
         id:
             expose: true
             inline: true
+            type: Domain\Task\ValueObject\TaskId
         name:
             expose: true
             inline: true
+            type: Domain\Task\ValueObject\TaskName
         description:
             expose: true
             inline: true
+            type: Domain\Core\ValueObject\Description
         date:
             expose: true
         estimated:
             expose: true
             inline: true
-        done:
+            type: Domain\Task\ValueObject\Estimated
+        completedAt:
             expose: true
-            inline: true
         timeSpent:
             expose: true
             inline: true
+            type: Domain\Task\ValueObject\TimeSpent
+    virtual_properties:
+        isCompleted:
+            serialized_name: is_completed
+            type: boolean
