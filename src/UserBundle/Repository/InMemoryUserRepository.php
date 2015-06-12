@@ -49,21 +49,9 @@ class InMemoryUserRepository implements UserRepository
     }
 
     /** {@inheritdoc} */
-    public function findAll()
-    {
-        return $this->users;
-    }
-
-    /** {@inheritdoc} */
     public function add(User $user)
     {
         $this->users[] = $user;
-    }
-
-    /** {@inheritdoc} */
-    public function remove(User $user)
-    {
-
     }
 
     /** {@inheritdocs} */

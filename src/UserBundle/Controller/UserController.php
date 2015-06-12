@@ -4,7 +4,6 @@ namespace UserBundle\Controller;
 
 use AppBundle\Controller\ApiController;
 use Domain\User\Command\GetUser;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -100,16 +99,6 @@ class UserController extends ApiController
             ->setData(['user' => $user])
             ->respond()
         ;
-    }
-
-    /**
-     * @Rest\View
-     */
-    public function allAction()
-    {
-        $users = $this->get('user_repository')->findAll();
-
-        return ['users' => $users];
     }
 
     /**

@@ -62,11 +62,6 @@ class DoctrineUserRepository extends EntityRepository implements UserRepository
     }
 
     /** {@inheritdoc} */
-    public function findAll()
-    {
-    }
-
-    /** {@inheritdoc} */
     public function add(User $user)
     {
         $em = $this->getEntityManager();
@@ -74,11 +69,6 @@ class DoctrineUserRepository extends EntityRepository implements UserRepository
         $em->persist($user);
 
         $em->flush();
-    }
-
-    /** {@inheritdoc} */
-    public function remove(User $user)
-    {
     }
 
     /** {@inheritdoc} */
