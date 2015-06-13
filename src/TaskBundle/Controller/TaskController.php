@@ -26,7 +26,7 @@ class TaskController extends ApiController
      *     "date": "2015-06-28T00:00:00+0000",
      *     "description": "This is task description",
      *     "estimated": 3,
-     *     "is_completed": true,
+     *     "completed": true,
      *     "completed_at": "2015-05-05T05:05:05+0000",
      *     "time_spent": 23,
      *     "important": true

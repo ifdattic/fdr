@@ -42,5 +42,5 @@ Domain\Task\Entity\Task:
             type: boolean
     virtual_properties:
         isCompleted:
-            serialized_name: is_completed
+            serialized_name: completed
             type: boolean
