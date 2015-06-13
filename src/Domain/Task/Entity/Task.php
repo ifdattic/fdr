@@ -2,6 +2,7 @@
 
 namespace Domain\Task\Entity;
 
+use Domain\Core\Validation\Assert;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Event\TaskWasEntered;
 use Domain\Task\ValueObject\Estimated;
@@ -40,6 +41,9 @@ class Task implements ContainsRecordedMessages
     /** @var TimeSpent */
     private $timeSpent;
 
+    /** @var boolean */
+    private $important = true;
+
     public function __construct(TaskId $id, User $user, TaskName $name, \DateTime $date)
     {
         $this->id = $id;
@@ -50,6 +54,7 @@ class Task implements ContainsRecordedMessages
         $this->estimated = new Estimated();
         $this->completedAt = null;
         $this->timeSpent = new TimeSpent();
+        $this->important = true;
 
         $this->record(new TaskWasEntered($id));
     }
@@ -126,5 +131,19 @@ class Task implements ContainsRecordedMessages
     public function getTimeSpent()
     {
         return $this->timeSpent;
+    }
+
+    /** @return boolean */
+    public function isImportant()
+    {
+        return $this->important;
+    }
+
+    /** @param boolean $important */
+    public function setImportant($important)
+    {
+        Assert::boolean($important);
+
+        $this->important = $important;
     }
 }

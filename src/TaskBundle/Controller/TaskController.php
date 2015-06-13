@@ -28,7 +28,8 @@ class TaskController extends ApiController
      *     "estimated": 3,
      *     "is_completed": true,
      *     "completed_at": "2015-05-05T05:05:05+0000",
-     *     "time_spent": 23
+     *     "time_spent": 23,
+     *     "important": true
      *   }
      * }
      * ```

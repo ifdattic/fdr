@@ -18,6 +18,7 @@ class CreateTaskSpec extends ObjectBehavior
     const DATE           = '2015-04-15';
     const DESCRIPTION    = 'This is the description.';
     const ESTIMATED      = 3;
+    const IMPORTANT      = false;
     const TASK_NAME      = 'Task Name';
     const TIME_SPENT     = 23;
 
@@ -30,7 +31,8 @@ class CreateTaskSpec extends ObjectBehavior
             self::DESCRIPTION,
             self::ESTIMATED,
             self::COMPLETED_DATE,
-            self::TIME_SPENT
+            self::TIME_SPENT,
+            self::IMPORTANT
         );
     }
 
@@ -72,6 +74,11 @@ class CreateTaskSpec extends ObjectBehavior
     function it_should_return_its_time_spent()
     {
         $this->getTimeSpent()->shouldBeLike(new TimeSpent(self::TIME_SPENT));
+    }
+
+    function it_should_return_its_important()
+    {
+        $this->getImportant()->shouldReturn(self::IMPORTANT);
     }
 
     function it_should_throw_an_exception_if_returning_task_without_setting_it()

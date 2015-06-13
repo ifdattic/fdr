@@ -22,3 +22,7 @@ Domain\Task\Command\CreateTask:
             - Range:
                 min: 0
                 minMessage: Time spent must be a positive number
+        important:
+            - Type:
+                type: bool
+                message: Important is not valid {{ type }}

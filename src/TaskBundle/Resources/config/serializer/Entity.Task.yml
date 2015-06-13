@@ -10,6 +10,7 @@ Domain\Task\Entity\Task:
         - isCompleted
         - completedAt
         - timeSpent
+        - important
     properties:
         id:
             expose: true
@@ -35,6 +36,10 @@ Domain\Task\Entity\Task:
             expose: true
             inline: true
             type: Domain\Task\ValueObject\TimeSpent
+        important:
+            expose: true
+            serialized_name: important
+            type: boolean
     virtual_properties:
         isCompleted:
             serialized_name: is_completed

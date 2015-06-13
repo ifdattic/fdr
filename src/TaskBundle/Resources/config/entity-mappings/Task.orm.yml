@@ -30,6 +30,11 @@ Domain\Task\Entity\Task:
             nullable: true
             options:
                 default: null
+        important:
+            type: boolean
+            column: important
+            options:
+                default: 1
     manyToOne:
         user:
             targetEntity: Domain\User\Entity\User

@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\Task\Entity;
 
+use Domain\Core\Exception\AssertionFailedException;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
 use Domain\Task\ValueObject\Estimated;
@@ -18,6 +19,7 @@ class TaskSpec extends ObjectBehavior
     const DATE           = '2015-04-15';
     const DESCRIPTION    = 'This is the description.';
     const ESTIMATED      = 3;
+    const IMPORTANT      = false;
     const TASK_NAME      = 'Task Name';
     const TIME_SPENT     = 23;
     const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
@@ -132,5 +134,25 @@ class TaskSpec extends ObjectBehavior
         $this->setTimeSpent($timeSpent);
 
         $this->getTimeSpent()->shouldReturn($timeSpent);
+    }
+
+    function it_should_be_important_by_default()
+    {
+        $this->shouldBeImportant();
+    }
+
+    function it_should_set_important()
+    {
+        $this->setImportant(self::IMPORTANT);
+
+        $this->shouldNotBeImportant();
+    }
+
+    function it_should_throw_an_exception_if_important_value_is_not_boolean()
+    {
+        $this
+            ->shouldThrow(AssertionFailedException::CLASS)
+            ->during('setImportant', [1])
+        ;
     }
 }

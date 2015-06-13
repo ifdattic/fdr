@@ -20,6 +20,7 @@ class CreateTaskCommandHandlerSpec extends ObjectBehavior
     const DESCRIPTION    = 'This is the description.';
     const COMPLETED_DATE = '2015-04-15 13:14:15';
     const ESTIMATED      = 3;
+    const IMPORTANT      = false;
     const TASK_NAME      = 'Task Name';
     const TIME_SPENT     = 23;
 
@@ -45,6 +46,7 @@ class CreateTaskCommandHandlerSpec extends ObjectBehavior
         $command->getEstimated()->willReturn(new Estimated(self::ESTIMATED));
         $command->getCompletedAt()->willReturn(new \DateTime(self::COMPLETED_DATE));
         $command->getTimeSpent()->willReturn(new TimeSpent(self::TIME_SPENT));
+        $command->getImportant()->willReturn(self::IMPORTANT);
         $task = Argument::type(Task::CLASS);
 
         $taskRepository->add($task)->shouldBeCalled();

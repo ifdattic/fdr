@@ -35,6 +35,9 @@ class CreateTask
     /** @var integer|null */
     private $timeSpent;
 
+    /** @var boolean */
+    private $important;
+
     /** @var Task */
     private $task;
 
@@ -48,7 +51,7 @@ class CreateTask
      * @param string|null $completedAt
      * @param integer|null $timeSpent
      */
-    public function __construct(User $user, $name, $date, $description, $estimated, $completedAt, $timeSpent)
+    public function __construct(User $user, $name, $date, $description, $estimated, $completedAt, $timeSpent, $important)
     {
         $this->user = $user;
         $this->name = $name;
@@ -57,6 +60,7 @@ class CreateTask
         $this->estimated = $estimated;
         $this->completedAt = $completedAt;
         $this->timeSpent = $timeSpent;
+        $this->important = $important;
     }
 
     /** @return User */
@@ -105,6 +109,12 @@ class CreateTask
     public function getTimeSpent()
     {
         return new TimeSpent($this->timeSpent);
+    }
+
+    /** @return boolean */
+    public function getImportant()
+    {
+        return $this->important;
     }
 
     /**
