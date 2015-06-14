@@ -44,6 +44,9 @@ class Task implements ContainsRecordedMessages
     /** @var boolean */
     private $important = true;
 
+    /** @var \DateTime */
+    private $createdAt;
+
     public function __construct(TaskId $id, User $user, TaskName $name, \DateTime $date)
     {
         $this->id = $id;
@@ -55,6 +58,7 @@ class Task implements ContainsRecordedMessages
         $this->completedAt = null;
         $this->timeSpent = new TimeSpent();
         $this->important = true;
+        $this->createdAt = new \DateTime();
 
         $this->record(new TaskWasEntered($id));
     }
@@ -145,5 +149,11 @@ class Task implements ContainsRecordedMessages
         Assert::boolean($important);
 
         $this->important = $important;
+    }
+
+    /** @return \DateTime */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

@@ -35,6 +35,9 @@ Domain\Task\Entity\Task:
             column: important
             options:
                 default: 1
+        createdAt:
+            type: datetime
+            column: created_at
     manyToOne:
         user:
             targetEntity: Domain\User\Entity\User

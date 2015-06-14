@@ -148,6 +148,11 @@ class TaskSpec extends ObjectBehavior
         $this->shouldNotBeImportant();
     }
 
+    function it_should_return_its_created_at()
+    {
+        $this->getCreatedAt()->shouldHaveType(\DateTime::CLASS);
+    }
+
     function it_should_throw_an_exception_if_important_value_is_not_boolean()
     {
         $this
