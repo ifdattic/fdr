@@ -12,11 +12,9 @@ final class Description
     /** @param string|null $value */
     public function __construct($value = null)
     {
-        if (null === $value) {
-            $value = '';
+        if (null !== $value) {
+            Assert::string($value);
         }
-
-        Assert::string($value);
 
         $this->value = $value;
     }
