@@ -1,0 +1,28 @@
+Domain\Task\Command\CreateTask:
+    properties:
+        name:
+            - NotBlank:
+                message: Task name is required
+            - Length:
+                max: 1028
+                maxMessage: Task name must be less than {{ limit }} characters
+        date:
+            - NotBlank:
+                message: Date is required
+            - Date:
+                message: Date is not valid
+        estimated:
+            - Range:
+                min: 0
+                minMessage: Estimated must be a positive number
+        completedAt:
+            - DateTime:
+                message: Completed at is not a valid date
+        timeSpent:
+            - Range:
+                min: 0
+                minMessage: Time spent must be a positive number
+        important:
+            - Type:
+                type: bool
+                message: Important is not valid {{ type }}

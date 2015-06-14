@@ -1,0 +1,13 @@
+services:
+    task_repository:
+        alias: task_repository.doctrine
+
+    task_repository.doctrine:
+        class: TaskBundle\Repository\DoctrineTaskRepository
+        factory: [@doctrine, getRepository]
+        arguments: ['Domain\Task\Entity\Task']
+        public: false
+
+    task_repository.in_memory:
+        class: TaskBundle\Repository\InMemoryTaskRepository
+        public: false

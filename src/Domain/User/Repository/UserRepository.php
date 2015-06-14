@@ -33,16 +33,12 @@ interface UserRepository
      */
     public function findByEmail(Email $email);
 
-    public function findAll();
-
     /**
      * Add a user.
      *
      * @param User $user
      */
     public function add(User $user);
-
-    public function remove(User $user);
 
     /**
      * Check if email is unique (no user with this email).
