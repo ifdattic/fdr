@@ -124,6 +124,8 @@ fos_rest:
             json: true
     service:
         serializer: jms_serializer.serializer
+    serializer:
+        serialize_null: true
     exception:
         codes:
             Domain\Core\Exception\AssertionFailedException: 400
