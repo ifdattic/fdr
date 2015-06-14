@@ -122,12 +122,12 @@ class TaskSpec extends ObjectBehavior
         $this->shouldBeCompleted();
     }
 
-    function it_should_returns_its_time_spent()
+    function it_should_return_its_time_spent()
     {
         $this->getTimeSpent()->shouldHaveType(TimeSpent::CLASS);
     }
 
-    function it_should_returns_time_spent_which_was_set()
+    function it_should_return_time_spent_which_was_set()
     {
         $timeSpent = new TimeSpent(self::TIME_SPENT);
 

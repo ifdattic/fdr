@@ -33,6 +33,7 @@ Domain\Task\Entity\Task:
             type: Domain\Task\ValueObject\Estimated
         completedAt:
             expose: true
+            serialized_name: completed_at
         timeSpent:
             expose: true
             inline: true
