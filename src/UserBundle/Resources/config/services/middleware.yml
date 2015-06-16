@@ -1,0 +1,7 @@
+services:
+    owner_bound_middleware:
+        class: Domain\User\Middleware\OwnerBoundMiddleware
+        arguments: [@user_provider]
+        public: false
+        tags:
+            - { name: command_bus_middleware }
