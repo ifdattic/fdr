@@ -4,7 +4,7 @@ Domain\User\Entity\User:
     repositoryClass: UserBundle\Repository\DoctrineUserRepository
     id:
         id:
-            type: guid
+            type: userid
             generator:
                 strategy: NONE
     embedded:

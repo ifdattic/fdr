@@ -27,6 +27,7 @@ Domain\Task\Entity\Task:
             type: Domain\Core\ValueObject\Description
         date:
             expose: true
+            type: "DateTime<'Y-m-d'>"
         estimated:
             expose: true
             inline: true

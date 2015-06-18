@@ -22,6 +22,7 @@ class UserExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services/handlers.yml');
+        $loader->load('services/middleware.yml');
         $loader->load('services/repositories.yml');
         $loader->load('services/services.yml');
     }

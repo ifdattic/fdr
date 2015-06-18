@@ -4,3 +4,9 @@ services:
         arguments: [@task_repository]
         tags:
             - { name: command_handler, handles: Domain\Task\Command\CreateTask }
+
+    get_task_command_handler:
+        class: Domain\Task\Handler\GetTaskCommandHandler
+        arguments: [@task_repository]
+        tags:
+            - { name: command_handler, handles: Domain\Task\Command\GetTask }

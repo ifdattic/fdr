@@ -79,6 +79,22 @@ class ApiContext implements Context
     }
 
     /**
+     * @Then I should receive forbidden response
+     */
+    public function iShouldReceiveForbiddenResponse()
+    {
+        Assert::assertSame(403, $this->session->getStatusCode());
+    }
+
+    /**
+     * @Then I should receive not found response
+     */
+    public function iShouldReceiveNotFoundResponse()
+    {
+        Assert::assertSame(404, $this->session->getStatusCode());
+    }
+
+    /**
      * Get the content of a response
      *
      * @return string

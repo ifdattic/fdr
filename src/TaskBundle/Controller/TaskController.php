@@ -3,6 +3,7 @@
 namespace TaskBundle\Controller;
 
 use AppBundle\Controller\ApiController;
+use Domain\Task\Command\GetTask;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -92,5 +93,72 @@ class TaskController extends ApiController
         }
 
         return $this->respondWithForm($form);
+    }
+
+    /**
+     * Get data of a task.
+     *
+     * ### Example of successful response
+     *
+     * ```
+     * {
+     *   "task": {
+     *     "id": "5399dbab-ccd0-493c-be1a-67300de1671f",
+     *     "name": "Task Name",
+     *     "date": "2015-04-15",
+     *     "description": "This is the description.",
+     *     "estimated": 3,
+     *     "completed": true,
+     *     "completed_at": "2015-04-15T13:14:15+0000",
+     *     "time_spent": 23,
+     *     "important": true,
+     *     "created_at": "2015-06-18T07:13:26+0000"
+     *   }
+     * }
+     * ```
+     *
+     * ### Example of response when not an owner of a task
+     *
+     * ```
+     * {
+     *   "code": 403,
+     *   "message": "Access Denied",
+     *   "errors": null
+     * }
+     * ```
+     *
+     * ### Example when task is not found response
+     *
+     * ```
+     * {
+     *   "code": 404,
+     *   "message": "Task not found",
+     *   "errors": null
+     * }
+     * ```
+     *
+     * @ApiDoc(
+     *     resource=true,
+     *     authentication=true,
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when not an owner of a resource",
+     *         404="Returned when resource not found"
+     *     }
+     * )
+     */
+    public function getAction($id)
+    {
+        $command = new GetTask($id);
+
+        $this->getCommandBus()->handle($command);
+
+        $task = $command->getTask();
+
+        return $this
+            ->setStatusCode(Response::HTTP_OK)
+            ->setData(['task' => $task])
+            ->respond()
+        ;
     }
 }
