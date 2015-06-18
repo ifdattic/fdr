@@ -127,18 +127,19 @@ fos_rest:
     serializer:
         serialize_null: true
     exception:
+        # The order is important!
         codes:
             Domain\Core\Exception\AssertionFailedException: 400
-            Domain\Core\Exception\DomainException: 400
             Domain\Core\Exception\EntityNotFoundException: 404
             Domain\User\Exception\AccessDeniedException: 403
             Symfony\Component\Security\Core\Exception\AccessDeniedException: 403
+            Domain\Core\Exception\DomainException: 400
         messages:
             Domain\Core\Exception\AssertionFailedException: true
-            Domain\Core\Exception\DomainException: true
             Domain\Core\Exception\EntityNotFoundException: true
             Domain\User\Exception\AccessDeniedException: true
             Symfony\Component\Security\Core\Exception\AccessDeniedException: true
+            Domain\Core\Exception\DomainException: true
 
 sensio_framework_extra:
     view: { annotations: false }
