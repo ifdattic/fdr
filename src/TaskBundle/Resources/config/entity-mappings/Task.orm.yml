@@ -4,7 +4,7 @@ Domain\Task\Entity\Task:
     repositoryClass: TaskBundle\Repository\DoctrineTaskRepository
     id:
         id:
-            type: guid
+            type: taskid
             generator:
                 strategy: NONE
     embedded:
