@@ -2,3 +2,8 @@ api.create_task:
     path: /tasks
     defaults: { _controller: TaskBundle:Task:create }
     methods: POST
+
+api.get_task:
+    path: /tasks/{id}
+    defaults: { _controller: TaskBundle:Task:get }
+    methods: GET

@@ -2,6 +2,7 @@
 
 namespace UserBundle\Features\Context;
 
+use AppBundle\Features\Context\ApiContext;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
@@ -21,11 +22,15 @@ class UserApiContext implements Context, SnippetAcceptingContext
 {
     const AVAILABLE_EMAIL = 'john@doe.com';
     const EMAIL           = 'virgil@mundell.com';
+    const EMAIL2          = 'alice@carlton.com';
     const FULLNAME        = 'Virgil Mundell';
+    const FULLNAME2       = 'Alice Carlton';
     const PASSWORD        = '9wt24yk^T&ObwHDQ2bbDej3kZ^Llz@';
     const PASSWORD2       = '%XIIPqR2j*mEF^DNuQg1JIKXt2Dzej';
     const PASSWORD_HASH   = '$2y$14$2RfLwLL./bzTyfNdBRaotelrsmoOR61yUcDTOIDT84VwvvvZA7zJW';
+    const PASSWORD_HASH2  = '$2y$14$WP8RXsprmipbMYe867YLmOEErWlZjlndcYijPT.swBodoHEdGWEU2';
     const UUID            = '5399dbab-ccd0-493c-be1a-67300de1671f';
+    const UUID2           = '97fd781e-35c5-4b8e-9175-3ae730d86bdb';
 
     /** @var UserRepository */
     private $userRepository;
@@ -35,6 +40,9 @@ class UserApiContext implements Context, SnippetAcceptingContext
 
     /** @var string */
     private $authToken;
+
+    /** @var User[] */
+    private $users;
 
     public function __construct(UserRepository $userRepository)
     {
@@ -48,9 +56,11 @@ class UserApiContext implements Context, SnippetAcceptingContext
     {
         $environment = $scope->getEnvironment();
 
-        $this->apiContext = $environment->getContext('AppBundle\Features\Context\ApiContext');
+        $this->apiContext = $environment->getContext(ApiContext::CLASS);
 
         $this->userRepository->clear();
+
+        $this->users = [];
     }
 
     /**
@@ -58,14 +68,30 @@ class UserApiContext implements Context, SnippetAcceptingContext
      */
     public function userDataIsSeeded()
     {
-        $user = new User(
-            new UserId(new Uuid(self::UUID)),
-            new Email(self::EMAIL),
-            new FullName(self::FULLNAME),
-            new PasswordHash(self::PASSWORD_HASH)
-        );
+        $this->users = [
+            self::UUID => new User(
+                new UserId(new Uuid(self::UUID)),
+                new Email(self::EMAIL),
+                new FullName(self::FULLNAME),
+                new PasswordHash(self::PASSWORD_HASH)
+            ),
+            self::UUID2 => new User(
+                new UserId(new Uuid(self::UUID2)),
+                new Email(self::EMAIL2),
+                new FullName(self::FULLNAME2),
+                new PasswordHash(self::PASSWORD_HASH2)
+            ),
+        ];
 
-        $this->userRepository->add($user);
+        foreach ($this->users as $user) {
+            $this->userRepository->add($user);
+        }
+    }
+
+    /** @return User[] */
+    public function getUsers()
+    {
+        return $this->users;
     }
 
     /**

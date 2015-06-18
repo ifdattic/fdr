@@ -2,25 +2,36 @@
 
 namespace TaskBundle\Features\Context;
 
+use AppBundle\Features\Context\ApiContext;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Domain\Core\ValueObject\Description;
+use Domain\Task\Entity\Task;
 use Domain\Task\Repository\TaskRepository;
+use Domain\Task\ValueObject\Estimated;
+use Domain\Task\ValueObject\TaskId;
+use Domain\Task\ValueObject\TaskName;
+use Domain\Task\ValueObject\TimeSpent;
 use PHPUnit_Framework_Assert as Assert;
+use UserBundle\Features\Context\UserApiContext;
 
 class TaskApiContext implements Context, SnippetAcceptingContext
 {
-    const DATE           = '2015-04-15';
-    const DESCRIPTION    = 'This is the description.';
     const COMPLETED_DATE = '2015-04-15 13:14:15';
+    const DATE           = '2015-04-15';
+    const DATE2          = '2014-06-05';
+    const DESCRIPTION    = 'This is the description.';
     const ESTIMATED      = 3;
     const IMPORTANT      = true;
     const TASK_NAME      = 'Task Name';
+    const TASK_NAME2     = 'Task Name Alternative';
     const TIME_SPENT     = 23;
     const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
+    const UUID2          = '97fd781e-35c5-4b8e-9175-3ae730d86bdb';
 
     /** @var ApiContext */
     private $apiContext;
@@ -30,6 +41,9 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
     /** @var UserApiContext */
     private $userApiContext;
+
+    /** @var Task[] */
+    private $tasks;
 
     public function __construct(TaskRepository $taskRepository)
     {
@@ -43,10 +57,50 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $environment = $scope->getEnvironment();
 
-        $this->apiContext = $environment->getContext('AppBundle\Features\Context\ApiContext');
-        $this->userApiContext = $environment->getContext('UserBundle\Features\Context\UserApiContext');
+        $this->apiContext = $environment->getContext(ApiContext::CLASS);
+        $this->userApiContext = $environment->getContext(UserApiContext::CLASS);
 
         $this->taskRepository->clear();
+
+        $this->tasks = [];
+    }
+
+    /**
+     * @Given task data is seeded
+     */
+    public function taskDataIsSeeded()
+    {
+        $task = new Task(
+            TaskId::createFromString(self::UUID),
+            $this->userApiContext->getUsers()[UserApiContext::UUID],
+            new TaskName(self::TASK_NAME),
+            new \DateTime(self::DATE)
+        );
+        $task->setDescription(new Description(self::DESCRIPTION));
+        $task->setEstimated(new Estimated(self::ESTIMATED));
+        $task->setCompletedAt(new \DateTime(self::COMPLETED_DATE));
+        $task->setTimeSpent(new TimeSpent(self::TIME_SPENT));
+        $task->setImportant(self::IMPORTANT);
+
+        $this->tasks[self::UUID] = $task;
+
+        $task = new Task(
+            TaskId::createFromString(self::UUID2),
+            $this->userApiContext->getUsers()[UserApiContext::UUID2],
+            new TaskName(self::TASK_NAME2),
+            new \DateTime(self::DATE2)
+        );
+        $this->tasks[self::UUID2] = $task;
+
+        foreach ($this->tasks as $task) {
+            $this->taskRepository->add($task);
+        }
+    }
+
+    /** @return Task[] */
+    public function getTasks()
+    {
+        return $this->tasks;
     }
 
     /**
@@ -102,5 +156,79 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         Assert::assertArrayHasKey('message', $response);
         Assert::assertArrayHasKey('task', $response);
+    }
+
+    /**
+     * @When I get task with id :id
+     */
+    public function iGetTaskWithId($id)
+    {
+        $client = $this->apiContext->getSession()->getDriver()->getClient();
+
+        $client->request(
+            'GET',
+            $this->apiContext->locatePath('/tasks/'.$id),
+            [],
+            [],
+            ['HTTP_AUTHORIZATION' => $this->userApiContext->getAuthToken()],
+            []
+        );
+    }
+
+    /**
+     * @Then I should not see a task which doesn't exist
+     */
+    public function iShouldNotSeeATaskWhichDoesntExist()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iGetTaskWithId(self::UUID);
+
+        $this->apiContext->iShouldReceiveNotFoundResponse();
+    }
+
+    /**
+     * @Then I should not be able to see a task I don't own
+     */
+    public function iShouldNotBeAbleToSeeATaskIDontOwn()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iGetTaskWithId(self::UUID2);
+
+        $this->apiContext->iShouldReceiveForbiddenResponse();
+    }
+
+    /**
+     * @Then I should see details of task I own
+     */
+    public function iShouldSeeDetailsOfTaskIOwn()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iGetTaskWithId(self::UUID);
+
+        $this->apiContext->iShouldReceiveSuccessResponse();
+
+        $response = $this->apiContext->getResponseContent();
+        $response = json_decode($response, true);
+
+        $task = $this->getTasks()[self::UUID];
+        $expectedResponse = [
+            'task' => [
+                'id' => $task->getId()->getValue(),
+                'name' => $task->getName()->getValue(),
+                'date' => $task->getDate()->format('Y-m-d'),
+                'description' => $task->getDescription()->getValue(),
+                'estimated' => $task->getEstimated()->getValue(),
+                'completed' => $task->isCompleted(),
+                'completed_at' => $task->getCompletedAt()->format(\DateTime::ISO8601),
+                'time_spent' => $task->getTimeSpent()->getValue(),
+                'important' => $task->isImportant(),
+                'created_at' => $task->getCreatedAt()->format(\DateTime::ISO8601),
+            ],
+        ];
+
+        Assert::assertSame($expectedResponse, $response);
     }
 }
