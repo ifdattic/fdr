@@ -44,7 +44,7 @@ class GetTask implements OwnerBound
         $this->task = $task;
     }
 
-    /** @return \Domain\User\Entity\User */
+    /** {@inheritdoc} */
     public function getUser()
     {
         return $this->getTask()->getUser();

@@ -8,4 +8,6 @@ namespace Domain\User\Middleware;
  */
 interface OwnerBound
 {
+    /** @return \Domain\User\Entity\User */
+    public function getUser();
 }
