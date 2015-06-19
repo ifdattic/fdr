@@ -128,6 +128,10 @@ class UserApiContext implements Context, SnippetAcceptingContext
         ];
 
         $this->iSignUpWithPayload(json_encode($payload));
+
+        $this->apiContext->iShouldReceiveCreatedResponse();
+
+        $this->apiContext->compareResponse([], ['message']);
     }
 
     /**
@@ -144,6 +148,20 @@ class UserApiContext implements Context, SnippetAcceptingContext
         ];
 
         $this->iSignUpWithPayload(json_encode($payload));
+
+        $this->apiContext->iShouldReceiveBadRequestResponse();
+
+        $this->apiContext->compareResponse(
+            [
+                'errors' => [
+                    ['field' => 'email'],
+                ],
+            ],
+            [
+                'errors.0.message',
+                'errors.0.code',
+            ]
+        );
     }
 
     /**
@@ -169,6 +187,7 @@ class UserApiContext implements Context, SnippetAcceptingContext
         $this->iLogInWithPayload(json_encode($payload));
 
         $this->apiContext->iShouldReceiveSuccessResponse();
+
         $this->iShouldReceiveAuthenticationToken();
     }
 
@@ -185,7 +204,10 @@ class UserApiContext implements Context, SnippetAcceptingContext
         $this->iLogInWithPayload(json_encode($payload));
 
         $this->apiContext->iShouldReceiveSuccessResponse();
+
         $this->iShouldReceiveAuthenticationToken();
+
+        $this->apiContext->compareResponse([], ['token']);
     }
 
     /**
@@ -201,6 +223,8 @@ class UserApiContext implements Context, SnippetAcceptingContext
         $this->iLogInWithPayload(json_encode($payload));
 
         $this->apiContext->iShouldReceiveUnauthorizedResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message']);
     }
 
     /**
@@ -216,6 +240,8 @@ class UserApiContext implements Context, SnippetAcceptingContext
         $this->iLogInWithPayload(json_encode($payload));
 
         $this->apiContext->iShouldReceiveUnauthorizedResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message']);
     }
 
     /**
@@ -250,10 +276,7 @@ class UserApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveSuccessResponse();
 
-        $response = $session->getPage()->getContent();
-        $response = json_decode($response, true);
-
-        $expectedResponse = [
+        $expected = [
             'user' => [
                 'id' => self::UUID,
                 'email' => self::EMAIL,
@@ -261,6 +284,6 @@ class UserApiContext implements Context, SnippetAcceptingContext
             ],
         ];
 
-        Assert::assertEquals($expectedResponse, $response);
+        $this->apiContext->compareResponse($expected);
     }
 }

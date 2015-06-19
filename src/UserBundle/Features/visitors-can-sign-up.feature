@@ -5,7 +5,6 @@ Feature: A visitor can sign up
 
     Scenario: Sign up for an account
         When I sign up with available email
-        Then I should receive created response
         And I should be able to log in as newly created user
 
     Scenario: Email address is already taken

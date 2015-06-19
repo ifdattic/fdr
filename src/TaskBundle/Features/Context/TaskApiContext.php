@@ -104,6 +104,28 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * Get task as array for response comparison.
+     *
+     * @param  Task   $task
+     * @return array
+     */
+    private function getTaskAsArray(Task $task)
+    {
+        return [
+            'id' => $task->getId()->getValue(),
+            'name' => $task->getName()->getValue(),
+            'date' => $task->getDate()->format('Y-m-d'),
+            'description' => $task->getDescription()->getValue(),
+            'estimated' => $task->getEstimated()->getValue(),
+            'completed' => $task->isCompleted(),
+            'completed_at' => $task->getCompletedAt()->format(\DateTime::ISO8601),
+            'time_spent' => $task->getTimeSpent()->getValue(),
+            'important' => $task->isImportant(),
+            'created_at' => $task->getCreatedAt()->format(\DateTime::ISO8601),
+        ];
+    }
+
+    /**
      * @When I create task with payload :payload
      */
     public function iCreateTaskWithPayload($payload)
@@ -128,6 +150,8 @@ class TaskApiContext implements Context, SnippetAcceptingContext
         $this->iCreateTaskWithPayload('{}');
 
         $this->apiContext->iShouldReceiveUnauthorizedResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message']);
     }
 
     /**
@@ -150,12 +174,23 @@ class TaskApiContext implements Context, SnippetAcceptingContext
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
         $this->iCreateTaskWithPayload(json_encode($payload));
+
         $this->apiContext->iShouldReceiveCreatedResponse();
 
-        $response = json_decode($this->apiContext->getResponseContent(), true);
-
-        Assert::assertArrayHasKey('message', $response);
-        Assert::assertArrayHasKey('task', $response);
+        $this->apiContext->compareResponse([], [
+            'message',
+            'task.id',
+            'task.name',
+            'task.date',
+            'task.description',
+            'task.estimated',
+            'task.completed',
+            'task.completed_at',
+            'task.time_spent',
+            'task.important',
+            'task.created_at',
+            'task',
+        ]);
     }
 
     /**
@@ -185,6 +220,8 @@ class TaskApiContext implements Context, SnippetAcceptingContext
         $this->iGetTaskWithId(self::UUID);
 
         $this->apiContext->iShouldReceiveNotFoundResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
     }
 
     /**
@@ -197,6 +234,8 @@ class TaskApiContext implements Context, SnippetAcceptingContext
         $this->iGetTaskWithId(self::UUID2);
 
         $this->apiContext->iShouldReceiveForbiddenResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
     }
 
     /**
@@ -210,25 +249,11 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveSuccessResponse();
 
-        $response = $this->apiContext->getResponseContent();
-        $response = json_decode($response, true);
-
         $task = $this->getTasks()[self::UUID];
-        $expectedResponse = [
-            'task' => [
-                'id' => $task->getId()->getValue(),
-                'name' => $task->getName()->getValue(),
-                'date' => $task->getDate()->format('Y-m-d'),
-                'description' => $task->getDescription()->getValue(),
-                'estimated' => $task->getEstimated()->getValue(),
-                'completed' => $task->isCompleted(),
-                'completed_at' => $task->getCompletedAt()->format(\DateTime::ISO8601),
-                'time_spent' => $task->getTimeSpent()->getValue(),
-                'important' => $task->isImportant(),
-                'created_at' => $task->getCreatedAt()->format(\DateTime::ISO8601),
-            ],
+        $expected = [
+            'task' => $this->getTaskAsArray($task),
         ];
 
-        Assert::assertSame($expectedResponse, $response);
+        $this->apiContext->compareResponse($expected);
     }
 }

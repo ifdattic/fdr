@@ -111,4 +111,46 @@ class ApiContext implements Context
     {
         echo $this->getResponseContent();
     }
+
+    /**
+     * Compare the response.
+     *
+     * @param  array  $expected
+     * @param  array  $containsKeys keys response should have, use when
+     * comparison against value is not needed. Separate levels using a dot (.)
+     * @throws \PHPUnit_Framework_ExpectationFailedException if response is different
+     */
+    public function compareResponse(array $expected, array $containsKeys = [])
+    {
+        $response = json_decode($this->getResponseContent(), true);
+
+        foreach ($containsKeys as $key) {
+            $this->responseHasKey($response, $key);
+        }
+
+        Assert::assertSame($expected, $response);
+    }
+
+    /**
+     * Check if response has a key.
+     *
+     * @param  array &$response
+     * @param  string $key
+     * @throws \PHPUnit_Framework_ExpectationFailedException if response doesn't have a key
+     */
+    private function responseHasKey(&$response, $key)
+    {
+        $position = strpos($key, '.');
+
+        if (false !== $position) {
+            $parentKey = substr($key, 0, $position);
+            $nextKey = substr($key, $position + 1);
+
+            $this->responseHasKey($response[$parentKey], $nextKey);
+        } else {
+            Assert::assertArrayHasKey($key, $response, 'Response is missing required key');
+
+            unset($response[$key]);
+        }
+    }
 }
