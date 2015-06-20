@@ -7,6 +7,7 @@ use Domain\Task\Entity\Task;
 use Domain\Task\Exception\TaskNotFoundException;
 use Domain\Task\Repository\TaskRepository;
 use Domain\Task\ValueObject\TaskId;
+use Domain\User\Entity\User;
 
 class DoctrineTaskRepository extends EntityRepository implements TaskRepository
 {
@@ -51,5 +52,18 @@ class DoctrineTaskRepository extends EntityRepository implements TaskRepository
         $em->persist($task);
 
         $em->flush();
+    }
+
+    /** {@inheritdoc} */
+    public function findAllByUser(User $user)
+    {
+        $tasks = $this->createQueryBuilder('t')
+            ->where('t.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->execute()
+        ;
+
+        return $tasks;
     }
 }

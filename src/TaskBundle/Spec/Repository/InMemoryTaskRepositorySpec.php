@@ -28,9 +28,12 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
     /** @var Task */
     private $task;
 
+    /** @var User */
+    private $user;
+
     function let()
     {
-        $user = new User(
+        $this->user = new User(
             UserId::createFromString(self::UUID),
             new Email(self::EMAIL),
             new FullName(self::FULLNAME),
@@ -39,7 +42,7 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
 
         $this->task = new Task(
             TaskId::createFromString(self::UUID),
-            $user,
+            $this->user,
             new TaskName(self::TASK_NAME),
             new \DateTime(self::DATE)
         );
@@ -76,5 +79,24 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
         $this->add($this->task);
 
         $this->findByTaskId($this->task->getId())->shouldReturn($this->task);
+    }
+
+    function it_should_return_empty_array_if_user_has_no_tasks()
+    {
+        $this->findAllByUser($this->user)->shouldReturn([]);
+    }
+
+    function it_should_return_all_users_tasks(User $user2, Task $task1, Task $task2)
+    {
+        $expectedTasks = [$this->task, $task2];
+
+        $task1->getUser()->shouldBeCalled()->willReturn($user2);
+        $task2->getUser()->shouldBeCalled()->willReturn($this->user);
+
+        $this->add($this->task);
+        $this->add($task1);
+        $this->add($task2);
+
+        $this->findAllByUser($this->user)->shouldReturn($expectedTasks);
     }
 }

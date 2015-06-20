@@ -4,6 +4,7 @@ namespace TaskBundle\Controller;
 
 use AppBundle\Controller\ApiController;
 use Domain\Task\Command\GetTask;
+use Domain\Task\Command\GetTasksByUser;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,6 +56,7 @@ class TaskController extends ApiController
      *
      * @ApiDoc(
      *     resource=true,
+     *     authentication=true,
      *     input="TaskBundle\Form\Type\CreateTaskCommandType",
      *     output="Domain\Task\Entity\Task",
      *     statusCodes={
@@ -158,6 +160,74 @@ class TaskController extends ApiController
         return $this
             ->setStatusCode(Response::HTTP_OK)
             ->setData(['task' => $task])
+            ->respond()
+        ;
+    }
+
+    /**
+     * Get all user tasks.
+     *
+     * ### Example of response when user has tasks
+     *
+     * ```
+     * {
+     *   "tasks": [
+     *     {
+     *       "id": "5399dbab-ccd0-493c-be1a-67300de1671f",
+     *       "name": "Task Name",
+     *       "date": "2015-04-15",
+     *       "description": "This is the description.",
+     *       "estimated": 3,
+     *       "completed": true,
+     *       "completed_at": "2015-04-15T13:14:15+0000",
+     *       "time_spent": 23,
+     *       "important": true,
+     *       "created_at": "2015-06-20T07:21:54+0000"
+     *     },
+     *     {
+     *       "id": "df603d36-1203-4bc5-9cd8-99c775ac272a",
+     *       "name": "Task Name Alternative",
+     *       "date": "2014-06-05",
+     *       "description": null,
+     *       "estimated": 1,
+     *       "completed": false,
+     *       "completed_at": null,
+     *       "time_spent": 0,
+     *       "important": true,
+     *       "created_at": "2015-06-20T07:21:54+0000"
+     *     }
+     *   ]
+     * }
+     * ```
+     *
+     * ### Example of response when user has no tasks
+     *
+     * ```
+     * {
+     *   "tasks": []
+     * }
+     * ```
+     *
+     * @ApiDoc(
+     *     resource=true,
+     *     authentication=true,
+     *     statusCodes={
+     *         200="Returned when successful"
+     *     }
+     * )
+     */
+    public function getAllAction()
+    {
+        $user = $this->get('user_provider')->getUser();
+        $command = new GetTasksByUser($user);
+
+        $this->getCommandBus()->handle($command);
+
+        $tasks = $command->getTasks();
+
+        return $this
+            ->setStatusCode(Response::HTTP_OK)
+            ->setData(['tasks' => $tasks])
             ->respond()
         ;
     }

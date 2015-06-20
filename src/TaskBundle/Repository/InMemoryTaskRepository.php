@@ -6,6 +6,7 @@ use Domain\Task\Entity\Task;
 use Domain\Task\Exception\TaskNotFoundException;
 use Domain\Task\Repository\TaskRepository;
 use Domain\Task\ValueObject\TaskId;
+use Domain\User\Entity\User;
 
 class InMemoryTaskRepository implements TaskRepository
 {
@@ -40,5 +41,19 @@ class InMemoryTaskRepository implements TaskRepository
     public function add(Task $task)
     {
         $this->tasks[] = $task;
+    }
+
+    /** {@inheritdoc} */
+    public function findAllByUser(User $user)
+    {
+        $tasks = [];
+
+        foreach ($this->tasks as $task) {
+            if ($user == $task->getUser()) {
+                $tasks[] = $task;
+            }
+        }
+
+        return $tasks;
     }
 }

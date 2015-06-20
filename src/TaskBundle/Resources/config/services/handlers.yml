@@ -10,3 +10,9 @@ services:
         arguments: [@task_repository]
         tags:
             - { name: command_handler, handles: Domain\Task\Command\GetTask }
+
+    get_tasks_by_user_command_handler:
+        class: Domain\Task\Handler\GetTasksByUserCommandHandler
+        arguments: [@task_repository]
+        tags:
+            - { name: command_handler, handles: Domain\Task\Command\GetTasksByUser }
