@@ -32,6 +32,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     const TIME_SPENT     = 23;
     const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
     const UUID2          = '97fd781e-35c5-4b8e-9175-3ae730d86bdb';
+    const UUID3          = 'df603d36-1203-4bc5-9cd8-99c775ac272a';
 
     /** @var ApiContext */
     private $apiContext;
@@ -92,6 +93,14 @@ class TaskApiContext implements Context, SnippetAcceptingContext
         );
         $this->tasks[self::UUID2] = $task;
 
+        $task = new Task(
+            TaskId::createFromString(self::UUID3),
+            $this->userApiContext->getUsers()[UserApiContext::UUID],
+            new TaskName(self::TASK_NAME2),
+            new \DateTime(self::DATE2)
+        );
+        $this->tasks[self::UUID3] = $task;
+
         foreach ($this->tasks as $task) {
             $this->taskRepository->add($task);
         }
@@ -118,7 +127,9 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             'description' => $task->getDescription()->getValue(),
             'estimated' => $task->getEstimated()->getValue(),
             'completed' => $task->isCompleted(),
-            'completed_at' => $task->getCompletedAt()->format(\DateTime::ISO8601),
+            'completed_at' => $task->isCompleted()
+                ? $task->getCompletedAt()->format(\DateTime::ISO8601)
+                : $task->getCompletedAt(),
             'time_spent' => $task->getTimeSpent()->getValue(),
             'important' => $task->isImportant(),
             'created_at' => $task->getCreatedAt()->format(\DateTime::ISO8601),
@@ -253,6 +264,58 @@ class TaskApiContext implements Context, SnippetAcceptingContext
         $expected = [
             'task' => $this->getTaskAsArray($task),
         ];
+
+        $this->apiContext->compareResponse($expected);
+    }
+
+    /**
+     * @When I get tasks
+     */
+    public function iGetTasks()
+    {
+        $client = $this->apiContext->getSession()->getDriver()->getClient();
+
+        $client->request(
+            'GET',
+            $this->apiContext->locatePath('/tasks'),
+            [],
+            [],
+            ['HTTP_AUTHORIZATION' => $this->userApiContext->getAuthToken()],
+            []
+        );
+    }
+
+    /**
+     * @Then I should not get any tasks if I don't have them
+     */
+    public function iShouldNotGetAnyTasksIfIDontHaveThem()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iGetTasks();
+
+        $this->apiContext->iShouldReceiveSuccessResponse();
+
+        $expected = ['tasks' => []];
+
+        $this->apiContext->compareResponse($expected);
+    }
+
+    /**
+     * @Then I should get a list of my tasks
+     */
+    public function iShouldGetAListOfMyTasks()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iGetTasks();
+
+        $this->apiContext->iShouldReceiveSuccessResponse();
+
+        $expected = ['tasks' => [
+            $this->getTaskAsArray($this->getTasks()[self::UUID]),
+            $this->getTaskAsArray($this->getTasks()[self::UUID3]),
+        ]];
 
         $this->apiContext->compareResponse($expected);
     }

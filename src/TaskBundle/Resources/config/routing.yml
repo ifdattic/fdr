@@ -7,3 +7,8 @@ api.get_task:
     path: /tasks/{id}
     defaults: { _controller: TaskBundle:Task:get }
     methods: GET
+
+api.get_all_tasks:
+    path: /tasks
+    defaults: { _controller: TaskBundle:Task:getAll }
+    methods: GET
