@@ -1,0 +1,7 @@
+services:
+    delete_task_command_middleware:
+        class: Domain\Task\Middleware\DeleteTaskCommandMiddleware
+        arguments: [@user_provider, @task_repository]
+        public: false
+        tags:
+            - { name: command_bus_middleware }
