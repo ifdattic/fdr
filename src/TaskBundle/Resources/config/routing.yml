@@ -3,6 +3,11 @@ api.create_task:
     defaults: { _controller: TaskBundle:Task:create }
     methods: POST
 
+api.delete_task:
+    path: /tasks/{id}
+    defaults: { _controller: TaskBundle:Task:delete }
+    methods: DELETE
+
 api.get_task:
     path: /tasks/{id}
     defaults: { _controller: TaskBundle:Task:get }

@@ -3,6 +3,7 @@
 namespace TaskBundle\Controller;
 
 use AppBundle\Controller\ApiController;
+use Domain\Task\Command\DeleteTask;
 use Domain\Task\Command\GetTask;
 use Domain\Task\Command\GetTasksByUser;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -228,6 +229,58 @@ class TaskController extends ApiController
         return $this
             ->setStatusCode(Response::HTTP_OK)
             ->setData(['tasks' => $tasks])
+            ->respond()
+        ;
+    }
+
+    /**
+     * Delete a task.
+     *
+     * ### Example of successful response
+     *
+     * ```
+     * []
+     * ```
+     *
+     * ### Example resource if not an owner of task
+     *
+     * ```
+     * {
+     *   "code": 403,
+     *   "message": "Access Denied",
+     *   "errors": null
+     * }
+     * ```
+     *
+     * ### Example resource if task not found
+     *
+     * ```
+     * {
+     *   "code": 404,
+     *   "message": "Task not found",
+     *   "errors": null
+     * }
+     * ```
+     *
+     * @ApiDoc(
+     *     resource=true,
+     *     authentication=true,
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when not an owner of a resource",
+     *         404="Returned when resource not found"
+     *     }
+     * )
+     */
+    public function deleteAction($id)
+    {
+        $command = new DeleteTask($id);
+
+        $this->getCommandBus()->handle($command);
+
+        return $this
+            ->setStatusCode(Response::HTTP_OK)
+            ->setData([])
             ->respond()
         ;
     }

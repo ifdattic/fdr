@@ -319,4 +319,63 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->compareResponse($expected);
     }
+
+    /**
+     * @When I delete task with id :id
+     */
+    public function iDeleteTaskWithId($id)
+    {
+        $client = $this->apiContext->getSession()->getDriver()->getClient();
+
+        $client->request(
+            'DELETE',
+            $this->apiContext->locatePath('/tasks/'.$id),
+            [],
+            [],
+            ['HTTP_AUTHORIZATION' => $this->userApiContext->getAuthToken()],
+            []
+        );
+    }
+
+    /**
+     * @Then I should not be able to delete a task which doesn't exist
+     */
+    public function iShouldNotBeAbleToDeleteATaskWhichDoesntExist()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iDeleteTaskWithId(self::UUID);
+
+        $this->apiContext->iShouldReceiveNotFoundResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+    }
+
+    /**
+     * @Then I should not be able to delete a task I don't own
+     */
+    public function iShouldNotBeAbleToDeleteATaskIDontOwn()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iDeleteTaskWithId(self::UUID2);
+
+        $this->apiContext->iShouldReceiveForbiddenResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+    }
+
+    /**
+     * @Then I should be able to delete a task
+     */
+    public function iShouldBeAbleToDeleteATask()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iDeleteTaskWithId(self::UUID);
+
+        $this->apiContext->iShouldReceiveSuccessResponse();
+
+        $this->apiContext->compareResponse([]);
+    }
 }

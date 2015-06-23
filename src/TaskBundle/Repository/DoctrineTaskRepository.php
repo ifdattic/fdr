@@ -66,4 +66,22 @@ class DoctrineTaskRepository extends EntityRepository implements TaskRepository
 
         return $tasks;
     }
+
+    /** {@inheritdoc} */
+    public function removeByTaskId(TaskId $taskId)
+    {
+        $task = $this->findByTaskId($taskId);
+
+        $this->remove($task);
+    }
+
+    /** {@inheritdoc} */
+    public function remove(Task $task)
+    {
+        $em = $this->getEntityManager();
+
+        $em->remove($task);
+
+        $em->flush();
+    }
 }
