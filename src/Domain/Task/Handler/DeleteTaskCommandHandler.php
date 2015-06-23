@@ -19,6 +19,6 @@ class DeleteTaskCommandHandler
     {
         $taskId = $command->getTaskId();
 
-        $this->taskRepository->deleteByTaskId($taskId);
+        $this->taskRepository->removeByTaskId($taskId);
     }
 }

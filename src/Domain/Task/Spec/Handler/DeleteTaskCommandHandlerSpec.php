@@ -29,7 +29,7 @@ class DeleteTaskCommandHandlerSpec extends ObjectBehavior
     ) {
         $taskId = TaskId::createFromString(self::UUID);
 
-        $taskRepository->deleteByTaskId($taskId)->shouldBeCalled();
+        $taskRepository->removeByTaskId($taskId)->shouldBeCalled();
 
         $command->getTaskId()->shouldBeCalled()->willReturn($taskId);
 
