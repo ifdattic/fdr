@@ -38,4 +38,19 @@ interface TaskRepository
      * @return Task[]
      */
     public function findAllByUser(User $user);
+
+    /**
+     * Remove task by id.
+     *
+     * @param  TaskId $taskId
+     * @throws Domain\Task\Exception\TaskNotFoundException if task is not found.
+     */
+    public function removeByTaskId(TaskId $taskId);
+
+    /**
+     * Remove a task.
+     *
+     * @param  Task   $task
+     */
+    public function remove(Task $task);
 }

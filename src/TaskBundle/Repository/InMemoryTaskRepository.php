@@ -56,4 +56,22 @@ class InMemoryTaskRepository implements TaskRepository
 
         return $tasks;
     }
+
+    /** {@inheritdoc} */
+    public function removeByTaskId(TaskId $taskId)
+    {
+        $task = $this->findByTaskId($taskId);
+
+        $this->remove($task);
+    }
+
+    /** {@inheritdoc} */
+    public function remove(Task $task)
+    {
+        foreach ($this->tasks as $key => $existingTask) {
+            if ($task->getId() == $existingTask->getId()) {
+                unset($this->tasks[$key]);
+            }
+        }
+    }
 }

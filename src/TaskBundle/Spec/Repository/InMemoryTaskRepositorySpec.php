@@ -24,6 +24,8 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
     const PASSWORD_HASH = '$2y$04$dWGqp58K1Xjr5tJUX/5TjOgWUBqC9EnPS8/sLog35cC46FJZh20QW';
     const TASK_NAME     = 'Task Name';
     const UUID          = '5399dbab-ccd0-493c-be1a-67300de1671f';
+    const UUID2         = '97fd781e-35c5-4b8e-9175-3ae730d86bdb';
+    const UUID3         = 'df603d36-1203-4bc5-9cd8-99c775ac272a';
 
     /** @var Task */
     private $task;
@@ -98,5 +100,34 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
         $this->add($task2);
 
         $this->findAllByUser($this->user)->shouldReturn($expectedTasks);
+    }
+
+    function it_should_throw_an_exception_if_task_is_not_found_when_removing()
+    {
+        $taskId = TaskId::createFromString(self::UUID);
+
+        $this
+            ->shouldThrow(TaskNotFoundException::CLASS)
+            ->during('removeByTaskId', [$taskId])
+        ;
+    }
+
+    function it_should_remove_a_task_by_id(Task $task1, Task $task2, Task $task3)
+    {
+        $taskId = TaskId::createFromString(self::UUID2);
+        $task1->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID));
+        $task2->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID2));
+        $task3->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID3));
+
+        $this->add($task1);
+        $this->add($task2);
+        $this->add($task3);
+
+        $this->removeByTaskId($taskId);
+
+        $this
+            ->shouldThrow(TaskNotFoundException::CLASS)
+            ->during('findByTaskId', [$taskId])
+        ;
     }
 }
