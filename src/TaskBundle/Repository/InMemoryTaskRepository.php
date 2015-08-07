@@ -74,4 +74,18 @@ class InMemoryTaskRepository implements TaskRepository
             }
         }
     }
+
+    /** @inheritdoc */
+    public function save(Task $task)
+    {
+        foreach ($this->tasks as $key => $existingTask) {
+            if ($task->getId() == $existingTask->getId()) {
+                $this->tasks[$key] = $task;
+
+                return;
+            }
+        }
+
+        throw new TaskNotFoundException();
+    }
 }

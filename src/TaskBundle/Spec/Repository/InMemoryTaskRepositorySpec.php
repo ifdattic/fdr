@@ -130,4 +130,31 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
             ->during('findByTaskId', [$taskId])
         ;
     }
+
+    function it_should_throw_an_exception_when_updating_if_task_not_found(Task $task)
+    {
+        $taskId = TaskId::createFromString(self::UUID2);
+
+        $this
+            ->shouldThrow(TaskNotFoundException::CLASS)
+            ->during('save', [$task])
+        ;
+    }
+
+    function it_should_save_updated_task(Task $task1, Task $task2, Task $task3, Task $task2Updated)
+    {
+        $taskId = TaskId::createFromString(self::UUID2);
+        $task1->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID));
+        $task2->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID2));
+        $task3->getId()->shouldNotBeCalled();
+        $task2Updated->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID2));
+
+        $this->add($task1);
+        $this->add($task2);
+        $this->add($task3);
+
+        $this->save($task2Updated);
+
+        $this->findByTaskId($taskId)->shouldReturn($task2Updated);
+    }
 }

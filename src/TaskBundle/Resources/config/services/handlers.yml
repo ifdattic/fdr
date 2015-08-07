@@ -22,3 +22,9 @@ services:
         arguments: [@task_repository]
         tags:
             - { name: command_handler, handles: Domain\Task\Command\GetTasksByUser }
+
+    update_task_command_handler:
+        class: Domain\Task\Handler\UpdateTaskCommandHandler
+        arguments: [@task_repository]
+        tags:
+            - { name: command_handler, handles: Domain\Task\Command\UpdateTask }

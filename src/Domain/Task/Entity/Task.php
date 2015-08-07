@@ -81,6 +81,11 @@ class Task implements ContainsRecordedMessages
         return $this->name;
     }
 
+    public function setName(TaskName $name)
+    {
+        $this->name = $name;
+    }
+
     public function setDescription(Description $description)
     {
         $this->description = $description;
@@ -96,6 +101,11 @@ class Task implements ContainsRecordedMessages
     public function getDate()
     {
         return $this->date;
+    }
+
+    public function setDate(\DateTime $date)
+    {
+        $this->date = $date;
     }
 
     public function setEstimated(Estimated $estimated)
