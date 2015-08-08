@@ -50,6 +50,7 @@ class CreateTask
      * @param boolean|null $done
      * @param string|null $completedAt
      * @param integer|null $timeSpent
+     * @param boolean|null $important
      */
     public function __construct(User $user, $name, $date, $description, $estimated, $completedAt, $timeSpent, $important)
     {
