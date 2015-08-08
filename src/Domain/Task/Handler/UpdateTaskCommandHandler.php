@@ -17,7 +17,7 @@ class UpdateTaskCommandHandler
 
     public function handle(UpdateTask $command)
     {
-        $task = $this->taskRepository->findByTaskId($command->getId());
+        $task = $command->getTask();
 
         $task->setName($command->getName());
         $task->setDate($command->getDate());

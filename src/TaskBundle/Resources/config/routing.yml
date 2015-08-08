@@ -17,3 +17,8 @@ api.get_all_tasks:
     path: /tasks
     defaults: { _controller: TaskBundle:Task:getAll }
     methods: GET
+
+api.update_task:
+    path: /tasks/{id}
+    defaults: { _controller: TaskBundle:Task:update }
+    methods: PUT

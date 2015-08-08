@@ -4,6 +4,7 @@ namespace Domain\Task\Command;
 
 use Domain\Core\Validation\HasErrorsTrait;
 use Domain\Core\ValueObject\Description;
+use Domain\Task\Entity\Task;
 use Domain\Task\ValueObject\Estimated;
 use Domain\Task\ValueObject\TaskId;
 use Domain\Task\ValueObject\TaskName;
@@ -13,8 +14,8 @@ class UpdateTask
 {
     use HasErrorsTrait;
 
-    /** @var TaskId */
-    private $id;
+    /** @var Task */
+    private $task;
 
     /** @var string */
     private $name;
@@ -38,7 +39,7 @@ class UpdateTask
     private $important;
 
     /**
-     * @param TaskId $id
+     * @param Task $task
      * @param string $name
      * @param string $date
      * @param string|null $description
@@ -49,7 +50,7 @@ class UpdateTask
      * @param boolean|null $important
      */
     public function __construct(
-        TaskId $id,
+        Task $task,
         $name,
         $date,
         $description,
@@ -58,7 +59,7 @@ class UpdateTask
         $timeSpent,
         $important
     ) {
-        $this->id = $id;
+        $this->task = $task;
         $this->name = $name;
         $this->date = $date;
         $this->description = $description;
@@ -68,10 +69,10 @@ class UpdateTask
         $this->important = $important;
     }
 
-    /** @return TaskId */
-    public function getId()
+    /** @return Task */
+    public function getTask()
     {
-        return $this->id;
+        return $this->task;
     }
 
     /** @return TaskName */

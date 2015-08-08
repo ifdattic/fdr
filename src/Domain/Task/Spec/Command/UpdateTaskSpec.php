@@ -4,8 +4,8 @@ namespace Spec\Domain\Task\Command;
 
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Command\UpdateTask;
+use Domain\Task\Entity\Task;
 use Domain\Task\ValueObject\Estimated;
-use Domain\Task\ValueObject\TaskId;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
 use PhpSpec\ObjectBehavior;
@@ -13,7 +13,6 @@ use Prophecy\Argument;
 
 class UpdateTaskSpec extends ObjectBehavior
 {
-    const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
     const COMPLETED_DATE2 = '2015-06-15 17:34:55';
     const DATE2           = '2015-06-15';
     const DESCRIPTION2    = 'Alternative description';
@@ -22,12 +21,10 @@ class UpdateTaskSpec extends ObjectBehavior
     const TASK_NAME2      = 'Alternative Task Name';
     const TIME_SPENT2     = 22;
 
-    function let()
+    function let(Task $task)
     {
-        $taskId = TaskId::createFromString(self::UUID);
-
         $this->beConstructedWith(
-            $taskId,
+            $task,
             self::TASK_NAME2,
             self::DATE2,
             self::DESCRIPTION2,
@@ -43,9 +40,9 @@ class UpdateTaskSpec extends ObjectBehavior
         $this->shouldHaveType(UpdateTask::CLASS);
     }
 
-    function it_should_return_its_id()
+    function it_should_return_its_task(Task $task)
     {
-        $this->getId()->shouldBeLike(TaskId::createFromString(self::UUID));
+        $this->getTask()->shouldReturn($task);
     }
 
     function it_should_return_its_name()

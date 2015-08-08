@@ -42,7 +42,7 @@ class UpdateTaskCommandHandlerSpec extends ObjectBehavior
         UpdateTask $command
     ) {
         $taskId = TaskId::createFromString(self::UUID);
-        $command->getId()->willReturn($taskId);
+
         $command->getName()->willReturn(new TaskName(self::TASK_NAME2));
         $command->getDate()->willReturn(new \DateTime(self::DATE2));
         $command->getDescription()->willReturn(new Description(self::DESCRIPTION2));
@@ -50,14 +50,15 @@ class UpdateTaskCommandHandlerSpec extends ObjectBehavior
         $command->getCompletedAt()->willReturn(new \DateTime(self::COMPLETED_DATE2));
         $command->getTimeSpent()->willReturn(new TimeSpent(self::TIME_SPENT2));
         $command->getImportant()->willReturn(self::IMPORTANT2);
+
         $task = new Task(
             $taskId,
             $user->getWrappedObject(),
             new TaskName(self::TASK_NAME2),
             new \DateTime(self::COMPLETED_DATE2)
         );
+        $command->getTask()->willReturn($task);
 
-        $taskRepository->findByTaskId($taskId)->willReturn($task)->shouldBeCalled();
         $taskRepository->save($task)->shouldBeCalled();
 
         $this->handle($command);
