@@ -17,10 +17,12 @@ class TaskSpec extends ObjectBehavior
 {
     const COMPLETED_DATE = '2015-04-15 13:14:15';
     const DATE           = '2015-04-15';
+    const DATE2          = '2015-06-15';
     const DESCRIPTION    = 'This is the description.';
     const ESTIMATED      = 3;
     const IMPORTANT      = false;
     const TASK_NAME      = 'Task Name';
+    const TASK_NAME2     = 'Alternative Task Name';
     const TIME_SPENT     = 23;
     const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
 
@@ -54,6 +56,15 @@ class TaskSpec extends ObjectBehavior
         $this->getName()->shouldHaveType(TaskName::CLASS);
     }
 
+    function it_should_set_its_name()
+    {
+        $name = new TaskName(self::TASK_NAME2);
+
+        $this->setName($name);
+
+        $this->getName()->shouldReturn($name);
+    }
+
     function it_should_returns_its_description()
     {
         $this->getDescription()->shouldHaveType(Description::CLASS);
@@ -71,6 +82,15 @@ class TaskSpec extends ObjectBehavior
     function it_should_returns_its_date()
     {
         $this->getDate()->shouldHaveType(\DateTime::CLASS);
+    }
+
+    function it_should_set_its_date()
+    {
+        $date = new \DateTime(self::DATE2);
+
+        $this->setDate($date);
+
+        $this->getDate()->shouldReturn($date);
     }
 
     function it_should_return_its_estimated()

@@ -84,4 +84,12 @@ class DoctrineTaskRepository extends EntityRepository implements TaskRepository
 
         $em->flush();
     }
+
+    /** @inheritdoc */
+    public function save(Task $task)
+    {
+        $em = $this->getEntityManager();
+
+        $em->flush();
+    }
 }

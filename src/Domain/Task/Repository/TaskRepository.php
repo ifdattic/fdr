@@ -53,4 +53,12 @@ interface TaskRepository
      * @param  Task   $task
      */
     public function remove(Task $task);
+
+    /**
+     * Save task.
+     *
+     * @param  Task   $task
+     * @throws Domain\Task\Exception\TaskNotFoundException if task is not found.
+     */
+    public function save(Task $task);
 }

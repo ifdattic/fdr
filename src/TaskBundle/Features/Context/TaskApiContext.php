@@ -378,4 +378,105 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->compareResponse([]);
     }
+
+    /**
+     * @When I update task :id with payload :payload
+     */
+    public function iUpdateTaskWithPayload($id, $payload)
+    {
+        $client = $this->apiContext->getSession()->getDriver()->getClient();
+
+        $client->request(
+            'PUT',
+            $this->apiContext->locatePath('/tasks/'.$id),
+            [],
+            [],
+            ['HTTP_AUTHORIZATION' => $this->userApiContext->getAuthToken()],
+            $payload
+        );
+    }
+
+    /**
+     * @Then I should not be able to update a task without an account
+     */
+    public function iShouldNotBeAbleToUpdateATaskWithoutAnAccount()
+    {
+        $this->iUpdateTaskWithPayload(self::UUID, '{}');
+
+        $this->apiContext->iShouldReceiveUnauthorizedResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message']);
+    }
+
+    /**
+     * @Then I should not be able to update a task if it doesn't exist
+     */
+    public function iShouldNotBeAbleToUpdateATaskIfItDoesntExist()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iUpdateTaskWithPayload(self::UUID, '{}');
+
+        $this->apiContext->iShouldReceiveNotFoundResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+    }
+
+    /**
+     * @Then I should not be able to update a task I don't own
+     */
+    public function iShouldNotBeAbleToUpdateATaskIDontOwn()
+    {
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iUpdateTaskWithPayload(self::UUID2, '{}');
+
+        $this->apiContext->iShouldReceiveForbiddenResponse();
+
+        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+    }
+
+    /**
+     * @Then I should update a task I own
+     */
+    public function iShouldUpdateATaskIOwn()
+    {
+        $payload = [
+            'update_task' => [
+                'name' => self::TASK_NAME2,
+                'date' => self::DATE2,
+                'description' => self::DESCRIPTION,
+                'estimated' => self::ESTIMATED,
+                'completed_at' => self::COMPLETED_DATE,
+                'time_spent' => self::TIME_SPENT,
+                'important' => self::IMPORTANT,
+            ],
+        ];
+
+        $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
+
+        $this->iUpdateTaskWithPayload(self::UUID, json_encode($payload));
+
+        $this->apiContext->iShouldReceiveSuccessResponse();
+
+        $expected = [
+            'task' => [
+                'name' => self::TASK_NAME2,
+                'date' => self::DATE2,
+                'description' => self::DESCRIPTION,
+            ],
+        ];
+
+        $this->apiContext->compareResponse($expected, [
+            'message',
+            'task.id',
+            'task.estimated',
+            'task.completed',
+            'task.completed_at',
+            'task.time_spent',
+            'task.important',
+            'task.created_at',
+        ]);
+    }
+
 }

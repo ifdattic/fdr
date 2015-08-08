@@ -10,6 +10,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use TaskBundle\Form\Type\CreateTaskCommandType;
+use TaskBundle\Form\Type\UpdateTaskCommandType;
 
 class TaskController extends ApiController
 {
@@ -283,5 +284,95 @@ class TaskController extends ApiController
             ->setData([])
             ->respond()
         ;
+    }
+
+    /**
+     * Update an existing task.
+     *
+     * #### Example of successful response
+     *
+     * ```
+     * {
+     *   "message": "Task updated.",
+     *   "task": {
+     *     "id": "5399dbab-ccd0-493c-be1a-67300de1671f",
+     *     "name": "Task name 2",
+     *     "date": "2015-06-28",
+     *     "description": "This is task description",
+     *     "estimated": 3,
+     *     "completed": false,
+     *     "completed_at": null,
+     *     "time_spent": 23,
+     *     "important": true,
+     *     "created_at": "2015-08-08T11:52:58+0000"
+     *   }
+     * }
+     * ```
+     *
+     * #### Example of failed validation response
+     *
+     * ```
+     * {
+     *   "errors": [
+     *     {
+     *       "message": "Task name is required",
+     *       "field": "name"
+     *     },
+     *     {
+     *       "message": "Date is required",
+     *       "field": "date"
+     *     }
+     *   ]
+     * }
+     * ```
+     *
+     * @ApiDoc(
+     *     resource=true,
+     *     authentication=true,
+     *     input="TaskBundle\Form\Type\UpdateTaskCommandType",
+     *     output="Domain\Task\Entity\Task",
+     *     statusCodes={
+     *         201="Returned when successful",
+     *         400={
+     *             "Returned when request is invalid",
+     *             "Returned when validation fails"
+     *         }
+     *     }
+     * )
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $command = new GetTask($id);
+
+        $this->getCommandBus()->handle($command);
+
+        $task = $command->getTask();
+
+        $form = $this->createForm(new UpdateTaskCommandType($task), null, [
+            'method' => $request->getMethod(),
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $command = $form->getData();
+
+            $this->getCommandBus()->handle($command);
+
+            if ($command->hasErrors()) {
+                return $this->respondWithErrors($command->getErrors());
+            }
+
+            return $this
+                ->setData([
+                    'message' => 'Task updated.',
+                    'task' => $command->getTask(),
+                ])
+                ->setStatusCode(Response::HTTP_OK)
+                ->respond()
+            ;
+        }
+
+        return $this->respondWithForm($form);
     }
 }
