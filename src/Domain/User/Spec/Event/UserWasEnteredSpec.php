@@ -7,7 +7,7 @@ use Domain\User\ValueObject\UserId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class UserSignedUpSpec extends ObjectBehavior
+class UserWasEnteredSpec extends ObjectBehavior
 {
     const VALID_UUID = '5399dbab-ccd0-493c-be1a-67300de1671f';
 

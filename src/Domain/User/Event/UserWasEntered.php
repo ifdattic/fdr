@@ -4,7 +4,7 @@ namespace Domain\User\Event;
 
 use Domain\User\ValueObject\UserId;
 
-class UserSignedUp
+class UserWasEntered
 {
     /** @var UserId */
     private $userId;

@@ -2,7 +2,7 @@
 
 namespace Domain\User\Entity;
 
-use Domain\User\Event\UserSignedUp;
+use Domain\User\Event\UserWasEntered;
 use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\FullName;
 use Domain\User\ValueObject\PasswordHash;
@@ -37,7 +37,7 @@ class User implements ContainsRecordedMessages
         $this->password = $password;
         $this->createdAt = new \DateTime();
 
-        $this->record(new UserSignedUp($this->id));
+        $this->record(new UserWasEntered($this->id));
     }
 
     /** @return UserId */
