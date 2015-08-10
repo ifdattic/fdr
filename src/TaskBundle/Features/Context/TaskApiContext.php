@@ -65,11 +65,11 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             new TaskName(TestValues::TASK_NAME),
             new \DateTime(TestValues::DATE)
         );
-        $task->setDescription(new Description(TestValues::DESCRIPTION));
-        $task->setEstimate(new Estimate(TestValues::ESTIMATE));
-        $task->setCompletedAt(new \DateTime(TestValues::COMPLETED_DATE));
-        $task->setTimeSpent(new TimeSpent(TestValues::TIME_SPENT));
-        $task->setImportant(TestValues::IMPORTANT);
+        $task->updateDescription(new Description(TestValues::DESCRIPTION));
+        $task->setInitialEstimate(new Estimate(TestValues::ESTIMATE));
+        $task->complete(new \DateTime(TestValues::COMPLETED_DATE));
+        $task->setInitialTimeSpent(new TimeSpent(TestValues::TIME_SPENT));
+        $task->markAsImportant();
 
         $this->tasks[TestValues::UUID] = $task;
 

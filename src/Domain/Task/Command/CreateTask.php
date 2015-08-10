@@ -115,7 +115,7 @@ class CreateTask
     /** @return boolean */
     public function getImportant()
     {
-        return $this->important;
+        return (bool) $this->important;
     }
 
     /**

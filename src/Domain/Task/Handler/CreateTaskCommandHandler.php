@@ -27,11 +27,12 @@ class CreateTaskCommandHandler
             $command->getDate()
         );
 
-        $task->setDescription($command->getDescription());
-        $task->setEstimate($command->getEstimate());
-        $task->setCompletedAt($command->getCompletedAt());
-        $task->setTimeSpent($command->getTimeSpent());
-        $task->setImportant($command->getImportant());
+        $task->updateDescription($command->getDescription());
+        $task->setInitialEstimate($command->getEstimate());
+        is_null($command->getCompletedAt()) ? $task->markAsIncomplete() : $task->complete($command->getCompletedAt());
+        $task->complete($command->getCompletedAt());
+        $task->setInitialTimeSpent($command->getTimeSpent());
+        $command->getImportant() ? $task->markAsImportant() : $task->markAsNotImportant();
 
         $this->taskRepository->add($task);
 

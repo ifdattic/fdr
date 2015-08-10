@@ -81,12 +81,12 @@ class Task implements ContainsRecordedMessages
         return $this->name;
     }
 
-    public function setName(TaskName $name)
+    public function updateName(TaskName $name)
     {
         $this->name = $name;
     }
 
-    public function setDescription(Description $description)
+    public function updateDescription(Description $description)
     {
         $this->description = $description;
     }
@@ -103,12 +103,17 @@ class Task implements ContainsRecordedMessages
         return $this->date;
     }
 
-    public function setDate(\DateTime $date)
+    public function updateDate(\DateTime $date)
     {
         $this->date = $date;
     }
 
-    public function setEstimate(Estimate $estimate)
+    public function setInitialEstimate(Estimate $estimate)
+    {
+        $this->estimate = $estimate;
+    }
+
+    public function adjustEstimate(Estimate $estimate)
     {
         $this->estimate = $estimate;
     }
@@ -125,9 +130,14 @@ class Task implements ContainsRecordedMessages
         return $this->completedAt;
     }
 
-    public function setCompletedAt(\DateTime $completedAt = null)
+    public function complete(\DateTime $completedAt)
     {
         $this->completedAt = $completedAt;
+    }
+
+    public function markAsIncomplete()
+    {
+        $this->completedAt = null;
     }
 
     /** @return boolean */
@@ -136,7 +146,12 @@ class Task implements ContainsRecordedMessages
         return null !== $this->completedAt;
     }
 
-    public function setTimeSpent(TimeSpent $timeSpent)
+    public function setInitialTimeSpent(TimeSpent $timeSpent)
+    {
+        $this->timeSpent = $timeSpent;
+    }
+
+    public function adjustTimeSpent(TimeSpent $timeSpent)
     {
         $this->timeSpent = $timeSpent;
     }
@@ -153,12 +168,14 @@ class Task implements ContainsRecordedMessages
         return $this->important;
     }
 
-    /** @param boolean $important */
-    public function setImportant($important)
+    public function markAsImportant()
     {
-        Assert::boolean($important);
+        $this->important = true;
+    }
 
-        $this->important = $important;
+    public function markAsNotImportant()
+    {
+        $this->important = false;
     }
 
     /** @return \DateTime */

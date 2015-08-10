@@ -19,13 +19,13 @@ class UpdateTaskCommandHandler
     {
         $task = $command->getTask();
 
-        $task->setName($command->getName());
-        $task->setDate($command->getDate());
-        $task->setDescription($command->getDescription());
-        $task->setEstimate($command->getEstimate());
-        $task->setCompletedAt($command->getCompletedAt());
-        $task->setTimeSpent($command->getTimeSpent());
-        $task->setImportant($command->getImportant());
+        $task->updateName($command->getName());
+        $task->updateDate($command->getDate());
+        $task->updateDescription($command->getDescription());
+        $task->adjustEstimate($command->getEstimate());
+        is_null($command->getCompletedAt()) ? $task->markAsIncomplete() : $task->complete($command->getCompletedAt());
+        $task->adjustTimeSpent($command->getTimeSpent());
+        $command->getImportant() ? $task->markAsImportant() : $task->markAsNotImportant();
 
         $this->taskRepository->save($task);
     }

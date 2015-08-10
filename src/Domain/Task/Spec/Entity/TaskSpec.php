@@ -46,11 +46,11 @@ class TaskSpec extends ObjectBehavior
         $this->getName()->shouldHaveType(TaskName::CLASS);
     }
 
-    function it_should_set_its_name()
+    function it_should_update_its_name()
     {
         $name = new TaskName(TestValues::TASK_NAME2);
 
-        $this->setName($name);
+        $this->updateName($name);
 
         $this->getName()->shouldReturn($name);
     }
@@ -60,11 +60,11 @@ class TaskSpec extends ObjectBehavior
         $this->getDescription()->shouldHaveType(Description::CLASS);
     }
 
-    function it_should_return_description_which_was_set()
+    function it_should_return_updated_description()
     {
         $description = new Description(TestValues::DESCRIPTION);
 
-        $this->setDescription($description);
+        $this->updateDescription($description);
 
         $this->getDescription()->shouldReturn($description);
     }
@@ -74,11 +74,11 @@ class TaskSpec extends ObjectBehavior
         $this->getDate()->shouldHaveType(\DateTime::CLASS);
     }
 
-    function it_should_set_its_date()
+    function it_should_update_its_date()
     {
         $date = new \DateTime(TestValues::DATE2);
 
-        $this->setDate($date);
+        $this->updateDate($date);
 
         $this->getDate()->shouldReturn($date);
     }
@@ -88,11 +88,20 @@ class TaskSpec extends ObjectBehavior
         $this->getEstimate()->shouldHaveType(Estimate::CLASS);
     }
 
-    function it_should_return_estimate_which_was_set()
+    function it_should_return_initial_estimate_which_was_set()
     {
         $estimate = new Estimate(TestValues::ESTIMATE);
 
-        $this->setEstimate($estimate);
+        $this->setInitialEstimate($estimate);
+
+        $this->getEstimate()->shouldReturn($estimate);
+    }
+
+    function it_should_return_adjusted_estimate()
+    {
+        $estimate = new Estimate(TestValues::ESTIMATE);
+
+        $this->adjustEstimate($estimate);
 
         $this->getEstimate()->shouldReturn($estimate);
     }
@@ -102,9 +111,9 @@ class TaskSpec extends ObjectBehavior
         $this->getCompletedAt()->shouldReturn(null);
     }
 
-    function it_should_return_completed_at_when_its_set_as_not_completed()
+    function it_should_return_completed_at_when_its_marked_as_incomplete()
     {
-        $this->setCompletedAt(null);
+        $this->markAsIncomplete();
 
         $this->getCompletedAt()->shouldReturn(null);
     }
@@ -113,7 +122,7 @@ class TaskSpec extends ObjectBehavior
     {
         $date = new \DateTime(TestValues::COMPLETED_DATE);
 
-        $this->setCompletedAt($date);
+        $this->complete($date);
 
         $this->getCompletedAt()->shouldReturn($date);
     }
@@ -127,7 +136,7 @@ class TaskSpec extends ObjectBehavior
     {
         $date = new \DateTime(TestValues::COMPLETED_DATE);
 
-        $this->setCompletedAt($date);
+        $this->complete($date);
 
         $this->shouldBeCompleted();
     }
@@ -137,11 +146,20 @@ class TaskSpec extends ObjectBehavior
         $this->getTimeSpent()->shouldHaveType(TimeSpent::CLASS);
     }
 
-    function it_should_return_time_spent_which_was_set()
+    function it_should_return_initial_time_spent_which_was_set()
     {
         $timeSpent = new TimeSpent(TestValues::TIME_SPENT);
 
-        $this->setTimeSpent($timeSpent);
+        $this->setInitialTimeSpent($timeSpent);
+
+        $this->getTimeSpent()->shouldReturn($timeSpent);
+    }
+
+    function it_should_return_adjusted_time_spent()
+    {
+        $timeSpent = new TimeSpent(TestValues::TIME_SPENT);
+
+        $this->adjustTimeSpent($timeSpent);
 
         $this->getTimeSpent()->shouldReturn($timeSpent);
     }
@@ -151,9 +169,9 @@ class TaskSpec extends ObjectBehavior
         $this->shouldBeImportant();
     }
 
-    function it_should_set_important()
+    function it_should_mark_as_not_important()
     {
-        $this->setImportant(TestValues::NOT_IMPORTANT);
+        $this->markAsNotImportant();
 
         $this->shouldNotBeImportant();
     }
@@ -161,13 +179,5 @@ class TaskSpec extends ObjectBehavior
     function it_should_return_its_created_at()
     {
         $this->getCreatedAt()->shouldHaveType(\DateTime::CLASS);
-    }
-
-    function it_should_throw_an_exception_if_important_value_is_not_boolean()
-    {
-        $this
-            ->shouldThrow(AssertionFailedException::CLASS)
-            ->during('setImportant', [1])
-        ;
     }
 }
