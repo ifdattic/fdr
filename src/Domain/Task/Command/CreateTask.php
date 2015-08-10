@@ -5,7 +5,7 @@ namespace Domain\Task\Command;
 use Domain\Core\Validation\HasErrorsTrait;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\Estimated;
+use Domain\Task\ValueObject\Estimate;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
 use Domain\User\Entity\User;
@@ -27,7 +27,7 @@ class CreateTask
     private $description;
 
     /** @var integer|null */
-    private $estimated;
+    private $estimate;
 
     /** @var \DateTime|null */
     private $completedAt;
@@ -46,19 +46,19 @@ class CreateTask
      * @param string $name
      * @param string $date
      * @param string|null $description
-     * @param integer|null $estimated
+     * @param integer|null $estimate
      * @param boolean|null $done
      * @param string|null $completedAt
      * @param integer|null $timeSpent
      * @param boolean|null $important
      */
-    public function __construct(User $user, $name, $date, $description, $estimated, $completedAt, $timeSpent, $important)
+    public function __construct(User $user, $name, $date, $description, $estimate, $completedAt, $timeSpent, $important)
     {
         $this->user = $user;
         $this->name = $name;
         $this->date = $date;
         $this->description = $description;
-        $this->estimated = $estimated;
+        $this->estimate = $estimate;
         $this->completedAt = $completedAt;
         $this->timeSpent = $timeSpent;
         $this->important = $important;
@@ -88,10 +88,10 @@ class CreateTask
         return new Description($this->description);
     }
 
-    /** @return Estimated */
-    public function getEstimated()
+    /** @return Estimate */
+    public function getEstimate()
     {
-        return new Estimated($this->estimated);
+        return new Estimate($this->estimate);
     }
 
     /** @return \DateTime|null */

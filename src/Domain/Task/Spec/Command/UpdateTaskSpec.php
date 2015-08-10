@@ -6,7 +6,7 @@ use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Command\UpdateTask;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\Estimated;
+use Domain\Task\ValueObject\Estimate;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
 use PhpSpec\ObjectBehavior;
@@ -21,7 +21,7 @@ class UpdateTaskSpec extends ObjectBehavior
             TestValues::TASK_NAME2,
             TestValues::DATE2,
             TestValues::DESCRIPTION2,
-            TestValues::ESTIMATED2,
+            TestValues::ESTIMATE2,
             TestValues::COMPLETED_DATE2,
             TestValues::TIME_SPENT2,
             TestValues::IMPORTANT
@@ -53,9 +53,9 @@ class UpdateTaskSpec extends ObjectBehavior
         $this->getDescription()->shouldBeLike(new Description(TestValues::DESCRIPTION2));
     }
 
-    function it_should_return_its_estimated()
+    function it_should_return_its_estimate()
     {
-        $this->getEstimated()->shouldBeLike(new Estimated(TestValues::ESTIMATED2));
+        $this->getEstimate()->shouldBeLike(new Estimate(TestValues::ESTIMATE2));
     }
 
     function it_should_return_its_completed_at()

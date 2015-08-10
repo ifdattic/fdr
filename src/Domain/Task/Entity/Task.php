@@ -5,7 +5,7 @@ namespace Domain\Task\Entity;
 use Domain\Core\Validation\Assert;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Event\TaskWasEntered;
-use Domain\Task\ValueObject\Estimated;
+use Domain\Task\ValueObject\Estimate;
 use Domain\Task\ValueObject\TaskId;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
@@ -32,8 +32,8 @@ class Task implements ContainsRecordedMessages
     /** @var \DateTime */
     private $date;
 
-    /** @var Estimated */
-    private $estimated;
+    /** @var Estimate */
+    private $estimate;
 
     /** @var \DateTime|null */
     private $completedAt;
@@ -54,7 +54,7 @@ class Task implements ContainsRecordedMessages
         $this->name = $name;
         $this->date = $date;
         $this->description = new Description();
-        $this->estimated = new Estimated();
+        $this->estimate = new Estimate();
         $this->completedAt = null;
         $this->timeSpent = new TimeSpent();
         $this->important = true;
@@ -108,15 +108,15 @@ class Task implements ContainsRecordedMessages
         $this->date = $date;
     }
 
-    public function setEstimated(Estimated $estimated)
+    public function setEstimate(Estimate $estimate)
     {
-        $this->estimated = $estimated;
+        $this->estimate = $estimate;
     }
 
-    /** @return Estimated */
-    public function getEstimated()
+    /** @return Estimate */
+    public function getEstimate()
     {
-        return $this->estimated;
+        return $this->estimate;
     }
 
     /** @return \DateTime|null */

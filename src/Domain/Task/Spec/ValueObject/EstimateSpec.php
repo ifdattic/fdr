@@ -4,14 +4,20 @@ namespace Spec\Domain\Task\ValueObject;
 
 use Domain\Core\Exception\AssertionFailedException;
 use Domain\Core\Spec\TestValues;
+use Domain\Task\ValueObject\Estimate;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class EstimatedSpec extends ObjectBehavior
+class EstimateSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(TestValues::ESTIMATED);
+        $this->beConstructedWith(TestValues::ESTIMATE);
+    }
+
+    function it_is_initializable()
+    {
+        $this->shouldHaveType(Estimate::CLASS);
     }
 
     function it_should_reject_string_value()
@@ -40,7 +46,7 @@ class EstimatedSpec extends ObjectBehavior
 
     function it_should_return_its_value()
     {
-        $this->getValue()->shouldReturn(TestValues::ESTIMATED);
+        $this->getValue()->shouldReturn(TestValues::ESTIMATE);
     }
 
     function it_should_have_default_value()

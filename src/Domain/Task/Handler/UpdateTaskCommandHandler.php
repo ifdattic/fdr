@@ -22,7 +22,7 @@ class UpdateTaskCommandHandler
         $task->setName($command->getName());
         $task->setDate($command->getDate());
         $task->setDescription($command->getDescription());
-        $task->setEstimated($command->getEstimated());
+        $task->setEstimate($command->getEstimate());
         $task->setCompletedAt($command->getCompletedAt());
         $task->setTimeSpent($command->getTimeSpent());
         $task->setImportant($command->getImportant());

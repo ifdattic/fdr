@@ -4,7 +4,7 @@ namespace Domain\Task\ValueObject;
 
 use Domain\Core\Validation\Assert;
 
-final class Estimated
+final class Estimate
 {
     const DEFAULT_VALUE = 1;
     const MIN = 0;

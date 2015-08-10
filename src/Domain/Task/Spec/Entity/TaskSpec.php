@@ -6,7 +6,7 @@ use Domain\Core\Exception\AssertionFailedException;
 use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\Estimated;
+use Domain\Task\ValueObject\Estimate;
 use Domain\Task\ValueObject\TaskId;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
@@ -83,18 +83,18 @@ class TaskSpec extends ObjectBehavior
         $this->getDate()->shouldReturn($date);
     }
 
-    function it_should_return_its_estimated()
+    function it_should_return_its_estimate()
     {
-        $this->getEstimated()->shouldHaveType(Estimated::CLASS);
+        $this->getEstimate()->shouldHaveType(Estimate::CLASS);
     }
 
-    function it_should_return_estimated_which_was_set()
+    function it_should_return_estimate_which_was_set()
     {
-        $estimated = new Estimated(TestValues::ESTIMATED);
+        $estimate = new Estimate(TestValues::ESTIMATE);
 
-        $this->setEstimated($estimated);
+        $this->setEstimate($estimate);
 
-        $this->getEstimated()->shouldReturn($estimated);
+        $this->getEstimate()->shouldReturn($estimate);
     }
 
     function it_should_return_completed_at_when_its_not_completed()

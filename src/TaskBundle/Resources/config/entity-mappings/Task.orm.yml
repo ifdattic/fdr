@@ -14,8 +14,8 @@ Domain\Task\Entity\Task:
         description:
             class: Domain\Core\ValueObject\Description
             columnPrefix: false
-        estimated:
-            class: Domain\Task\ValueObject\Estimated
+        estimate:
+            class: Domain\Task\ValueObject\Estimate
             columnPrefix: false
         timeSpent:
             class: Domain\Task\ValueObject\TimeSpent

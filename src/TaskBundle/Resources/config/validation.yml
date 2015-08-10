@@ -11,10 +11,10 @@ Domain\Task\Command\CreateTask:
                 message: Date is required
             - Date:
                 message: Date is not valid
-        estimated:
+        estimate:
             - Range:
                 min: 0
-                minMessage: Estimated must be a positive number
+                minMessage: Estimate must be a positive number
         completedAt:
             - DateTime:
                 message: Completed at is not a valid date
@@ -40,10 +40,10 @@ Domain\Task\Command\UpdateTask:
                 message: Date is required
             - Date:
                 message: Date is not valid
-        estimated:
+        estimate:
             - Range:
                 min: 0
-                minMessage: Estimated must be a positive number
+                minMessage: Estimate must be a positive number
         completedAt:
             - DateTime:
                 message: Completed at is not a valid date

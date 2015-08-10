@@ -21,8 +21,8 @@ final class TestValues
     const EMAIL3        = 'alice@carlton.com';
     const INVALID_EMAIL = 'invalid@email';
 
-    const ESTIMATED  = 3;
-    const ESTIMATED2 = 2;
+    const ESTIMATE  = 3;
+    const ESTIMATE2 = 2;
 
     const FULLNAME  = 'Virgil Mundell';
     const FULLNAME2 = 'John Doe';

@@ -28,7 +28,7 @@ class UpdateTaskCommandType extends AbstractType
             ->add('name', null, $notMapped)
             ->add('date', null, $notMapped)
             ->add('description', null, $notMapped)
-            ->add('estimated', 'integer', $notMapped)
+            ->add('estimate', 'integer', $notMapped)
             ->add('completed_at', null, $notMapped)
             ->add('time_spent', 'integer', $notMapped)
             ->add('important', 'checkbox', $notMapped)
@@ -46,7 +46,7 @@ class UpdateTaskCommandType extends AbstractType
                     $form->get('name')->getData(),
                     $form->get('date')->getData(),
                     $form->get('description')->getData(),
-                    $form->get('estimated')->getData(),
+                    $form->get('estimate')->getData(),
                     $form->get('completed_at')->getData(),
                     $form->get('time_spent')->getData(),
                     $form->get('important')->getData()

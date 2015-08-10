@@ -1,9 +1,9 @@
-Domain\Task\ValueObject\Estimated:
+Domain\Task\ValueObject\Estimate:
     type: embeddable
     fields:
         value:
             type: smallint
-            column: estimated
+            column: estimate
             options:
                 unsigned: true
                 default: 1

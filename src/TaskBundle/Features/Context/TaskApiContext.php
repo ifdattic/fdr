@@ -13,7 +13,7 @@ use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
 use Domain\Task\Repository\TaskRepository;
-use Domain\Task\ValueObject\Estimated;
+use Domain\Task\ValueObject\Estimate;
 use Domain\Task\ValueObject\TaskId;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
@@ -66,7 +66,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             new \DateTime(TestValues::DATE)
         );
         $task->setDescription(new Description(TestValues::DESCRIPTION));
-        $task->setEstimated(new Estimated(TestValues::ESTIMATED));
+        $task->setEstimate(new Estimate(TestValues::ESTIMATE));
         $task->setCompletedAt(new \DateTime(TestValues::COMPLETED_DATE));
         $task->setTimeSpent(new TimeSpent(TestValues::TIME_SPENT));
         $task->setImportant(TestValues::IMPORTANT);
@@ -113,7 +113,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             'name' => $task->getName()->getValue(),
             'date' => $task->getDate()->format('Y-m-d'),
             'description' => $task->getDescription()->getValue(),
-            'estimated' => $task->getEstimated()->getValue(),
+            'estimate' => $task->getEstimate()->getValue(),
             'completed' => $task->isCompleted(),
             'completed_at' => $task->isCompleted()
                 ? $task->getCompletedAt()->format(\DateTime::ISO8601)
@@ -163,7 +163,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
                 'name' => TestValues::TASK_NAME,
                 'date' => TestValues::DATE,
                 'description' => TestValues::DESCRIPTION,
-                'estimated' => TestValues::ESTIMATED,
+                'estimate' => TestValues::ESTIMATE,
                 'completed_at' => TestValues::COMPLETED_DATE,
                 'time_spent' => TestValues::TIME_SPENT,
                 'important' => TestValues::IMPORTANT,
@@ -182,7 +182,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             'task.name',
             'task.date',
             'task.description',
-            'task.estimated',
+            'task.estimate',
             'task.completed',
             'task.completed_at',
             'task.time_spent',
@@ -434,7 +434,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
                 'name' => TestValues::TASK_NAME2,
                 'date' => TestValues::DATE2,
                 'description' => TestValues::DESCRIPTION,
-                'estimated' => TestValues::ESTIMATED,
+                'estimate' => TestValues::ESTIMATE,
                 'completed_at' => TestValues::COMPLETED_DATE,
                 'time_spent' => TestValues::TIME_SPENT,
                 'important' => TestValues::IMPORTANT,
@@ -458,7 +458,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
         $this->apiContext->compareResponse($expected, [
             'message',
             'task.id',
-            'task.estimated',
+            'task.estimate',
             'task.completed',
             'task.completed_at',
             'task.time_spent',

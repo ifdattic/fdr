@@ -8,7 +8,7 @@ use Domain\Task\Command\CreateTask;
 use Domain\Task\Entity\Task;
 use Domain\Task\Handler\CreateTaskCommandHandler;
 use Domain\Task\Repository\TaskRepository;
-use Domain\Task\ValueObject\Estimated;
+use Domain\Task\ValueObject\Estimate;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
 use Domain\User\Entity\User;
@@ -36,7 +36,7 @@ class CreateTaskCommandHandlerSpec extends ObjectBehavior
         $command->getName()->willReturn(new TaskName(TestValues::TASK_NAME));
         $command->getDate()->willReturn(new \DateTime(TestValues::DATE));
         $command->getDescription()->willReturn(new Description(TestValues::DESCRIPTION));
-        $command->getEstimated()->willReturn(new Estimated(TestValues::ESTIMATED));
+        $command->getEstimate()->willReturn(new Estimate(TestValues::ESTIMATE));
         $command->getCompletedAt()->willReturn(new \DateTime(TestValues::COMPLETED_DATE));
         $command->getTimeSpent()->willReturn(new TimeSpent(TestValues::TIME_SPENT));
         $command->getImportant()->willReturn(TestValues::NOT_IMPORTANT);

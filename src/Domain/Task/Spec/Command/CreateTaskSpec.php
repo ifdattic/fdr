@@ -6,7 +6,7 @@ use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Command\CreateTask;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\Estimated;
+use Domain\Task\ValueObject\Estimate;
 use Domain\Task\ValueObject\TaskName;
 use Domain\Task\ValueObject\TimeSpent;
 use Domain\User\Entity\User;
@@ -22,7 +22,7 @@ class CreateTaskSpec extends ObjectBehavior
             TestValues::TASK_NAME,
             TestValues::DATE,
             TestValues::DESCRIPTION,
-            TestValues::ESTIMATED,
+            TestValues::ESTIMATE,
             TestValues::COMPLETED_DATE,
             TestValues::TIME_SPENT,
             TestValues::NOT_IMPORTANT
@@ -54,9 +54,9 @@ class CreateTaskSpec extends ObjectBehavior
         $this->getDescription()->shouldBeLike(new Description(TestValues::DESCRIPTION));
     }
 
-    function it_should_return_its_estimated()
+    function it_should_return_its_estimate()
     {
-        $this->getEstimated()->shouldBeLike(new Estimated(TestValues::ESTIMATED));
+        $this->getEstimate()->shouldBeLike(new Estimate(TestValues::ESTIMATE));
     }
 
     function it_should_return_its_completed_at()

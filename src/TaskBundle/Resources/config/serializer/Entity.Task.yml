@@ -6,7 +6,7 @@ Domain\Task\Entity\Task:
         - name
         - date
         - description
-        - estimated
+        - estimate
         - isCompleted
         - completedAt
         - timeSpent
@@ -28,10 +28,10 @@ Domain\Task\Entity\Task:
         date:
             expose: true
             type: "DateTime<'Y-m-d'>"
-        estimated:
+        estimate:
             expose: true
             inline: true
-            type: Domain\Task\ValueObject\Estimated
+            type: Domain\Task\ValueObject\Estimate
         completedAt:
             expose: true
             serialized_name: completed_at
