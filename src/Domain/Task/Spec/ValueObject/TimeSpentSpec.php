@@ -3,16 +3,15 @@
 namespace Spec\Domain\Task\ValueObject;
 
 use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Spec\TestValues;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class TimeSpentSpec extends ObjectBehavior
 {
-    const NUMBER = 4;
-
     function let()
     {
-        $this->beConstructedWith(self::NUMBER);
+        $this->beConstructedWith(TestValues::TIME_SPENT);
     }
 
     function it_should_reject_string_value()
@@ -41,7 +40,7 @@ class TimeSpentSpec extends ObjectBehavior
 
     function it_should_return_its_value()
     {
-        $this->getValue()->shouldReturn(self::NUMBER);
+        $this->getValue()->shouldReturn(TestValues::TIME_SPENT);
     }
 
     function it_should_have_default_value()

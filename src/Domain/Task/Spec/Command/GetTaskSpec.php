@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\Task\Command;
 
+use Domain\Core\Spec\TestValues;
 use Domain\Task\Command\GetTask;
 use Domain\Task\Entity\Task;
 use Domain\Task\ValueObject\TaskId;
@@ -12,8 +13,6 @@ use Prophecy\Argument;
 
 class GetTaskSpec extends ObjectBehavior
 {
-    const UUID = '5399dbab-ccd0-493c-be1a-67300de1671f';
-
     function it_is_initializable()
     {
         $this->shouldHaveType(OwnerBound::CLASS);
@@ -22,12 +21,12 @@ class GetTaskSpec extends ObjectBehavior
 
     function let()
     {
-        $this->beConstructedWith(self::UUID);
+        $this->beConstructedWith(TestValues::UUID);
     }
 
     function it_should_return_its_task_id()
     {
-        $this->getTaskId()->shouldBeLike(TaskId::createFromString(self::UUID));
+        $this->getTaskId()->shouldBeLike(TaskId::createFromString(TestValues::UUID));
     }
 
     function it_should_throw_an_exception_if_returning_task_without_setting_it()

@@ -3,16 +3,15 @@
 namespace Spec\Domain\Task\ValueObject;
 
 use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Spec\TestValues;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class TaskNameSpec extends ObjectBehavior
 {
-    const NAME = 'Task Name';
-
     function let()
     {
-        $this->beConstructedWith(self::NAME);
+        $this->beConstructedWith(TestValues::TASK_NAME);
     }
 
     function it_throws_an_exception_on_empty_value()
@@ -35,6 +34,6 @@ class TaskNameSpec extends ObjectBehavior
 
     function it_returns_its_value()
     {
-        $this->getValue()->shouldReturn(self::NAME);
+        $this->getValue()->shouldReturn(TestValues::TASK_NAME);
     }
 }

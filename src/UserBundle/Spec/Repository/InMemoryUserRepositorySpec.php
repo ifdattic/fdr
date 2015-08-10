@@ -3,6 +3,7 @@
 namespace Spec\UserBundle\Repository;
 
 use Domain\Core\Identity\Uuid;
+use Domain\Core\Spec\TestValues;
 use Domain\User\Entity\User;
 use Domain\User\Exception\UserNotFoundException;
 use Domain\User\ValueObject\Email;
@@ -11,15 +12,10 @@ use Domain\User\ValueObject\PasswordHash;
 use Domain\User\ValueObject\UserId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use UserBundle\Repository\InMemoryUserRepository;
 
 class InMemoryUserRepositorySpec extends ObjectBehavior
 {
-    const EMAIL          = 'virgil@mundell.com';
-    const EXISTING_EMAIL = 'john@doe.com';
-    const EXISTING_UUID  = '8ce05088-ed1f-43e9-a415-3b3792655a9b';
-    const FULLNAME       = 'Virgil Mundell';
-    const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
-
     /** @var User */
     private $existingUser;
 
@@ -29,35 +25,35 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
     function let()
     {
         $this->existingUser = new User(
-            new UserId(new Uuid(self::EXISTING_UUID)),
-            new Email(self::EXISTING_EMAIL),
-            new FullName('John Doe'),
-            new PasswordHash('$2y$04$ZpNmuQAE0roOG.UnpEFErOuZ0fFMXmMDoojuzmbvOwhYOKT9SJgB2')
+            new UserId(new Uuid(TestValues::UUID2)),
+            new Email(TestValues::EMAIL2),
+            new FullName(TestValues::FULLNAME2),
+            new PasswordHash(TestValues::PASSWORD_HASH2)
         );
 
         $this->user = new User(
-            new UserId(new Uuid(self::UUID)),
-            new Email(self::EMAIL),
-            new FullName(self::FULLNAME),
-            new PasswordHash('$2y$04$dWGqp58K1Xjr5tJUX/5TjOgWUBqC9EnPS8/sLog35cC46FJZh20QW')
+            new UserId(new Uuid(TestValues::UUID)),
+            new Email(TestValues::EMAIL),
+            new FullName(TestValues::FULLNAME),
+            new PasswordHash(TestValues::PASSWORD_HASH)
         );
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('UserBundle\Repository\InMemoryUserRepository');
+        $this->shouldHaveType(InMemoryUserRepository::CLASS);
     }
 
     function it_throws_an_exception_if_user_not_found()
     {
-        $userId = new UserId(new Uuid(self::UUID));
+        $userId = new UserId(new Uuid(TestValues::UUID));
 
         $this->shouldThrow(UserNotFoundException::CLASS)->during('findByUserId', [$userId]);
     }
 
     function it_finds_a_user_by_id()
     {
-        $userId = new UserId(new Uuid(self::EXISTING_UUID));
+        $userId = new UserId(new Uuid(TestValues::UUID2));
 
         $this->add($this->existingUser);
 
@@ -73,7 +69,7 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
 
     function it_returns_false_when_checking_for_unique_email_when_email_is_taken()
     {
-        $email = new Email(self::EXISTING_EMAIL);
+        $email = new Email(TestValues::EMAIL2);
 
         $this->add($this->existingUser);
 
@@ -82,7 +78,7 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
 
     function it_returns_true_when_checking_for_unique_email_when_email_is_not_taken()
     {
-        $email = new Email(self::EMAIL);
+        $email = new Email(TestValues::EMAIL);
 
         $this->add($this->existingUser);
 
@@ -91,7 +87,7 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
 
     function it_throws_an_exception_if_user_with_provided_email_not_found()
     {
-        $email = new Email(self::EMAIL);
+        $email = new Email(TestValues::EMAIL);
 
         $this->add($this->existingUser);
 
@@ -100,7 +96,7 @@ class InMemoryUserRepositorySpec extends ObjectBehavior
 
     function it_returns_a_user_found_by_email()
     {
-        $email = new Email(self::EMAIL);
+        $email = new Email(TestValues::EMAIL);
 
         $this->add($this->existingUser);
         $this->add($this->user);

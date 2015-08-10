@@ -3,21 +3,20 @@
 namespace Spec\Domain\Core\ValueObject;
 
 use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Spec\TestValues;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class DescriptionSpec extends ObjectBehavior
 {
-    const DESCRIPTION = 'This is the description.';
-
     function let()
     {
-        $this->beConstructedWith(self::DESCRIPTION);
+        $this->beConstructedWith(TestValues::DESCRIPTION);
     }
 
     function it_returns_its_value()
     {
-        $this->getValue()->shouldReturn(self::DESCRIPTION);
+        $this->getValue()->shouldReturn(TestValues::DESCRIPTION);
     }
 
     function it_should_return_null_when_constructed_without_value()

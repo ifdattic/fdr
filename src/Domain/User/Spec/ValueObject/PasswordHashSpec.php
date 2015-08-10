@@ -3,14 +3,12 @@
 namespace Spec\Domain\User\ValueObject;
 
 use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Spec\TestValues;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class PasswordHashSpec extends ObjectBehavior
 {
-    const INVALID_LENGTH_HASH = '$2y$14$2RfLwLL./bzTyfNdBRaote';
-    const VALID_HASH          = '$2y$14$2RfLwLL./bzTyfNdBRaotelrsmoOR61yUcDTOIDT84VwvvvZA7zJW';
-
     function it_throws_an_exception_on_empty_value()
     {
         $this
@@ -31,7 +29,7 @@ class PasswordHashSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(AssertionFailedException::CLASS)
-            ->during('__construct', [self::INVALID_LENGTH_HASH])
+            ->during('__construct', [TestValues::INVALID_LENGTH_PASSWORD_HASH])
         ;
     }
 
@@ -45,8 +43,8 @@ class PasswordHashSpec extends ObjectBehavior
 
     function it_returns_its_value()
     {
-        $this->beConstructedWith(self::VALID_HASH);
+        $this->beConstructedWith(TestValues::PASSWORD_HASH);
 
-        $this->getValue()->shouldReturn(self::VALID_HASH);
+        $this->getValue()->shouldReturn(TestValues::PASSWORD_HASH);
     }
 }

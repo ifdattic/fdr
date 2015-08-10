@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\User\Handler;
 
+use Domain\Core\Spec\TestValues;
 use Domain\User\Command\SignUp;
 use Domain\User\Entity\User;
 use Domain\User\Handler\SignUpCommandHandler;
@@ -16,11 +17,6 @@ use Prophecy\Argument;
 
 class SignUpCommandHandlerSpec extends ObjectBehavior
 {
-    const EMAIL         = 'virgil@mundell.com';
-    const FULLNAME      = 'Virgil Mundell';
-    const PASSWORD      = '9wt24yk^T&ObwHDQ2bbDej3kZ^Llz@';
-    const PASSWORD_HASH = '$2y$14$2RfLwLL./bzTyfNdBRaotelrsmoOR61yUcDTOIDT84VwvvvZA7zJW';
-
     function let(UserRepository $userRepository, PasswordEncoder $passwordEncoder)
     {
         $this->beConstructedWith($userRepository, $passwordEncoder);
@@ -36,12 +32,12 @@ class SignUpCommandHandlerSpec extends ObjectBehavior
         PasswordEncoder $passwordEncoder,
         SignUp $command
     ) {
-        $command->getEmail()->willReturn(new Email(self::EMAIL));
-        $command->getFullName()->willReturn(new FullName(self::FULLNAME));
-        $command->getPassword()->willReturn(new Password(self::PASSWORD));
+        $command->getEmail()->willReturn(new Email(TestValues::EMAIL));
+        $command->getFullName()->willReturn(new FullName(TestValues::FULLNAME));
+        $command->getPassword()->willReturn(new Password(TestValues::PASSWORD));
         $passwordEncoder
             ->encodePassword(Argument::type(Password::CLASS))
-            ->willReturn(new PasswordHash(self::PASSWORD_HASH))
+            ->willReturn(new PasswordHash(TestValues::PASSWORD_HASH))
         ;
         $user = Argument::type(User::CLASS);
 

@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\Task\Handler;
 
+use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Command\CreateTask;
 use Domain\Task\Entity\Task;
@@ -16,14 +17,6 @@ use Prophecy\Argument;
 
 class CreateTaskCommandHandlerSpec extends ObjectBehavior
 {
-    const DATE           = '2015-04-15';
-    const DESCRIPTION    = 'This is the description.';
-    const COMPLETED_DATE = '2015-04-15 13:14:15';
-    const ESTIMATED      = 3;
-    const IMPORTANT      = false;
-    const TASK_NAME      = 'Task Name';
-    const TIME_SPENT     = 23;
-
     function let(TaskRepository $taskRepository)
     {
         $this->beConstructedWith($taskRepository);
@@ -40,13 +33,13 @@ class CreateTaskCommandHandlerSpec extends ObjectBehavior
         CreateTask $command
     ) {
         $command->getUser()->willReturn($user);
-        $command->getName()->willReturn(new TaskName(self::TASK_NAME));
-        $command->getDate()->willReturn(new \DateTime(self::DATE));
-        $command->getDescription()->willReturn(new Description(self::DESCRIPTION));
-        $command->getEstimated()->willReturn(new Estimated(self::ESTIMATED));
-        $command->getCompletedAt()->willReturn(new \DateTime(self::COMPLETED_DATE));
-        $command->getTimeSpent()->willReturn(new TimeSpent(self::TIME_SPENT));
-        $command->getImportant()->willReturn(self::IMPORTANT);
+        $command->getName()->willReturn(new TaskName(TestValues::TASK_NAME));
+        $command->getDate()->willReturn(new \DateTime(TestValues::DATE));
+        $command->getDescription()->willReturn(new Description(TestValues::DESCRIPTION));
+        $command->getEstimated()->willReturn(new Estimated(TestValues::ESTIMATED));
+        $command->getCompletedAt()->willReturn(new \DateTime(TestValues::COMPLETED_DATE));
+        $command->getTimeSpent()->willReturn(new TimeSpent(TestValues::TIME_SPENT));
+        $command->getImportant()->willReturn(TestValues::NOT_IMPORTANT);
         $task = Argument::type(Task::CLASS);
 
         $taskRepository->add($task)->shouldBeCalled();

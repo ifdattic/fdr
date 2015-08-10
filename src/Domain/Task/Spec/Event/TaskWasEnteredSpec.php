@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\Task\Event;
 
+use Domain\Core\Spec\TestValues;
 use Domain\Task\Event\TaskWasEntered;
 use Domain\Task\ValueObject\TaskId;
 use PhpSpec\ObjectBehavior;
@@ -9,11 +10,9 @@ use Prophecy\Argument;
 
 class TaskWasEnteredSpec extends ObjectBehavior
 {
-    const UUID = '5399dbab-ccd0-493c-be1a-67300de1671f';
-
     function let()
     {
-        $this->beConstructedWith(TaskId::createFromString(self::UUID));
+        $this->beConstructedWith(TaskId::createFromString(TestValues::UUID));
     }
 
     function it_is_initializable()

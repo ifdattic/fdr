@@ -2,6 +2,7 @@
 
 namespace Spec\TaskBundle\Repository;
 
+use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
 use Domain\Task\Exception\TaskNotFoundException;
@@ -18,15 +19,6 @@ use TaskBundle\Repository\InMemoryTaskRepository;
 
 class InMemoryTaskRepositorySpec extends ObjectBehavior
 {
-    const DATE          = '2015-04-15';
-    const EMAIL         = 'virgil@mundell.com';
-    const FULLNAME      = 'Virgil Mundell';
-    const PASSWORD_HASH = '$2y$04$dWGqp58K1Xjr5tJUX/5TjOgWUBqC9EnPS8/sLog35cC46FJZh20QW';
-    const TASK_NAME     = 'Task Name';
-    const UUID          = '5399dbab-ccd0-493c-be1a-67300de1671f';
-    const UUID2         = '97fd781e-35c5-4b8e-9175-3ae730d86bdb';
-    const UUID3         = 'df603d36-1203-4bc5-9cd8-99c775ac272a';
-
     /** @var Task */
     private $task;
 
@@ -36,17 +28,17 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
     function let()
     {
         $this->user = new User(
-            UserId::createFromString(self::UUID),
-            new Email(self::EMAIL),
-            new FullName(self::FULLNAME),
-            new PasswordHash(self::PASSWORD_HASH)
+            UserId::createFromString(TestValues::UUID),
+            new Email(TestValues::EMAIL),
+            new FullName(TestValues::FULLNAME),
+            new PasswordHash(TestValues::PASSWORD_HASH)
         );
 
         $this->task = new Task(
-            TaskId::createFromString(self::UUID),
+            TaskId::createFromString(TestValues::UUID),
             $this->user,
-            new TaskName(self::TASK_NAME),
-            new \DateTime(self::DATE)
+            new TaskName(TestValues::TASK_NAME),
+            new \DateTime(TestValues::DATE)
         );
     }
 
@@ -62,14 +54,14 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
 
     function it_should_throw_an_exception_if_task_not_found()
     {
-        $taskId = TaskId::createFromString(self::UUID);
+        $taskId = TaskId::createFromString(TestValues::UUID);
 
         $this->shouldThrow(TaskNotFoundException::CLASS)->during('findByTaskId', [$taskId]);
     }
 
     function it_should_find_a_task_by_id()
     {
-        $taskId = TaskId::createFromString(self::UUID);
+        $taskId = TaskId::createFromString(TestValues::UUID);
 
         $this->add($this->task);
 
@@ -104,7 +96,7 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
 
     function it_should_throw_an_exception_if_task_is_not_found_when_removing()
     {
-        $taskId = TaskId::createFromString(self::UUID);
+        $taskId = TaskId::createFromString(TestValues::UUID);
 
         $this
             ->shouldThrow(TaskNotFoundException::CLASS)
@@ -114,10 +106,10 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
 
     function it_should_remove_a_task_by_id(Task $task1, Task $task2, Task $task3)
     {
-        $taskId = TaskId::createFromString(self::UUID2);
-        $task1->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID));
-        $task2->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID2));
-        $task3->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID3));
+        $taskId = TaskId::createFromString(TestValues::UUID2);
+        $task1->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(TestValues::UUID));
+        $task2->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(TestValues::UUID2));
+        $task3->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(TestValues::UUID3));
 
         $this->add($task1);
         $this->add($task2);
@@ -133,7 +125,7 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
 
     function it_should_throw_an_exception_when_updating_if_task_not_found(Task $task)
     {
-        $taskId = TaskId::createFromString(self::UUID2);
+        $taskId = TaskId::createFromString(TestValues::UUID2);
 
         $this
             ->shouldThrow(TaskNotFoundException::CLASS)
@@ -143,11 +135,11 @@ class InMemoryTaskRepositorySpec extends ObjectBehavior
 
     function it_should_save_updated_task(Task $task1, Task $task2, Task $task3, Task $task2Updated)
     {
-        $taskId = TaskId::createFromString(self::UUID2);
-        $task1->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID));
-        $task2->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID2));
+        $taskId = TaskId::createFromString(TestValues::UUID2);
+        $task1->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(TestValues::UUID));
+        $task2->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(TestValues::UUID2));
         $task3->getId()->shouldNotBeCalled();
-        $task2Updated->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(self::UUID2));
+        $task2Updated->getId()->shouldBeCalled()->willReturn(TaskId::createFromString(TestValues::UUID2));
 
         $this->add($task1);
         $this->add($task2);

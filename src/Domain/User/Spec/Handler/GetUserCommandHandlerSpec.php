@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\User\Handler;
 
+use Domain\Core\Spec\TestValues;
 use Domain\User\Command\GetUser;
 use Domain\User\Entity\User;
 use Domain\User\Handler\GetUserCommandHandler;
@@ -12,8 +13,6 @@ use Prophecy\Argument;
 
 class GetUserCommandHandlerSpec extends ObjectBehavior
 {
-    const UUID = '5399dbab-ccd0-493c-be1a-67300de1671f';
-
     function let(UserRepository $userRepository)
     {
         $this->beConstructedWith($userRepository);
@@ -29,7 +28,7 @@ class GetUserCommandHandlerSpec extends ObjectBehavior
         User $user,
         GetUser $command
     ) {
-        $userId = UserId::createFromString(self::UUID);
+        $userId = UserId::createFromString(TestValues::UUID);
 
         $userRepository->findByUserId($userId)->willReturn($user);
         $userRepository->findByUserId($userId)->shouldBeCalled();

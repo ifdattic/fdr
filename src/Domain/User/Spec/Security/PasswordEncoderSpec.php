@@ -3,6 +3,7 @@
 namespace Spec\Domain\User\Security;
 
 use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Spec\TestValues;
 use Domain\User\ValueObject\Password;
 use Domain\User\ValueObject\PasswordHash;
 use PhpSpec\ObjectBehavior;
@@ -13,7 +14,6 @@ class PasswordEncoderSpec extends ObjectBehavior
     const COST           = 4;
     const COST_ABOVE     = 32;
     const COST_BELOW     = 1;
-    const VALID_PASSWORD = '9wt24yk^T&ObwHDQ2bbDej3kZ^Llz@';
 
     function let()
     {
@@ -38,7 +38,7 @@ class PasswordEncoderSpec extends ObjectBehavior
 
     function it_encodes_a_password()
     {
-        $password = new Password(self::VALID_PASSWORD);
+        $password = new Password(TestValues::PASSWORD);
 
         $this->encodePassword($password)->shouldHaveType(PasswordHash::CLASS);
     }

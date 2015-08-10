@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\Task\Handler;
 
+use Domain\Core\Spec\TestValues;
 use Domain\Task\Command\GetTask;
 use Domain\Task\Entity\Task;
 use Domain\Task\Handler\GetTaskCommandHandler;
@@ -12,8 +13,6 @@ use Prophecy\Argument;
 
 class GetTaskCommandHandlerSpec extends ObjectBehavior
 {
-    const UUID = '5399dbab-ccd0-493c-be1a-67300de1671f';
-
     function let(TaskRepository $taskRepository)
     {
         $this->beConstructedWith($taskRepository);
@@ -29,7 +28,7 @@ class GetTaskCommandHandlerSpec extends ObjectBehavior
         Task $task,
         GetTask $command
     ) {
-        $taskId = TaskId::createFromString(self::UUID);
+        $taskId = TaskId::createFromString(TestValues::UUID);
 
         $taskRepository->findByTaskId($taskId)->shouldBeCalled()->willReturn($task);
 

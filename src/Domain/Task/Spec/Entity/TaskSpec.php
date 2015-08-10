@@ -3,6 +3,7 @@
 namespace Spec\Domain\Task\Entity;
 
 use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
 use Domain\Task\ValueObject\Estimated;
@@ -15,24 +16,13 @@ use Prophecy\Argument;
 
 class TaskSpec extends ObjectBehavior
 {
-    const COMPLETED_DATE = '2015-04-15 13:14:15';
-    const DATE           = '2015-04-15';
-    const DATE2          = '2015-06-15';
-    const DESCRIPTION    = 'This is the description.';
-    const ESTIMATED      = 3;
-    const IMPORTANT      = false;
-    const TASK_NAME      = 'Task Name';
-    const TASK_NAME2     = 'Alternative Task Name';
-    const TIME_SPENT     = 23;
-    const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
-
     function let(User $user)
     {
         $this->beConstructedWith(
-            TaskId::createFromString(self::UUID),
+            TaskId::createFromString(TestValues::UUID),
             $user,
-            new TaskName(self::TASK_NAME),
-            new \DateTime(self::DATE)
+            new TaskName(TestValues::TASK_NAME),
+            new \DateTime(TestValues::DATE)
         );
     }
 
@@ -58,7 +48,7 @@ class TaskSpec extends ObjectBehavior
 
     function it_should_set_its_name()
     {
-        $name = new TaskName(self::TASK_NAME2);
+        $name = new TaskName(TestValues::TASK_NAME2);
 
         $this->setName($name);
 
@@ -72,7 +62,7 @@ class TaskSpec extends ObjectBehavior
 
     function it_should_return_description_which_was_set()
     {
-        $description = new Description(self::DESCRIPTION);
+        $description = new Description(TestValues::DESCRIPTION);
 
         $this->setDescription($description);
 
@@ -86,7 +76,7 @@ class TaskSpec extends ObjectBehavior
 
     function it_should_set_its_date()
     {
-        $date = new \DateTime(self::DATE2);
+        $date = new \DateTime(TestValues::DATE2);
 
         $this->setDate($date);
 
@@ -100,7 +90,7 @@ class TaskSpec extends ObjectBehavior
 
     function it_should_return_estimated_which_was_set()
     {
-        $estimated = new Estimated(self::ESTIMATED);
+        $estimated = new Estimated(TestValues::ESTIMATED);
 
         $this->setEstimated($estimated);
 
@@ -121,7 +111,7 @@ class TaskSpec extends ObjectBehavior
 
     function it_should_return_completed_at_when_its_completed()
     {
-        $date = new \DateTime(self::COMPLETED_DATE);
+        $date = new \DateTime(TestValues::COMPLETED_DATE);
 
         $this->setCompletedAt($date);
 
@@ -135,7 +125,7 @@ class TaskSpec extends ObjectBehavior
 
     function it_should_be_completed()
     {
-        $date = new \DateTime(self::COMPLETED_DATE);
+        $date = new \DateTime(TestValues::COMPLETED_DATE);
 
         $this->setCompletedAt($date);
 
@@ -149,7 +139,7 @@ class TaskSpec extends ObjectBehavior
 
     function it_should_return_time_spent_which_was_set()
     {
-        $timeSpent = new TimeSpent(self::TIME_SPENT);
+        $timeSpent = new TimeSpent(TestValues::TIME_SPENT);
 
         $this->setTimeSpent($timeSpent);
 
@@ -163,7 +153,7 @@ class TaskSpec extends ObjectBehavior
 
     function it_should_set_important()
     {
-        $this->setImportant(self::IMPORTANT);
+        $this->setImportant(TestValues::NOT_IMPORTANT);
 
         $this->shouldNotBeImportant();
     }

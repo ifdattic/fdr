@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\Task\Handler;
 
+use Domain\Core\Spec\TestValues;
 use Domain\Task\Command\DeleteTask;
 use Domain\Task\Handler\DeleteTaskCommandHandler;
 use Domain\Task\Repository\TaskRepository;
@@ -11,8 +12,6 @@ use Prophecy\Argument;
 
 class DeleteTaskCommandHandlerSpec extends ObjectBehavior
 {
-    const UUID = '5399dbab-ccd0-493c-be1a-67300de1671f';
-
     function let(TaskRepository $taskRepository)
     {
         $this->beConstructedWith($taskRepository);
@@ -27,7 +26,7 @@ class DeleteTaskCommandHandlerSpec extends ObjectBehavior
         TaskRepository $taskRepository,
         DeleteTask $command
     ) {
-        $taskId = TaskId::createFromString(self::UUID);
+        $taskId = TaskId::createFromString(TestValues::UUID);
 
         $taskRepository->removeByTaskId($taskId)->shouldBeCalled();
 

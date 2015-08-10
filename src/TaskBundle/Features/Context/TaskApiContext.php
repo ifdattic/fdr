@@ -9,6 +9,7 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
 use Domain\Task\Repository\TaskRepository;
@@ -21,19 +22,6 @@ use UserBundle\Features\Context\UserApiContext;
 
 class TaskApiContext implements Context, SnippetAcceptingContext
 {
-    const COMPLETED_DATE = '2015-04-15 13:14:15';
-    const DATE           = '2015-04-15';
-    const DATE2          = '2014-06-05';
-    const DESCRIPTION    = 'This is the description.';
-    const ESTIMATED      = 3;
-    const IMPORTANT      = true;
-    const TASK_NAME      = 'Task Name';
-    const TASK_NAME2     = 'Task Name Alternative';
-    const TIME_SPENT     = 23;
-    const UUID           = '5399dbab-ccd0-493c-be1a-67300de1671f';
-    const UUID2          = '97fd781e-35c5-4b8e-9175-3ae730d86bdb';
-    const UUID3          = 'df603d36-1203-4bc5-9cd8-99c775ac272a';
-
     /** @var ApiContext */
     private $apiContext;
 
@@ -72,34 +60,34 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     public function taskDataIsSeeded()
     {
         $task = new Task(
-            TaskId::createFromString(self::UUID),
-            $this->userApiContext->getUsers()[UserApiContext::UUID],
-            new TaskName(self::TASK_NAME),
-            new \DateTime(self::DATE)
+            TaskId::createFromString(TestValues::UUID),
+            $this->userApiContext->getUsers()[TestValues::UUID],
+            new TaskName(TestValues::TASK_NAME),
+            new \DateTime(TestValues::DATE)
         );
-        $task->setDescription(new Description(self::DESCRIPTION));
-        $task->setEstimated(new Estimated(self::ESTIMATED));
-        $task->setCompletedAt(new \DateTime(self::COMPLETED_DATE));
-        $task->setTimeSpent(new TimeSpent(self::TIME_SPENT));
-        $task->setImportant(self::IMPORTANT);
+        $task->setDescription(new Description(TestValues::DESCRIPTION));
+        $task->setEstimated(new Estimated(TestValues::ESTIMATED));
+        $task->setCompletedAt(new \DateTime(TestValues::COMPLETED_DATE));
+        $task->setTimeSpent(new TimeSpent(TestValues::TIME_SPENT));
+        $task->setImportant(TestValues::IMPORTANT);
 
-        $this->tasks[self::UUID] = $task;
-
-        $task = new Task(
-            TaskId::createFromString(self::UUID2),
-            $this->userApiContext->getUsers()[UserApiContext::UUID2],
-            new TaskName(self::TASK_NAME2),
-            new \DateTime(self::DATE2)
-        );
-        $this->tasks[self::UUID2] = $task;
+        $this->tasks[TestValues::UUID] = $task;
 
         $task = new Task(
-            TaskId::createFromString(self::UUID3),
-            $this->userApiContext->getUsers()[UserApiContext::UUID],
-            new TaskName(self::TASK_NAME2),
-            new \DateTime(self::DATE2)
+            TaskId::createFromString(TestValues::UUID2),
+            $this->userApiContext->getUsers()[TestValues::UUID2],
+            new TaskName(TestValues::TASK_NAME2),
+            new \DateTime(TestValues::DATE2)
         );
-        $this->tasks[self::UUID3] = $task;
+        $this->tasks[TestValues::UUID2] = $task;
+
+        $task = new Task(
+            TaskId::createFromString(TestValues::UUID3),
+            $this->userApiContext->getUsers()[TestValues::UUID],
+            new TaskName(TestValues::TASK_NAME2),
+            new \DateTime(TestValues::DATE2)
+        );
+        $this->tasks[TestValues::UUID3] = $task;
 
         foreach ($this->tasks as $task) {
             $this->taskRepository->add($task);
@@ -172,13 +160,13 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $payload = [
             'create_task' => [
-                'name' => self::TASK_NAME,
-                'date' => self::DATE,
-                'description' => self::DESCRIPTION,
-                'estimated' => self::ESTIMATED,
-                'completed_at' => self::COMPLETED_DATE,
-                'time_spent' => self::TIME_SPENT,
-                'important' => self::IMPORTANT,
+                'name' => TestValues::TASK_NAME,
+                'date' => TestValues::DATE,
+                'description' => TestValues::DESCRIPTION,
+                'estimated' => TestValues::ESTIMATED,
+                'completed_at' => TestValues::COMPLETED_DATE,
+                'time_spent' => TestValues::TIME_SPENT,
+                'important' => TestValues::IMPORTANT,
             ],
         ];
 
@@ -228,7 +216,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
-        $this->iGetTaskWithId(self::UUID);
+        $this->iGetTaskWithId(TestValues::UUID);
 
         $this->apiContext->iShouldReceiveNotFoundResponse();
 
@@ -242,7 +230,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
-        $this->iGetTaskWithId(self::UUID2);
+        $this->iGetTaskWithId(TestValues::UUID2);
 
         $this->apiContext->iShouldReceiveForbiddenResponse();
 
@@ -256,11 +244,11 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
-        $this->iGetTaskWithId(self::UUID);
+        $this->iGetTaskWithId(TestValues::UUID);
 
         $this->apiContext->iShouldReceiveSuccessResponse();
 
-        $task = $this->getTasks()[self::UUID];
+        $task = $this->getTasks()[TestValues::UUID];
         $expected = [
             'task' => $this->getTaskAsArray($task),
         ];
@@ -313,8 +301,8 @@ class TaskApiContext implements Context, SnippetAcceptingContext
         $this->apiContext->iShouldReceiveSuccessResponse();
 
         $expected = ['tasks' => [
-            $this->getTaskAsArray($this->getTasks()[self::UUID]),
-            $this->getTaskAsArray($this->getTasks()[self::UUID3]),
+            $this->getTaskAsArray($this->getTasks()[TestValues::UUID]),
+            $this->getTaskAsArray($this->getTasks()[TestValues::UUID3]),
         ]];
 
         $this->apiContext->compareResponse($expected);
@@ -344,7 +332,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
-        $this->iDeleteTaskWithId(self::UUID);
+        $this->iDeleteTaskWithId(TestValues::UUID);
 
         $this->apiContext->iShouldReceiveNotFoundResponse();
 
@@ -358,7 +346,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
-        $this->iDeleteTaskWithId(self::UUID2);
+        $this->iDeleteTaskWithId(TestValues::UUID2);
 
         $this->apiContext->iShouldReceiveForbiddenResponse();
 
@@ -372,7 +360,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
-        $this->iDeleteTaskWithId(self::UUID);
+        $this->iDeleteTaskWithId(TestValues::UUID);
 
         $this->apiContext->iShouldReceiveSuccessResponse();
 
@@ -401,7 +389,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
      */
     public function iShouldNotBeAbleToUpdateATaskWithoutAnAccount()
     {
-        $this->iUpdateTaskWithPayload(self::UUID, '{}');
+        $this->iUpdateTaskWithPayload(TestValues::UUID, '{}');
 
         $this->apiContext->iShouldReceiveUnauthorizedResponse();
 
@@ -415,7 +403,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
-        $this->iUpdateTaskWithPayload(self::UUID, '{}');
+        $this->iUpdateTaskWithPayload(TestValues::UUID, '{}');
 
         $this->apiContext->iShouldReceiveNotFoundResponse();
 
@@ -429,7 +417,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
-        $this->iUpdateTaskWithPayload(self::UUID2, '{}');
+        $this->iUpdateTaskWithPayload(TestValues::UUID2, '{}');
 
         $this->apiContext->iShouldReceiveForbiddenResponse();
 
@@ -443,27 +431,27 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     {
         $payload = [
             'update_task' => [
-                'name' => self::TASK_NAME2,
-                'date' => self::DATE2,
-                'description' => self::DESCRIPTION,
-                'estimated' => self::ESTIMATED,
-                'completed_at' => self::COMPLETED_DATE,
-                'time_spent' => self::TIME_SPENT,
-                'important' => self::IMPORTANT,
+                'name' => TestValues::TASK_NAME2,
+                'date' => TestValues::DATE2,
+                'description' => TestValues::DESCRIPTION,
+                'estimated' => TestValues::ESTIMATED,
+                'completed_at' => TestValues::COMPLETED_DATE,
+                'time_spent' => TestValues::TIME_SPENT,
+                'important' => TestValues::IMPORTANT,
             ],
         ];
 
         $this->userApiContext->iShouldBeAbleToLogInAsExistingUser();
 
-        $this->iUpdateTaskWithPayload(self::UUID, json_encode($payload));
+        $this->iUpdateTaskWithPayload(TestValues::UUID, json_encode($payload));
 
         $this->apiContext->iShouldReceiveSuccessResponse();
 
         $expected = [
             'task' => [
-                'name' => self::TASK_NAME2,
-                'date' => self::DATE2,
-                'description' => self::DESCRIPTION,
+                'name' => TestValues::TASK_NAME2,
+                'date' => TestValues::DATE2,
+                'description' => TestValues::DESCRIPTION,
             ],
         ];
 

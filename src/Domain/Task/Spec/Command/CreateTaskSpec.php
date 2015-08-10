@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\Task\Command;
 
+use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Command\CreateTask;
 use Domain\Task\Entity\Task;
@@ -14,25 +15,17 @@ use Prophecy\Argument;
 
 class CreateTaskSpec extends ObjectBehavior
 {
-    const COMPLETED_DATE = '2015-04-15 13:14:15';
-    const DATE           = '2015-04-15';
-    const DESCRIPTION    = 'This is the description.';
-    const ESTIMATED      = 3;
-    const IMPORTANT      = false;
-    const TASK_NAME      = 'Task Name';
-    const TIME_SPENT     = 23;
-
     function let(User $user)
     {
         $this->beConstructedWith(
             $user,
-            self::TASK_NAME,
-            self::DATE,
-            self::DESCRIPTION,
-            self::ESTIMATED,
-            self::COMPLETED_DATE,
-            self::TIME_SPENT,
-            self::IMPORTANT
+            TestValues::TASK_NAME,
+            TestValues::DATE,
+            TestValues::DESCRIPTION,
+            TestValues::ESTIMATED,
+            TestValues::COMPLETED_DATE,
+            TestValues::TIME_SPENT,
+            TestValues::NOT_IMPORTANT
         );
     }
 
@@ -48,37 +41,37 @@ class CreateTaskSpec extends ObjectBehavior
 
     function it_should_returns_its_name()
     {
-        $this->getName()->shouldBeLike(new TaskName(self::TASK_NAME));
+        $this->getName()->shouldBeLike(new TaskName(TestValues::TASK_NAME));
     }
 
     function it_should_returns_its_date()
     {
-        $this->getDate()->shouldBeLike(new \DateTime(self::DATE));
+        $this->getDate()->shouldBeLike(new \DateTime(TestValues::DATE));
     }
 
     function it_should_returns_its_description()
     {
-        $this->getDescription()->shouldBeLike(new Description(self::DESCRIPTION));
+        $this->getDescription()->shouldBeLike(new Description(TestValues::DESCRIPTION));
     }
 
     function it_should_return_its_estimated()
     {
-        $this->getEstimated()->shouldBeLike(new Estimated(self::ESTIMATED));
+        $this->getEstimated()->shouldBeLike(new Estimated(TestValues::ESTIMATED));
     }
 
     function it_should_return_its_completed_at()
     {
-        $this->getCompletedAt()->shouldBeLike(new \DateTime(self::COMPLETED_DATE));
+        $this->getCompletedAt()->shouldBeLike(new \DateTime(TestValues::COMPLETED_DATE));
     }
 
     function it_should_return_its_time_spent()
     {
-        $this->getTimeSpent()->shouldBeLike(new TimeSpent(self::TIME_SPENT));
+        $this->getTimeSpent()->shouldBeLike(new TimeSpent(TestValues::TIME_SPENT));
     }
 
     function it_should_return_its_important()
     {
-        $this->getImportant()->shouldReturn(self::IMPORTANT);
+        $this->getImportant()->shouldReturn(TestValues::NOT_IMPORTANT);
     }
 
     function it_should_throw_an_exception_if_returning_task_without_setting_it()

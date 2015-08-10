@@ -2,6 +2,7 @@
 
 namespace Spec\Domain\Task\Middleware;
 
+use Domain\Core\Spec\TestValues;
 use Domain\Task\Command\CreateTask;
 use Domain\Task\Command\DeleteTask;
 use Domain\Task\Entity\Task;
@@ -17,8 +18,6 @@ use Prophecy\Argument;
 
 class DeleteTaskCommandMiddlewareSpec extends ObjectBehavior
 {
-    const UUID = '5399dbab-ccd0-493c-be1a-67300de1671f';
-
     function let(UserProvider $userProvider, TaskRepository $taskRepository)
     {
         $this->beConstructedWith($userProvider, $taskRepository);
@@ -45,7 +44,7 @@ class DeleteTaskCommandMiddlewareSpec extends ObjectBehavior
         Task $task
     ) {
         $callable = function () {};
-        $taskId = TaskId::createFromString(self::UUID);
+        $taskId = TaskId::createFromString(TestValues::UUID);
         $command = new DeleteTask($taskId);
 
         $userProvider->getUser()->shouldBeCalled()->willReturn($currentUser);
@@ -65,7 +64,7 @@ class DeleteTaskCommandMiddlewareSpec extends ObjectBehavior
         Task $task
     ) {
         $callable = function () {};
-        $taskId = TaskId::createFromString(self::UUID);
+        $taskId = TaskId::createFromString(TestValues::UUID);
         $command = new DeleteTask($taskId);
 
         $userProvider->getUser()->shouldBeCalled()->willReturn($user);

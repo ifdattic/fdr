@@ -4,6 +4,7 @@ namespace Spec\Domain\Task\ValueObject;
 
 use Domain\Core\Exception\AssertionFailedException;
 use Domain\Core\Identity\Uuid;
+use Domain\Core\Spec\TestValues;
 use Domain\Task\ValueObject\TaskId;
 use PhpSpec\Exception\Example\ExampleException;
 use PhpSpec\ObjectBehavior;
@@ -11,32 +12,30 @@ use Prophecy\Argument;
 
 class TaskIdSpec extends ObjectBehavior
 {
-    const VALID_UUID = '5399dbab-ccd0-493c-be1a-67300de1671f';
-
     function let()
     {
-        $uuid = new Uuid(self::VALID_UUID);
+        $uuid = new Uuid(TestValues::UUID);
 
         $this->beConstructedWith($uuid);
     }
 
     function it_returns_its_value()
     {
-        $this->getValue()->shouldReturn(self::VALID_UUID);
+        $this->getValue()->shouldReturn(TestValues::UUID);
     }
 
     function it_creates_task_id_from_string()
     {
-        $this->beConstructedThrough('createFromString', [self::VALID_UUID]);
+        $this->beConstructedThrough('createFromString', [TestValues::UUID]);
 
         $this->shouldHaveType(TaskId::CLASS);
 
-        $this->getValue()->shouldReturn(self::VALID_UUID);
+        $this->getValue()->shouldReturn(TestValues::UUID);
     }
 
     function it_should_reject_invalid_uuid_string()
     {
-        $this->beConstructedThrough('createFromString', ['invalid']);
+        $this->beConstructedThrough('createFromString', [TestValues::INVALID_UUID]);
 
         try {
             $this->getWrappedObject();
@@ -48,6 +47,6 @@ class TaskIdSpec extends ObjectBehavior
 
     function it_returns_its_value_on_string_usage()
     {
-        $this->__toString()->shouldReturn(self::VALID_UUID);
+        $this->__toString()->shouldReturn(TestValues::UUID);
     }
 }
