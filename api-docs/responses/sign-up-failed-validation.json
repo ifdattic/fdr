@@ -1,0 +1,19 @@
+{
+  "errors": [
+    {
+      "message": "The email is required",
+      "field": "email",
+      "code": null
+    },
+    {
+      "message": "The full name is required",
+      "field": "full_name",
+      "code": null
+    },
+    {
+      "message": "The password is required",
+      "field": "password",
+      "code": null
+    }
+  ]
+}

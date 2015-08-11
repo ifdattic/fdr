@@ -1,0 +1,11 @@
+{
+  "update_task": {
+    "name": "Task name 2",
+    "date": "2015-06-28",
+    "description": "This is task description",
+    "estimate": 3,
+    "completed_at": "2015-06-28 12:32:34",
+    "time_spent": 23,
+    "important": true
+  }
+}

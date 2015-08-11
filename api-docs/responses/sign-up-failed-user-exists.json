@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "message": "User with this email already exists",
+      "field": "email",
+      "code": null
+    }
+  ]
+}

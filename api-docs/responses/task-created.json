@@ -1,0 +1,15 @@
+{
+  "message": "Task created.",
+  "task": {
+    "id": "f2e23d1e-e7b8-4511-8721-b6bfe3bfef28",
+    "name": "Task name",
+    "date": "2015-06-28",
+    "description": "This is task description",
+    "estimate": 3,
+    "completed": false,
+    "completed_at": null,
+    "time_spent": 23,
+    "important": true,
+    "created_at": "2015-08-11T07:26:59+0000"
+  }
+}

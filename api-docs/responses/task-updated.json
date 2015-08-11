@@ -1,0 +1,15 @@
+{
+  "message": "Task updated.",
+  "task": {
+    "id": "5399dbab-ccd0-493c-be1a-67300de1671f",
+    "name": "Task name 2",
+    "date": "2015-06-28",
+    "description": "This is task description",
+    "estimate": 3,
+    "completed": true,
+    "completed_at": "2015-06-28T12:32:34+0000",
+    "time_spent": 23,
+    "important": true,
+    "created_at": "2015-08-11T12:17:12+0000"
+  }
+}

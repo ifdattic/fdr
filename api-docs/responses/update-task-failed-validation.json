@@ -1,0 +1,14 @@
+{
+  "errors": [
+    {
+      "message": "Task name is required",
+      "field": "name",
+      "code": null
+    },
+    {
+      "message": "Date is required",
+      "field": "date",
+      "code": null
+    }
+  ]
+}
