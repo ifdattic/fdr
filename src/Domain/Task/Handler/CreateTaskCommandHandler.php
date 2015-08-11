@@ -30,7 +30,6 @@ class CreateTaskCommandHandler
         $task->updateDescription($command->getDescription());
         $task->setInitialEstimate($command->getEstimate());
         is_null($command->getCompletedAt()) ? $task->markAsIncomplete() : $task->complete($command->getCompletedAt());
-        $task->complete($command->getCompletedAt());
         $task->setInitialTimeSpent($command->getTimeSpent());
         $command->getImportant() ? $task->markAsImportant() : $task->markAsNotImportant();
 
