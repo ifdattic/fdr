@@ -28,11 +28,11 @@
         "simple-bus/doctrine-orm-bridge": "^4.0",
         "ramsey/uuid": "3.0.x@dev",
         "lexik/jwt-authentication-bundle": "^1.0",
-        "gfreeau/get-jwt-bundle": "^1.0"
+        "gfreeau/get-jwt-bundle": "^1.0",
+        "behat/behat": "^3.0-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "behat/behat": "^3.0",
         "phpunit/phpunit": "^4.6",
         "phpspec/phpspec": "^2.2",
         "behat/mink-extension": "^2.0",

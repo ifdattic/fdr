@@ -1,0 +1,41 @@
+language: php
+
+php:
+    - 5.6
+
+archive: true
+
+env:
+    global:
+        - SYMFONY_ENV=dev
+        - SYMFONY__ENV__DATABASE_HOST=127.0.0.1
+        - SYMFONY__ENV__DATABASE_PORT=~
+        - SYMFONY__ENV__DATABASE_NAME=symfony
+        - SYMFONY__ENV__DATABASE_USER=shippable
+        - SYMFONY__ENV__DATABASE_PASSWORD=
+        - SYMFONY__ENV__JWT_TOKEN_TTL=7776000
+        # JWT private key path
+        - secure: YabamD37BbQ+/37tlE9+CYQNqoobgBtFH557Z/qxRZzXT/lr/kuoD1mcSGyQIAA3RjBe46+ia+rdP6h8tILUvxHaFCrNEM4ZpP1tpMH02eUFcWlfkXsYgOXnOWU0QJ7VJ4nSZSNz++xTD1drfm2R4L3n4S5Kl+gOu0saUZEXcNnQz9PvNmwWoNkgGHWCZjEpMddgEXKyNjCaO25UqodtkQT32C5M35SzB1EAbEBVyxMpKUo9Fzr4BAtpQp/GYfUXiP8/lEzSmKZvvq53EPsHhf7bs6kwyKTrlAedAJQuckisWrs3AU3zvn373+eVffjQRL2yqNJ8g1+e8acJZkHzig==
+        # JWT public key path
+        - secure: k6JtZAzUUgEp1XaOACP5XKURfN5BW7brgyeV/gIoDoHCK19vAKokCVlJ76LwKVSMGnKNfM46ABvXug4/7/Z3e1Z8c5qKZ+Lh/H+ptXPxin7ttvd5Zuqchb7l1Mgn2XweeZpkustR5SNxInMJYayOKKOyPfhsMAqO7g9zPze9TjVeP2Bdy8qx3XcKbtaYYJ7elVpiXX4u8J7ynduCM7Rdt7AcNeKwfDodhxrwL9KjFgtPKqJjeo/S5NxDXHE7l2z1KgoLsKpo8bWR5xzVHfn8QHbm8B8iLos4qaM8eGRUeHc/lylDs4feVFuufJGUhEsZbAu0uMxfR2fIMKlCRdnoAw==
+        # JWT key pass phrase
+        - secure: jyeJG71Mkiq6ZsyEeCbfciN0I4GDusBFypVgWQcy6VZCvFpJk8Yzs3pnmhT+Y/pmLmcfTiGkb1S9IdXsfpqmt9DotVKDkiUVrQvOTPN2y+Dvwfio6yRoNSlSiuD8YslAXJi4Sp/KwfJEF3q88L9xMcQe2dE3duvWzqDYF89UX+5PxErlIFr27+fuK7YwgyY/izumSaeka4KDweH8mhZ+Fl9f5a6y3tyotefl0HlTuTc1Vfy7IIXNhFS6c3is5/cjzK321CpWmsstzgwi7Hd+tvtDO/93MLo5kigAI7MuK6Pekb2mQpMuLThpxH8ygoCHjuPafElkb3ZuBN8eLdbVJQ==
+
+before_install:
+    - echo "xdebug.max_nesting_level = 1000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo 'variables_order = "EGPCS"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+before_script:
+    - composer self-update
+    - composer install --prefer-source
+    - mysql -e "CREATE DATABASE $SYMFONY__ENV__DATABASE_NAME"
+
+script:
+    - ./bin/phpspec run -fpretty --verbose
+    - ./app/console doctrine:schema:create
+    - ./app/console server:start
+    - ./bin/behat --format=progress --out=std --format=junit --out=shippable/testresults
+
+after_script:
+    - ./app/console server:stop
+    - cp -r ./app/logs shippable/logs
