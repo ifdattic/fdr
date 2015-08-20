@@ -2,7 +2,7 @@
 
 namespace Spec\Domain\Task\Entity;
 
-use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Spec\TestValues;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;

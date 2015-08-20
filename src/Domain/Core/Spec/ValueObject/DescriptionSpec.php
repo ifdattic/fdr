@@ -2,7 +2,7 @@
 
 namespace Spec\Domain\Core\ValueObject;
 
-use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Spec\TestValues;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -36,7 +36,7 @@ class DescriptionSpec extends ObjectBehavior
     function it_should_throw_an_exception_if_value_is_not_null_or_string()
     {
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('__construct', [0])
         ;
     }

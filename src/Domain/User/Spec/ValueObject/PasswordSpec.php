@@ -2,7 +2,7 @@
 
 namespace Spec\Domain\User\ValueObject;
 
-use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Spec\TestValues;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -12,7 +12,7 @@ class PasswordSpec extends ObjectBehavior
     function it_throws_an_exception_on_empty_value()
     {
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('__construct', [''])
         ;
     }
@@ -20,7 +20,7 @@ class PasswordSpec extends ObjectBehavior
     function it_throws_an_exception_on_short_value()
     {
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('__construct', [TestValues::TOO_SHORT_PASSWORD])
         ;
     }
@@ -30,7 +30,7 @@ class PasswordSpec extends ObjectBehavior
         $tooLongPassword = str_repeat('i', 80);
 
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('__construct', [$tooLongPassword])
         ;
     }
@@ -38,7 +38,7 @@ class PasswordSpec extends ObjectBehavior
     function it_throws_an_exception_if_value_not_a_string()
     {
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('__construct', [TestValues::INVALID_NON_STRING_PASSWORD])
         ;
     }

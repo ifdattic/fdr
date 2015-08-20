@@ -2,11 +2,10 @@
 
 namespace Spec\Domain\Task\ValueObject;
 
-use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Identity\Uuid;
 use Domain\Core\Spec\TestValues;
 use Domain\Task\ValueObject\TaskId;
-use PhpSpec\Exception\Example\ExampleException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -37,12 +36,7 @@ class TaskIdSpec extends ObjectBehavior
     {
         $this->beConstructedThrough('createFromString', [TestValues::INVALID_UUID]);
 
-        try {
-            $this->getWrappedObject();
-
-            throw new ExampleException('Expected exception was not thrown');
-        } catch (AssertionFailedException $e) {
-        }
+        $this->shouldThrow(AssertionFailed::CLASS)->duringInstantiation();
     }
 
     function it_returns_its_value_on_string_usage()

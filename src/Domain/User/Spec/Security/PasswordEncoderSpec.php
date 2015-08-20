@@ -2,7 +2,7 @@
 
 namespace Spec\Domain\User\Security;
 
-use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Spec\TestValues;
 use Domain\User\ValueObject\Password;
 use Domain\User\ValueObject\PasswordHash;

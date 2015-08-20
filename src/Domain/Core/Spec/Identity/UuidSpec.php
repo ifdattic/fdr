@@ -2,7 +2,7 @@
 
 namespace Spec\Domain\Core\Identity;
 
-use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Identity\Uuid;
 use Domain\Core\Spec\TestValues;
 use PhpSpec\ObjectBehavior;
@@ -14,7 +14,7 @@ class UuidSpec extends ObjectBehavior
     function it_throws_an_exception_if_value_is_not_uuid()
     {
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('__construct', [TestValues::INVALID_UUID])
         ;
     }

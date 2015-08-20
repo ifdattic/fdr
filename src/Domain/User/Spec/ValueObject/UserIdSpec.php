@@ -2,11 +2,10 @@
 
 namespace Spec\Domain\User\ValueObject;
 
-use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Identity\Uuid;
 use Domain\Core\Spec\TestValues;
 use Domain\User\ValueObject\UserId;
-use PhpSpec\Exception\Example\ExampleException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -32,13 +31,8 @@ class UserIdSpec extends ObjectBehavior
 
     function it_should_reject_invalid_uuid_string()
     {
-        $this->beConstructedThrough('createFromString', ['invalid']);
+        $this->beConstructedThrough('createFromString', [TestValues::INVALID_UUID]);
 
-        try {
-            $this->getWrappedObject();
-
-            throw new ExampleException('Expected exception was not thrown');
-        } catch (AssertionFailedException $e) {
-        }
+        $this->shouldThrow(AssertionFailed::CLASS)->duringInstantiation();
     }
 }

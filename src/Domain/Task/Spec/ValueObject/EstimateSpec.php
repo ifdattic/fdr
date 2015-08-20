@@ -2,7 +2,7 @@
 
 namespace Spec\Domain\Task\ValueObject;
 
-use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Spec\TestValues;
 use Domain\Task\ValueObject\Estimate;
 use PhpSpec\ObjectBehavior;
@@ -23,7 +23,7 @@ class EstimateSpec extends ObjectBehavior
     function it_should_reject_string_value()
     {
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('__construct', ['4'])
         ;
     }
@@ -31,7 +31,7 @@ class EstimateSpec extends ObjectBehavior
     function it_should_reject_float_value()
     {
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('__construct', [3.4])
         ;
     }
@@ -39,7 +39,7 @@ class EstimateSpec extends ObjectBehavior
     function it_should_reject_negative_value()
     {
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('__construct', [-4])
         ;
     }

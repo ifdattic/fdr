@@ -2,7 +2,7 @@
 
 namespace Spec\Domain\User\Command;
 
-use Domain\Core\Exception\AssertionFailedException;
+use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Spec\TestValues;
 use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\FullName;
@@ -22,7 +22,7 @@ class SignUpSpec extends ObjectBehavior
         $this->beConstructedWith(TestValues::INVALID_EMAIL, TestValues::FULLNAME, TestValues::PASSWORD);
 
         $this
-            ->shouldThrow(AssertionFailedException::CLASS)
+            ->shouldThrow(AssertionFailed::CLASS)
             ->during('getEmail')
         ;
     }
