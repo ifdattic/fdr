@@ -2,7 +2,7 @@
 
 namespace Domain\Core\Middleware;
 
-use Domain\Core\Validation\HasErrorsTrait;
+use Domain\Core\Validation\HasErrors;
 use Domain\Core\Validation\ValidatorInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
@@ -22,7 +22,7 @@ class CommandValidatorMiddleware implements MessageBusMiddleware
         $traits = class_uses($command);
 
         // Command isn't worried about validation, continue on
-        if (false === $traits || !in_array(HasErrorsTrait::CLASS, $traits)) {
+        if (false === $traits || !in_array(HasErrors::CLASS, $traits)) {
             $next($command);
 
             return;

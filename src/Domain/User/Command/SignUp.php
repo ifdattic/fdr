@@ -2,14 +2,14 @@
 
 namespace Domain\User\Command;
 
-use Domain\Core\Validation\HasErrorsTrait;
+use Domain\Core\Validation\HasErrors;
 use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\FullName;
 use Domain\User\ValueObject\Password;
 
 class SignUp
 {
-    use HasErrorsTrait;
+    use HasErrors;
 
     /** @var string */
     private $email;

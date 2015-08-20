@@ -2,7 +2,7 @@
 
 namespace Domain\Core\Validation;
 
-trait HasErrorsTrait
+trait HasErrors
 {
     /** @var Error[] */
     private $errors;

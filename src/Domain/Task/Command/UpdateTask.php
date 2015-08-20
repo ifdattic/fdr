@@ -2,7 +2,7 @@
 
 namespace Domain\Task\Command;
 
-use Domain\Core\Validation\HasErrorsTrait;
+use Domain\Core\Validation\HasErrors;
 use Domain\Core\ValueObject\Description;
 use Domain\Task\Entity\Task;
 use Domain\Task\ValueObject\Estimate;
@@ -12,7 +12,7 @@ use Domain\Task\ValueObject\TimeSpent;
 
 class UpdateTask
 {
-    use HasErrorsTrait;
+    use HasErrors;
 
     /** @var Task */
     private $task;
