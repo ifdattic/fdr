@@ -116,7 +116,7 @@ class UserApiContext implements Context, SnippetAcceptingContext
     public function iSignUpWithAvailableEmail()
     {
         $payload = [
-            'sign_up' => [
+            'user' => [
                 'email' => TestValues::EMAIL2,
                 'full_name' => 'name',
                 'password' => TestValues::PASSWORD,
@@ -136,7 +136,7 @@ class UserApiContext implements Context, SnippetAcceptingContext
     public function iSignUpWithEmailWhichIsTaken()
     {
         $payload = [
-            'sign_up' => [
+            'user' => [
                 'email' => TestValues::EMAIL,
                 'full_name' => 'name',
                 'password' => TestValues::PASSWORD,

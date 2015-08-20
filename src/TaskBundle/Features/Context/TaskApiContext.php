@@ -159,7 +159,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     public function iShouldBeAbleToCreateATaskUsingExistingAccount()
     {
         $payload = [
-            'create_task' => [
+            'task' => [
                 'name' => TestValues::TASK_NAME,
                 'date' => TestValues::DATE,
                 'description' => TestValues::DESCRIPTION,
@@ -430,7 +430,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
     public function iShouldUpdateATaskIOwn()
     {
         $payload = [
-            'update_task' => [
+            'task' => [
                 'name' => TestValues::TASK_NAME2,
                 'date' => TestValues::DATE2,
                 'description' => TestValues::DESCRIPTION,

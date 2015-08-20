@@ -58,6 +58,6 @@ class UpdateTaskCommandType extends AbstractType
     /** {@inheritdoc} */
     public function getName()
     {
-        return 'update_task';
+        return 'task';
     }
 }

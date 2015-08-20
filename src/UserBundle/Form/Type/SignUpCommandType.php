@@ -40,6 +40,6 @@ class SignUpCommandType extends AbstractType
     /** {@inheritdoc} */
     public function getName()
     {
-        return 'sign_up';
+        return 'user';
     }
 }

@@ -58,6 +58,6 @@ class CreateTaskCommandType extends AbstractType
     /** {@inheritdoc} */
     public function getName()
     {
-        return 'create_task';
+        return 'task';
     }
 }
