@@ -20,26 +20,27 @@ class TaskController extends ApiController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $command = $form->getData();
-
-            $this->getCommandBus()->handle($command);
-
-            if ($command->hasErrors()) {
-                return $this->respondWithErrors($command->getErrors());
-            }
-
-            return $this
-                ->setData([
-                    'message' => 'Task created.',
-                    'task' => $command->getTask(),
-                ])
-                ->setStatusCode(Response::HTTP_CREATED)
-                ->respond()
-            ;
+        if (!$form->isValid()) {
+            return $this->respondWithForm($form);
         }
 
-        return $this->respondWithForm($form);
+        $command = $form->getData();
+        $this->getCommandBus()->handle($command);
+
+        if ($command->hasErrors()) {
+            return $this->respondWithErrors($command->getErrors());
+        }
+
+        $message = 'Task created.';
+
+        return $this
+            ->setStatusCode(Response::HTTP_CREATED)
+            ->setData([
+                'message' => $message,
+                'task' => $command->getTask(),
+            ])
+            ->respond()
+        ;
     }
 
     public function getAction($id)
@@ -51,7 +52,6 @@ class TaskController extends ApiController
         $task = $command->getTask();
 
         return $this
-            ->setStatusCode(Response::HTTP_OK)
             ->setData(['task' => $task])
             ->respond()
         ;
@@ -67,7 +67,6 @@ class TaskController extends ApiController
         $tasks = $command->getTasks();
 
         return $this
-            ->setStatusCode(Response::HTTP_OK)
             ->setData(['tasks' => $tasks])
             ->respond()
         ;
@@ -80,7 +79,6 @@ class TaskController extends ApiController
         $this->getCommandBus()->handle($command);
 
         return $this
-            ->setStatusCode(Response::HTTP_OK)
             ->setData([])
             ->respond()
         ;
@@ -100,25 +98,26 @@ class TaskController extends ApiController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $command = $form->getData();
-
-            $this->getCommandBus()->handle($command);
-
-            if ($command->hasErrors()) {
-                return $this->respondWithErrors($command->getErrors());
-            }
-
-            return $this
-                ->setData([
-                    'message' => 'Task updated.',
-                    'task' => $command->getTask(),
-                ])
-                ->setStatusCode(Response::HTTP_OK)
-                ->respond()
-            ;
+        if (!$form->isValid()) {
+            return $this->respondWithForm($form);
         }
 
-        return $this->respondWithForm($form);
+        $command = $form->getData();
+
+        $this->getCommandBus()->handle($command);
+
+        if ($command->hasErrors()) {
+            return $this->respondWithErrors($command->getErrors());
+        }
+
+        $message = 'Task updated.';
+
+        return $this
+            ->setData([
+                'message' => $message,
+                'task' => $command->getTask(),
+            ])
+            ->respond()
+        ;
     }
 }
