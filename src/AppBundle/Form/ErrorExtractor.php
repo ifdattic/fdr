@@ -5,9 +5,14 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 
-final class FlattenedFormErrorExtractor implements FormErrorExtractorInterface
+final class ErrorExtractor
 {
-    /** {@inheritdocs} */
+    /**
+     * Extract the errors from the form.
+     *
+     * @param FormInterface $form
+     * @return string[]
+     */
     public function extract(FormInterface $form)
     {
         $errors = [];

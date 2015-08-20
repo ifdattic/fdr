@@ -186,7 +186,7 @@ class ApiController extends Controller
         return $context;
     }
 
-    /** @return AppBundle\Form\FormErrorExtractorInterface */
+    /** @return AppBundle\Form\ErrorExtractor */
     protected function getFormErrorExtractor()
     {
         return $this->get('form.error_extractor');
