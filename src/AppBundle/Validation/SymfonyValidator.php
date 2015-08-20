@@ -4,10 +4,10 @@ namespace AppBundle\Validation;
 
 use Doctrine\Common\Inflector\Inflector;
 use Domain\Core\Validation\Error;
-use Domain\Core\Validation\ValidatorInterface as BaseValidatorInterface;
+use Domain\Core\Validation\Validator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class Validator implements BaseValidatorInterface
+class SymfonyValidator implements Validator
 {
     /** @var ValidatorInterface */
     private $validator;

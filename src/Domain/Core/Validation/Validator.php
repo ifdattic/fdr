@@ -2,7 +2,7 @@
 
 namespace Domain\Core\Validation;
 
-interface ValidatorInterface
+interface Validator
 {
     /**
      * Validate a value.

@@ -5,7 +5,7 @@ services:
         class: AppBundle\Form\ErrorExtractor
 
     command_validator:
-        class: AppBundle\Validation\Validator
+        class: AppBundle\Validation\SymfonyValidator
         arguments: [@validator]
 
     kernel.event_listener.json_request_transformer:

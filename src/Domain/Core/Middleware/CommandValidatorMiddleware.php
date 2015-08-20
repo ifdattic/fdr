@@ -3,15 +3,15 @@
 namespace Domain\Core\Middleware;
 
 use Domain\Core\Validation\HasErrors;
-use Domain\Core\Validation\ValidatorInterface;
+use Domain\Core\Validation\Validator;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
 class CommandValidatorMiddleware implements MessageBusMiddleware
 {
-    /** @var ValidatorInterface */
+    /** @var Validator */
     private $validator;
 
-    public function __construct(ValidatorInterface $validator)
+    public function __construct(Validator $validator)
     {
         $this->validator = $validator;
     }
