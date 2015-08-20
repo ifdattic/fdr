@@ -165,6 +165,12 @@ class ApiController extends Controller
         return array_key_exists($statusCode, Response::$statusTexts);
     }
 
+    /** @return bool */
+    private function isProduction()
+    {
+        return $this->getParameter('kernel.environment') === 'prod';
+    }
+
     /** @return SimpleBus\Message\Bus\MessageBus */
     protected function getCommandBus()
     {
