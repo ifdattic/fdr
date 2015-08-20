@@ -27,7 +27,6 @@ class UserController extends ApiController
         $user = $command->getUser();
 
         return $this
-            ->setStatusCode(Response::HTTP_OK)
             ->setData(['user' => $user])
             ->respond()
         ;
@@ -39,22 +38,24 @@ class UserController extends ApiController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $command = $form->getData();
-
-            $this->getCommandBus()->handle($command);
-
-            if ($command->hasErrors()) {
-                return $this->respondWithErrors($command->getErrors());
-            }
-
-            return $this
-                ->setData(['message' => 'Sign up successful.'])
-                ->setStatusCode(Response::HTTP_CREATED)
-                ->respond()
-            ;
+        if (!$form->isValid()) {
+            return $this->respondWithForm($form);
         }
 
-        return $this->respondWithForm($form);
+        $command = $form->getData();
+
+        $this->getCommandBus()->handle($command);
+
+        if ($command->hasErrors()) {
+            return $this->respondWithErrors($command->getErrors());
+        }
+
+        $message = 'Sign up successful.';
+
+        return $this
+            ->setStatusCode(Response::HTTP_CREATED)
+            ->setData(['message' => $message])
+            ->respond()
+        ;
     }
 }

@@ -8,6 +8,7 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use PHPUnit_Framework_Assert as Assert;
+use UserBundle\Features\Context\UserApiContext;
 
 class ApiContext implements Context
 {
@@ -17,6 +18,9 @@ class ApiContext implements Context
     /** @var Behat\Mink\Session */
     private $session;
 
+    /** @var UserApiContext */
+    private $userApiContext;
+
     /**
      * @BeforeScenario
      */
@@ -25,6 +29,7 @@ class ApiContext implements Context
         $environment = $scope->getEnvironment();
 
         $this->minkContext = $environment->getContext('Behat\MinkExtension\Context\MinkContext');
+        $this->userApiContext = $environment->getContext(UserApiContext::CLASS);
 
         $this->session = $this->minkContext->getSession();
     }
@@ -152,5 +157,27 @@ class ApiContext implements Context
 
             unset($response[$key]);
         }
+    }
+
+    /**
+     * Get headers for client call.
+     *
+     * @param  boolean $includeAuthorization
+     * @param  array   $replaceHeaders
+     * @return array
+     */
+    public function getHeaders($includeAuthorization = false, array $replaceHeaders = [])
+    {
+        $headers = [
+            'HTTP_CONTENT_TYPE' => 'application/json',
+        ];
+
+        if ($includeAuthorization) {
+            $headers['HTTP_AUTHORIZATION'] = $this->userApiContext->getAuthToken();
+        }
+
+        $headers = array_merge($headers, $replaceHeaders);
+
+        return $headers;
     }
 }

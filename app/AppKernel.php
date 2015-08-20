@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle(),
             new SimpleBus\SymfonyBridge\DoctrineOrmBridgeBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new UserBundle\UserBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),

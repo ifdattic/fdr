@@ -23,13 +23,13 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "simple-bus/symfony-bridge": "^4.0",
         "beberlei/assert": "^2.3",
-        "friendsofsymfony/rest-bundle": "^1.5",
         "jms/serializer-bundle": "^0.13.0",
         "simple-bus/doctrine-orm-bridge": "^4.0",
         "ramsey/uuid": "3.0.x@dev",
         "lexik/jwt-authentication-bundle": "^1.0",
         "gfreeau/get-jwt-bundle": "^1.0",
-        "behat/behat": "^3.0-dev"
+        "behat/behat": "^3.0-dev",
+        "qandidate/symfony-json-request-transformer": "~1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

@@ -30,6 +30,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    exception_controller: AppBundle:Api:showException
 
 # Assetic Configuration
 assetic:
@@ -111,38 +112,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-fos_rest:
-    routing_loader:
-        default_format: json
-    param_fetcher_listener: true
-    body_listener: ~
-    disable_csrf_role: ROLE_API
-    format_listener:
-        rules:
-            - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: false }
-    view:
-        view_response_listener: force
-        formats:
-            json: true
-    service:
-        serializer: jms_serializer.serializer
-    serializer:
-        serialize_null: true
-    exception:
-        # The order is important!
-        codes:
-            Domain\Core\Exception\AssertionFailedException: 400
-            Domain\Core\Exception\EntityNotFoundException: 404
-            Domain\User\Exception\AccessDeniedException: 403
-            Symfony\Component\Security\Core\Exception\AccessDeniedException: 403
-            Domain\Core\Exception\DomainException: 400
-        messages:
-            Domain\Core\Exception\AssertionFailedException: true
-            Domain\Core\Exception\EntityNotFoundException: true
-            Domain\User\Exception\AccessDeniedException: true
-            Symfony\Component\Security\Core\Exception\AccessDeniedException: true
-            Domain\Core\Exception\DomainException: true
 
 sensio_framework_extra:
     view: { annotations: false }

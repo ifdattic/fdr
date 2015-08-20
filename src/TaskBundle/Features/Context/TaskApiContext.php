@@ -136,7 +136,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             $this->apiContext->locatePath('/tasks'),
             [],
             [],
-            ['HTTP_AUTHORIZATION' => $this->userApiContext->getAuthToken()],
+            $this->apiContext->getHeaders(true),
             $payload
         );
     }
@@ -204,7 +204,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             $this->apiContext->locatePath('/tasks/'.$id),
             [],
             [],
-            ['HTTP_AUTHORIZATION' => $this->userApiContext->getAuthToken()],
+            $this->apiContext->getHeaders(true),
             []
         );
     }
@@ -220,7 +220,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveNotFoundResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**
@@ -234,7 +234,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveForbiddenResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**
@@ -268,7 +268,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             $this->apiContext->locatePath('/tasks'),
             [],
             [],
-            ['HTTP_AUTHORIZATION' => $this->userApiContext->getAuthToken()],
+            $this->apiContext->getHeaders(true),
             []
         );
     }
@@ -320,7 +320,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             $this->apiContext->locatePath('/tasks/'.$id),
             [],
             [],
-            ['HTTP_AUTHORIZATION' => $this->userApiContext->getAuthToken()],
+            $this->apiContext->getHeaders(true),
             []
         );
     }
@@ -336,7 +336,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveNotFoundResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**
@@ -350,7 +350,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveForbiddenResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**
@@ -379,7 +379,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             $this->apiContext->locatePath('/tasks/'.$id),
             [],
             [],
-            ['HTTP_AUTHORIZATION' => $this->userApiContext->getAuthToken()],
+            $this->apiContext->getHeaders(true),
             $payload
         );
     }
@@ -407,7 +407,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveNotFoundResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**
@@ -421,7 +421,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveForbiddenResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message', 'errors']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**
@@ -466,5 +466,4 @@ class TaskApiContext implements Context, SnippetAcceptingContext
             'task.created_at',
         ]);
     }
-
 }

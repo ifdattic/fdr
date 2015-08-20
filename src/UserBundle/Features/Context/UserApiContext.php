@@ -100,7 +100,14 @@ class UserApiContext implements Context, SnippetAcceptingContext
     {
         $client = $this->apiContext->getSession()->getDriver()->getClient();
 
-        $client->request('POST', $this->apiContext->locatePath('/users/sign-up'), [], [], [], $payload);
+        $client->request(
+            'POST',
+            $this->apiContext->locatePath('/users/sign-up'),
+            [],
+            [],
+            $this->apiContext->getHeaders(),
+            $payload
+        );
     }
 
     /**
@@ -148,7 +155,9 @@ class UserApiContext implements Context, SnippetAcceptingContext
             ],
             [
                 'errors.0.message',
-                'errors.0.code',
+
+                'errors.0.status_code',
+                'errors.0.status_text',
             ]
         );
     }
@@ -160,7 +169,14 @@ class UserApiContext implements Context, SnippetAcceptingContext
     {
         $client = $this->apiContext->getSession()->getDriver()->getClient();
 
-        $client->request('POST', $this->apiContext->locatePath('/users/get-token'), [], [], [], $payload);
+        $client->request(
+            'POST',
+            $this->apiContext->locatePath('/users/get-token'),
+            [],
+            [],
+            $this->apiContext->getHeaders(),
+            $payload
+        );
     }
 
     /**
@@ -259,7 +275,7 @@ class UserApiContext implements Context, SnippetAcceptingContext
             $this->apiContext->locatePath('/users/me'),
             [],
             [],
-            ['HTTP_AUTHORIZATION' => $this->getAuthToken()],
+            $this->apiContext->getHeaders(true),
             []
         );
 
