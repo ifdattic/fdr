@@ -34,10 +34,10 @@
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "phpunit/phpunit": "^4.6",
-        "phpspec/phpspec": "^2.2",
         "behat/mink-extension": "^2.0",
         "behat/mink-goutte-driver": "^1.1",
-        "behat/symfony2-extension": "^2.0"
+        "behat/symfony2-extension": "^2.0",
+        "phpspec/phpspec": "^2.3-beta3"
     },
     "scripts": {
         "post-root-package-install": [
