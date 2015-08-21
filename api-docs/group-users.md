@@ -20,7 +20,7 @@ See [authorization](#header-authorization) for how to use the token.
 
 + Response 401 (application/json)
 
-        <!-- include(responses/get-token-invalid-credentials.json) -->
+        <!-- include(responses/unauthorized.json) -->
 
 ## Sign-up [/users/sign-up]
 

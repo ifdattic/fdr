@@ -1,5 +1,10 @@
 {
-  "code": 400,
-  "message": "Bad Request",
-  "errors": null
+  "errors": [
+    {
+      "status_code": 400,
+      "status_text": "Bad Request",
+      "message": "Invalid request",
+      "field": null
+    }
+  ]
 }

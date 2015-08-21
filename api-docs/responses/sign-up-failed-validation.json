@@ -1,19 +1,22 @@
 {
   "errors": [
     {
+      "status_code": 400,
+      "status_text": "Bad Request",
       "message": "The email is required",
-      "field": "email",
-      "code": null
+      "field": "email"
     },
     {
+      "status_code": 400,
+      "status_text": "Bad Request",
       "message": "The full name is required",
-      "field": "full_name",
-      "code": null
+      "field": "full_name"
     },
     {
+      "status_code": 400,
+      "status_text": "Bad Request",
       "message": "The password is required",
-      "field": "password",
-      "code": null
+      "field": "password"
     }
   ]
 }

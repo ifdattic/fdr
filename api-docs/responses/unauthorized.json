@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "status_code": 401,
+      "status_text": "Unauthorized",
+      "message": "Bad credentials",
+      "field": null
+    }
+  ]
+}

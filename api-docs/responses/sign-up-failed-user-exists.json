@@ -1,9 +1,10 @@
 {
   "errors": [
     {
+      "status_code": 400,
+      "status_text": "Bad Request",
       "message": "User with this email already exists",
-      "field": "email",
-      "code": null
+      "field": "email"
     }
   ]
 }

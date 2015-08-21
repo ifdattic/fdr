@@ -1,5 +1,5 @@
 {
-  "create_task": {
+  "task": {
     "name": "Task name",
     "date": "2015-06-28",
     "description": "This is task description",

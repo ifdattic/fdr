@@ -1,14 +1,16 @@
 {
   "errors": [
     {
+      "status_code": 400,
+      "status_text": "Bad Request",
       "message": "Task name is required",
-      "field": "name",
-      "code": null
+      "field": "name"
     },
     {
+      "status_code": 400,
+      "status_text": "Bad Request",
       "message": "Date is required",
-      "field": "date",
-      "code": null
+      "field": "date"
     }
   ]
 }

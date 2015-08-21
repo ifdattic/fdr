@@ -32,10 +32,7 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NDAxNDA5M
 Failing to do so will cause the following error:
 
 ```json
-{
-  "code": 401,
-  "message": "Invalid credentials"
-}
+<!-- include(responses/unauthorized.json) -->
 ```
 
 To get the token make a [call for authorization](#users-get-token-post).

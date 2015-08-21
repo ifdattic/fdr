@@ -1,7 +1,12 @@
 + Response 404 (application/json)
 
         {
-          "code": 404,
-          "message": "Task not found",
-          "errors": null
+          "errors": [
+            {
+              "status_code": 404,
+              "status_text": "Not Found",
+              "message": "Task not found",
+              "field": null
+            }
+          ]
         }
