@@ -4,7 +4,7 @@ namespace UserBundle\DBAL\Type;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\UserId;
 
 class UserIdType extends Type
 {

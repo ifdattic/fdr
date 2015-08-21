@@ -3,7 +3,7 @@
 namespace Domain\Task\Repository;
 
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 use Domain\User\Entity\User;
 
 interface TaskRepository

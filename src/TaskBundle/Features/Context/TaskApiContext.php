@@ -10,13 +10,13 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Domain\Core\Spec\TestValues;
-use Domain\Core\ValueObject\Description;
+use Domain\Core\Value\Description;
 use Domain\Task\Entity\Task;
 use Domain\Task\Repository\TaskRepository;
-use Domain\Task\ValueObject\Estimate;
-use Domain\Task\ValueObject\TaskId;
-use Domain\Task\ValueObject\TaskName;
-use Domain\Task\ValueObject\TimeSpent;
+use Domain\Task\Value\Estimate;
+use Domain\Task\Value\TaskId;
+use Domain\Task\Value\TaskName;
+use Domain\Task\Value\TimeSpent;
 use PHPUnit_Framework_Assert as Assert;
 use UserBundle\Features\Context\UserApiContext;
 

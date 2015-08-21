@@ -2,7 +2,7 @@
 
 namespace Domain\User\Event;
 
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\UserId;
 
 class UserWasEntered
 {

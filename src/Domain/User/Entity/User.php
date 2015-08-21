@@ -3,10 +3,10 @@
 namespace Domain\User\Entity;
 
 use Domain\User\Event\UserWasEntered;
-use Domain\User\ValueObject\Email;
-use Domain\User\ValueObject\FullName;
-use Domain\User\ValueObject\PasswordHash;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\Email;
+use Domain\User\Value\FullName;
+use Domain\User\Value\PasswordHash;
+use Domain\User\Value\UserId;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
 

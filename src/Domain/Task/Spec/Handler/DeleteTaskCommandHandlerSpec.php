@@ -6,7 +6,7 @@ use Domain\Core\Spec\TestValues;
 use Domain\Task\Command\DeleteTask;
 use Domain\Task\Handler\DeleteTaskCommandHandler;
 use Domain\Task\Repository\TaskRepository;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

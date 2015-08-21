@@ -1,0 +1,10 @@
+Domain\Core\Value\Description:
+    exclusion_policy: ALL
+    properties:
+        value:
+            expose: true
+            serialized_name: description
+            access_type: public_method
+            accessor:
+                getter: getValue
+            read_only: true

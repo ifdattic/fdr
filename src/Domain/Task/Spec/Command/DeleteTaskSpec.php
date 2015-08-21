@@ -4,7 +4,7 @@ namespace Spec\Domain\Task\Command;
 
 use Domain\Core\Spec\TestValues;
 use Domain\Task\Command\DeleteTask;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

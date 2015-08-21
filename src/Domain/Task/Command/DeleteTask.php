@@ -2,7 +2,7 @@
 
 namespace Domain\Task\Command;
 
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 
 class DeleteTask
 {

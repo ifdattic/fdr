@@ -4,12 +4,12 @@ namespace Spec\Domain\Task\Entity;
 
 use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Spec\TestValues;
-use Domain\Core\ValueObject\Description;
+use Domain\Core\Value\Description;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\Estimate;
-use Domain\Task\ValueObject\TaskId;
-use Domain\Task\ValueObject\TaskName;
-use Domain\Task\ValueObject\TimeSpent;
+use Domain\Task\Value\Estimate;
+use Domain\Task\Value\TaskId;
+use Domain\Task\Value\TaskName;
+use Domain\Task\Value\TimeSpent;
 use Domain\User\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

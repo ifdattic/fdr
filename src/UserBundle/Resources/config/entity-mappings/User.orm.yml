@@ -9,13 +9,13 @@ Domain\User\Entity\User:
                 strategy: NONE
     embedded:
         email:
-            class: Domain\User\ValueObject\Email
+            class: Domain\User\Value\Email
             columnPrefix: false
         fullName:
-            class: Domain\User\ValueObject\FullName
+            class: Domain\User\Value\FullName
             columnPrefix: false
         password:
-            class: Domain\User\ValueObject\PasswordHash
+            class: Domain\User\Value\PasswordHash
             columnPrefix: false
     fields:
         createdAt:

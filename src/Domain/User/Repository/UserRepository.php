@@ -3,8 +3,8 @@
 namespace Domain\User\Repository;
 
 use Domain\User\Entity\User;
-use Domain\User\ValueObject\Email;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\Email;
+use Domain\User\Value\UserId;
 
 interface UserRepository
 {

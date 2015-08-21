@@ -3,7 +3,7 @@
 namespace Domain\User\Command;
 
 use Domain\User\Entity\User;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\UserId;
 
 class GetUser
 {

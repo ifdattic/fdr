@@ -4,9 +4,9 @@ namespace Spec\Domain\User\Command;
 
 use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Spec\TestValues;
-use Domain\User\ValueObject\Email;
-use Domain\User\ValueObject\FullName;
-use Domain\User\ValueObject\Password;
+use Domain\User\Value\Email;
+use Domain\User\Value\FullName;
+use Domain\User\Value\Password;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

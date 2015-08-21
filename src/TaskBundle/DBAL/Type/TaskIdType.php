@@ -4,7 +4,7 @@ namespace TaskBundle\DBAL\Type;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 
 class TaskIdType extends Type
 {

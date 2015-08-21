@@ -2,7 +2,7 @@
 
 namespace Domain\Task\Event;
 
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 
 class TaskWasEntered
 {

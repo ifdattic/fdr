@@ -1,4 +1,4 @@
-Domain\Task\ValueObject\TaskName:
+Domain\Task\Value\TaskName:
     type: embeddable
     fields:
         value:

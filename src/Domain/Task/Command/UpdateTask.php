@@ -3,12 +3,12 @@
 namespace Domain\Task\Command;
 
 use Domain\Core\Validation\HasErrors;
-use Domain\Core\ValueObject\Description;
+use Domain\Core\Value\Description;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\Estimate;
-use Domain\Task\ValueObject\TaskId;
-use Domain\Task\ValueObject\TaskName;
-use Domain\Task\ValueObject\TimeSpent;
+use Domain\Task\Value\Estimate;
+use Domain\Task\Value\TaskId;
+use Domain\Task\Value\TaskName;
+use Domain\Task\Value\TimeSpent;
 
 class UpdateTask
 {

@@ -7,8 +7,8 @@ use Domain\User\Command\SignUp;
 use Domain\User\Entity\User;
 use Domain\User\Repository\UserRepository;
 use Domain\User\Security\PasswordEncoder;
-use Domain\User\ValueObject\PasswordHash;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\PasswordHash;
+use Domain\User\Value\UserId;
 
 class SignUpCommandHandler
 {

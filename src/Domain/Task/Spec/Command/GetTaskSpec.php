@@ -5,7 +5,7 @@ namespace Spec\Domain\Task\Command;
 use Domain\Core\Spec\TestValues;
 use Domain\Task\Command\GetTask;
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 use Domain\User\Entity\User;
 use Domain\User\Middleware\OwnerBound;
 use PhpSpec\ObjectBehavior;

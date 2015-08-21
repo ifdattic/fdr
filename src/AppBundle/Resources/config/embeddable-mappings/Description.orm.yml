@@ -1,4 +1,4 @@
-Domain\Core\ValueObject\Description:
+Domain\Core\Value\Description:
     type: embeddable
     fields:
         value:

@@ -6,7 +6,7 @@ use Domain\Core\Identity\Uuid;
 use Domain\Task\Command\CreateTask;
 use Domain\Task\Entity\Task;
 use Domain\Task\Repository\TaskRepository;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 
 class CreateTaskCommandHandler
 {

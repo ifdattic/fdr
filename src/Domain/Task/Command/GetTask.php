@@ -3,7 +3,7 @@
 namespace Domain\Task\Command;
 
 use Domain\Task\Entity\Task;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 use Domain\User\Middleware\OwnerBound;
 
 class GetTask implements OwnerBound

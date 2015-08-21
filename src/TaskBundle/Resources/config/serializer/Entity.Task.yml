@@ -16,29 +16,29 @@ Domain\Task\Entity\Task:
         id:
             expose: true
             inline: true
-            type: Domain\Task\ValueObject\TaskId
+            type: Domain\Task\Value\TaskId
         name:
             expose: true
             inline: true
-            type: Domain\Task\ValueObject\TaskName
+            type: Domain\Task\Value\TaskName
         description:
             expose: true
             inline: true
-            type: Domain\Core\ValueObject\Description
+            type: Domain\Core\Value\Description
         date:
             expose: true
             type: "DateTime<'Y-m-d'>"
         estimate:
             expose: true
             inline: true
-            type: Domain\Task\ValueObject\Estimate
+            type: Domain\Task\Value\Estimate
         completedAt:
             expose: true
             serialized_name: completed_at
         timeSpent:
             expose: true
             inline: true
-            type: Domain\Task\ValueObject\TimeSpent
+            type: Domain\Task\Value\TimeSpent
         important:
             expose: true
             serialized_name: important

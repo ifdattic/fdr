@@ -12,7 +12,7 @@ Domain\User\Command\SignUp:
                 message: User with this email already exists
                 repositoryMethod: isEmailUnique
                 service: validator.unique.user_email
-                valueObjectClass: Domain\User\ValueObject\Email
+                valueClass: Domain\User\Value\Email
                 groups: [Unique]
         fullName:
             - NotBlank:

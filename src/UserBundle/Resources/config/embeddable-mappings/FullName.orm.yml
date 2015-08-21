@@ -1,4 +1,4 @@
-Domain\User\ValueObject\FullName:
+Domain\User\Value\FullName:
     type: embeddable
     fields:
         value:

@@ -7,7 +7,7 @@ use Domain\Task\Command\GetTask;
 use Domain\Task\Entity\Task;
 use Domain\Task\Handler\GetTaskCommandHandler;
 use Domain\Task\Repository\TaskRepository;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

@@ -1,4 +1,4 @@
-Domain\Task\ValueObject\Estimate:
+Domain\Task\Value\Estimate:
     type: embeddable
     fields:
         value:

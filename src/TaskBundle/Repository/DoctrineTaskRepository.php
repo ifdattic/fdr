@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Domain\Task\Entity\Task;
 use Domain\Task\Exception\TaskNotFoundException;
 use Domain\Task\Repository\TaskRepository;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 use Domain\User\Entity\User;
 
 class DoctrineTaskRepository extends EntityRepository implements TaskRepository

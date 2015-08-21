@@ -13,10 +13,10 @@ use Domain\Core\Identity\Uuid;
 use Domain\Core\Spec\TestValues;
 use Domain\User\Entity\User;
 use Domain\User\Repository\UserRepository;
-use Domain\User\ValueObject\Email;
-use Domain\User\ValueObject\FullName;
-use Domain\User\ValueObject\PasswordHash;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\Email;
+use Domain\User\Value\FullName;
+use Domain\User\Value\PasswordHash;
+use Domain\User\Value\UserId;
 use PHPUnit_Framework_Assert as Assert;
 
 class UserApiContext implements Context, SnippetAcceptingContext

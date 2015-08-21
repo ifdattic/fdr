@@ -16,7 +16,7 @@ class UniqueFieldValidator extends ConstraintValidator
     /** {@inheritdoc} */
     public function validate($value, Constraint $constraint)
     {
-        $valueObject = new $constraint->valueObjectClass($value);
+        $valueObject = new $constraint->valueClass($value);
         $isUnique = $this->repository->{$constraint->repositoryMethod}($valueObject);
 
         if (false === $isUnique) {

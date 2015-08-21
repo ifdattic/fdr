@@ -20,17 +20,17 @@ class UniqueField extends Constraint
     public $service = 'validator.unique';
 
     /** @var string */
-    public $valueObjectClass = null;
+    public $valueClass = null;
 
     /** {@inheritdoc} */
     public function __construct($options = null)
     {
         parent::__construct($options);
 
-        if (null === $this->valueObjectClass) {
+        if (null === $this->valueClass) {
             throw new MissingOptionsException(
-                sprintf('The class for the value object must be given for constraint %s', __CLASS__),
-                ['valueObjectClass']
+                sprintf('The class for the value must be given for constraint %s', __CLASS__),
+                ['valueClass']
             );
         }
 

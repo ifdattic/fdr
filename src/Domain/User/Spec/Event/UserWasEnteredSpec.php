@@ -4,7 +4,7 @@ namespace Spec\Domain\User\Event;
 
 use Domain\Core\Identity\Uuid;
 use Domain\Core\Spec\TestValues;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\UserId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

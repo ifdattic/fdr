@@ -6,8 +6,8 @@ use Doctrine\ORM\EntityRepository;
 use Domain\User\Entity\User;
 use Domain\User\Exception\UserNotFoundException;
 use Domain\User\Repository\UserRepository;
-use Domain\User\ValueObject\Email;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\Email;
+use Domain\User\Value\UserId;
 
 class DoctrineUserRepository extends EntityRepository implements UserRepository
 {

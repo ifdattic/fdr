@@ -3,12 +3,12 @@
 namespace Domain\Task\Entity;
 
 use Domain\Core\Validation\Assert;
-use Domain\Core\ValueObject\Description;
+use Domain\Core\Value\Description;
 use Domain\Task\Event\TaskWasEntered;
-use Domain\Task\ValueObject\Estimate;
-use Domain\Task\ValueObject\TaskId;
-use Domain\Task\ValueObject\TaskName;
-use Domain\Task\ValueObject\TimeSpent;
+use Domain\Task\Value\Estimate;
+use Domain\Task\Value\TaskId;
+use Domain\Task\Value\TaskName;
+use Domain\Task\Value\TimeSpent;
 use Domain\User\Entity\User;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;

@@ -1,4 +1,4 @@
-Domain\Task\ValueObject\TimeSpent:
+Domain\Task\Value\TimeSpent:
     type: embeddable
     fields:
         value:

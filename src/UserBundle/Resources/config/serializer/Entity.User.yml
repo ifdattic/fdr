@@ -4,7 +4,7 @@ Domain\User\Entity\User:
         id:
             expose: true
             inline: true
-            type: Domain\User\ValueObject\UserId
+            type: Domain\User\Value\UserId
         email:
             expose: true
             inline: true

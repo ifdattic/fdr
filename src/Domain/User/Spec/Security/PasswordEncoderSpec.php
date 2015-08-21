@@ -4,8 +4,8 @@ namespace Spec\Domain\User\Security;
 
 use Domain\Core\Exception\AssertionFailed;
 use Domain\Core\Spec\TestValues;
-use Domain\User\ValueObject\Password;
-use Domain\User\ValueObject\PasswordHash;
+use Domain\User\Value\Password;
+use Domain\User\Value\PasswordHash;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

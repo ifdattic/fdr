@@ -4,7 +4,7 @@ namespace UserBundle\Security;
 
 use Domain\User\Repository\UserRepository;
 use Domain\User\Security\UserProvider;
-use Domain\User\ValueObject\Email;
+use Domain\User\Value\Email;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;

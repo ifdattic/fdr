@@ -1,0 +1,10 @@
+Domain\Task\Value\Estimate:
+    exclusion_policy: ALL
+    properties:
+        value:
+            expose: true
+            serialized_name: estimate
+            access_type: public_method
+            access:
+                getter: getValue
+            read_only: true

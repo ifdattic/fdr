@@ -5,7 +5,7 @@ namespace Spec\Domain\User\Command;
 use Domain\Core\Spec\TestValues;
 use Domain\User\Command\GetUser;
 use Domain\User\Entity\User;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\UserId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

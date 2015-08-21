@@ -7,7 +7,7 @@ use Domain\User\Command\GetUser;
 use Domain\User\Entity\User;
 use Domain\User\Handler\GetUserCommandHandler;
 use Domain\User\Repository\UserRepository;
-use Domain\User\ValueObject\UserId;
+use Domain\User\Value\UserId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

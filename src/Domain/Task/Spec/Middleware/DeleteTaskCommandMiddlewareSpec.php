@@ -8,7 +8,7 @@ use Domain\Task\Command\DeleteTask;
 use Domain\Task\Entity\Task;
 use Domain\Task\Middleware\DeleteTaskCommandMiddleware;
 use Domain\Task\Repository\TaskRepository;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 use Domain\User\Entity\User;
 use Domain\User\Exception\AccessDeniedException;
 use Domain\User\Middleware\AuthMiddleware;

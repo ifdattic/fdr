@@ -8,10 +8,10 @@ use Domain\User\Entity\User;
 use Domain\User\Handler\SignUpCommandHandler;
 use Domain\User\Repository\UserRepository;
 use Domain\User\Security\PasswordEncoder;
-use Domain\User\ValueObject\Email;
-use Domain\User\ValueObject\FullName;
-use Domain\User\ValueObject\Password;
-use Domain\User\ValueObject\PasswordHash;
+use Domain\User\Value\Email;
+use Domain\User\Value\FullName;
+use Domain\User\Value\Password;
+use Domain\User\Value\PasswordHash;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

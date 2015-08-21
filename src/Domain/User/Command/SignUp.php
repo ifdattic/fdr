@@ -3,9 +3,9 @@
 namespace Domain\User\Command;
 
 use Domain\Core\Validation\HasErrors;
-use Domain\User\ValueObject\Email;
-use Domain\User\ValueObject\FullName;
-use Domain\User\ValueObject\Password;
+use Domain\User\Value\Email;
+use Domain\User\Value\FullName;
+use Domain\User\Value\Password;
 
 class SignUp
 {

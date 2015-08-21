@@ -4,7 +4,7 @@ namespace Spec\Domain\Task\Event;
 
 use Domain\Core\Spec\TestValues;
 use Domain\Task\Event\TaskWasEntered;
-use Domain\Task\ValueObject\TaskId;
+use Domain\Task\Value\TaskId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
