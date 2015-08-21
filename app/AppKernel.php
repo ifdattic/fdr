@@ -21,9 +21,9 @@ class AppKernel extends Kernel
             new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle(),
             new SimpleBus\SymfonyBridge\DoctrineOrmBridgeBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new UserBundle\UserBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Gfreeau\Bundle\GetJWTBundle\GfreeauGetJWTBundle(),
+            new UserBundle\UserBundle(),
             new TaskBundle\TaskBundle(),
         );
 

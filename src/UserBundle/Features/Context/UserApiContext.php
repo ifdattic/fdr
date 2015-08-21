@@ -229,7 +229,7 @@ class UserApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveUnauthorizedResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**
@@ -246,7 +246,7 @@ class UserApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveUnauthorizedResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**

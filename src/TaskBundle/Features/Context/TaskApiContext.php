@@ -150,7 +150,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveUnauthorizedResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**
@@ -393,7 +393,7 @@ class TaskApiContext implements Context, SnippetAcceptingContext
 
         $this->apiContext->iShouldReceiveUnauthorizedResponse();
 
-        $this->apiContext->compareResponse([], ['code', 'message']);
+        $this->apiContext->compareResponse([], ['errors']);
     }
 
     /**

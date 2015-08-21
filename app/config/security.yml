@@ -34,13 +34,14 @@ security:
                 password_parameter: password
                 post_only: true
                 success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+                failure_handler: authentication.handler.authentication_failure
 
         api:
             pattern: ^/
             stateless: true
             anonymous: true
-            lexik_jwt: ~
+            lexik_jwt:
+                throw_exceptions: true
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods

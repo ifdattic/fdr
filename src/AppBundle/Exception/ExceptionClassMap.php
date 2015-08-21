@@ -5,6 +5,7 @@ namespace AppBundle\Exception;
 use Domain\Core\Exception\DomainException;
 use Domain\Core\Exception\EntityNotFoundException;
 use Domain\User\Exception\AccessDeniedException;
+use Domain\User\Exception\BadCredentials;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ExceptionClassMap
@@ -12,6 +13,7 @@ final class ExceptionClassMap
     /** @var array */
     private $statusCodeMap = [
         AccessDeniedException::CLASS => Response::HTTP_FORBIDDEN,
+        BadCredentials::CLASS => Response::HTTP_UNAUTHORIZED,
         EntityNotFoundException::CLASS => Response::HTTP_NOT_FOUND,
         DomainException::CLASS => Response::HTTP_BAD_REQUEST,
     ];
@@ -19,6 +21,7 @@ final class ExceptionClassMap
     /** @var array */
     private $showMessages = [
         AccessDeniedException::CLASS,
+        BadCredentials::CLASS,
         EntityNotFoundException::CLASS,
         DomainException::CLASS,
     ];

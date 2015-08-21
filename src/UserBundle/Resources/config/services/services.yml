@@ -1,7 +1,13 @@
 parameters:
+    lexik_jwt_authentication.security.authentication.entry_point.class: UserBundle\Security\Http\Authentication\JWTEntryPoint
     password_encoder_cost: %security_encoder_cost%
 
 services:
+    authentication.handler.authentication_failure:
+        class: UserBundle\Security\Http\Authentication\AuthenticationFailureHandler
+        tags:
+            - { name: monolog.logger, channel: security }
+
     password_encoder:
         class: Domain\User\Security\PasswordEncoder
         arguments: ["%password_encoder_cost%"]
