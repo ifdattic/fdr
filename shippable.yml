@@ -26,16 +26,16 @@ before_install:
     - echo 'variables_order = "EGPCS"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 before_script:
-    - composer self-update
-    - composer install --prefer-source
+    - composer self-update -n
+    - composer install --prefer-dist -n
     - mysql -e "CREATE DATABASE $SYMFONY__ENV__DATABASE_NAME"
 
 script:
-    - ./bin/phpspec run -fpretty --verbose
-    - ./app/console doctrine:schema:create
-    - ./app/console server:start
-    - ./bin/behat --format=progress --out=std --format=junit --out=shippable/testresults
+    - ./bin/phpspec run -fpretty --verbose -n
+    - ./app/console doctrine:schema:create -n
+    - ./app/console server:start -n
+    - ./bin/behat --format=progress --out=std --format=junit --out=shippable/testresults -n
 
 after_script:
-    - ./app/console server:stop
+    - ./app/console server:stop -n
     - cp -r ./app/logs shippable/logs
