@@ -28,7 +28,6 @@
         "ramsey/uuid": "3.0.x@dev",
         "lexik/jwt-authentication-bundle": "^1.0",
         "gfreeau/get-jwt-bundle": "^1.0",
-        "behat/behat": "^3.0-dev",
         "qandidate/symfony-json-request-transformer": "~1.1"
     },
     "require-dev": {
@@ -37,7 +36,8 @@
         "behat/mink-extension": "^2.0",
         "behat/mink-goutte-driver": "^1.1",
         "behat/symfony2-extension": "^2.0",
-        "phpspec/phpspec": "^2.3-beta3"
+        "phpspec/phpspec": "^2.3-beta3",
+        "behat/behat": "^3.0-dev"
     },
     "scripts": {
         "post-root-package-install": [
