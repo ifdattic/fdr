@@ -3,7 +3,7 @@
 namespace Domain\Core\Spec;
 
 /**
- * Class this contains the values used in tests.
+ * Class which contains the values used in tests.
  */
 final class TestValues
 {

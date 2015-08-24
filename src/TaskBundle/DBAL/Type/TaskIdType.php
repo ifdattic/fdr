@@ -10,25 +10,25 @@ class TaskIdType extends Type
 {
     const TASKID = 'taskid';
 
-    /** {@inheritdoc} */
+    /** @inheritdoc */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
         return $platform->getGuidTypeDeclarationSQL($fieldDeclaration);
     }
 
-    /** {@inheritdoc} */
+    /** @inheritdoc */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         return TaskId::createFromString($value);
     }
 
-    /** {@inheritdoc} */
+    /** @inheritdoc */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         return $value->getValue();
     }
 
-    /** {@inheritdoc} */
+    /** @inheritdoc */
     public function getName()
     {
         return self::TASKID;
